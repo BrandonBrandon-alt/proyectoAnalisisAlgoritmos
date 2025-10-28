@@ -1,0 +1,180 @@
+# ============================================================================
+# Proyecto de Análisis Bibliométrico - Universidad del Quindío
+# ============================================================================
+
+# ============================================================================
+# ARCHIVOS SENSIBLES Y CREDENCIALES
+# ============================================================================
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+credentials.json
+config/secrets.yaml
+
+# ============================================================================
+# ENTORNOS VIRTUALES DE PYTHON
+# ============================================================================
+venv/
+env/
+ENV/
+.venv/
+.virtualenv/
+*.egg-info/
+dist/
+build/
+
+# ============================================================================
+# ARCHIVOS DE PYTHON
+# ============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+*.cover
+*.log
+
+# ============================================================================
+# JUPYTER NOTEBOOKS
+# ============================================================================
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+*.ipynb_checkpoints
+
+# ============================================================================
+# DATOS Y DESCARGAS (archivos grandes)
+# ============================================================================
+# Archivos BibTeX descargados
+descargas/*.bib
+data/raw/**/*.bib
+data/raw/**/*.ris
+data/raw/**/*.csv
+
+# Archivos procesados grandes
+data/processed/*.bib
+*.bib
+!data/processed/.gitkeep
+
+# Archivos temporales de descarga
+*.crdownload
+*.tmp
+*.temp
+
+# ============================================================================
+# SALIDAS Y RESULTADOS
+# ============================================================================
+salidas/
+outputs/
+resultados/
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.svg
+!docs/**/*.png
+!docs/**/*.jpg
+
+# ============================================================================
+# LOGS Y METADATOS
+# ============================================================================
+*.log
+logs/
+*.log.*
+data/metadata/*.json
+!data/metadata/.gitkeep
+
+# ============================================================================
+# SISTEMA OPERATIVO
+# ============================================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ============================================================================
+# IDEs Y EDITORES
+# ============================================================================
+# VSCode
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# ============================================================================
+# HERRAMIENTAS DE DESARROLLO
+# ============================================================================
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# pytest
+.pytest_cache/
+
+# coverage
+.coverage
+.coverage.*
+htmlcov/
+
+# ============================================================================
+# ARCHIVOS ESPECÍFICOS DEL PROYECTO
+# ============================================================================
+# Duplicados identificados (opcional, depende si quieres versionar)
+duplicados/*.bib
+
+# Archivos de ChromeDriver y Selenium
+chromedriver
+geckodriver
+*.exe
+
+# Archivos temporales de procesamiento
+temp/
+tmp/
+cache/
+
+# ============================================================================
+# MANTENER ESTRUCTURA DE CARPETAS VACÍAS
+# ============================================================================
+# Usar archivos .gitkeep para mantener carpetas vacías en el repo
+!**/.gitkeep
