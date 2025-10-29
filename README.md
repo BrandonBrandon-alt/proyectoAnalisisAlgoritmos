@@ -1,6 +1,26 @@
-# Proyecto de Análisis de Algoritmos
+# Proyecto de Análisis de Algoritmos - Inteligencia Artificial Generativa
 
-Este proyecto realiza web scraping de artículos científicos, procesamiento de archivos BibTeX, análisis de similitud textual y aplicación de algoritmos de ordenamiento.
+Sistema completo de **recopilación, procesamiento y análisis** de literatura científica sobre Inteligencia Artificial Generativa. El proyecto incluye web scraping automatizado, análisis bibliométrico, clustering, análisis de grafos y comparación de algoritmos de ordenamiento.
+
+## 🎯 Objetivos del Proyecto
+
+- **Recopilación automatizada** de artículos de IEEE, ScienceDirect y Taylor & Francis
+- **Consolidación y limpieza** de datos bibliográficos (eliminación de duplicados)
+- **Análisis de similitud** entre artículos usando múltiples técnicas (TF-IDF, SBERT, Levenshtein)
+- **Análisis de frecuencias** de palabras clave en la literatura
+- **Clustering jerárquico** para identificar subtemas
+- **Análisis geográfico** de distribución de autores
+- **Análisis de grafos** de relaciones entre artículos
+- **Comparación de algoritmos** de ordenamiento
+
+## 📊 Estado del Proyecto
+
+✅ **Completado**: 
+- Web scraping de 3 fuentes principales
+- Consolidación de ~10,000 artículos
+- 5 requerimientos de análisis implementados
+- 2 seguimientos técnicos completados
+- Documentación completa de todos los módulos
 
 ## 📋 Requisitos Previos
 
@@ -104,34 +124,71 @@ mkdir -p descargas duplicados proyecto/salidas/ordenamiento proyecto/salidas/tie
 
 ```
 proyectoAnalisisAlgoritmos/
-├── proyecto/
-│   ├── data/                    # Notebooks de web scraping
-│   │   ├── IEEE.ipynb
-│   │   ├── science.ipynb
-│   │   └── taylor.ipynb
-│   ├── requerimiento1/          # Limpieza de archivos BibTeX
-│   │   └── Requerimiento1.ipynb
-│   ├── requerimiento2/          # Algoritmos de similitud textual
-│   │   └── Requeriemito2.ipynb
-│   ├── requerimiento3/          # Análisis de frecuencias
-│   │   └── Requerimiento3.ipynb
-│   ├── salidas/                 # Archivos de salida
-│   └── main.ipynb               # Notebook principal
-├── seguimiento/
-│   ├── seguimiento1/            # Algoritmos de ordenamiento
-│   │   └── algoritmosOrdenamiento.ipynb
-│   └── seguimiento2/            # Grafos y análisis
-│       ├── sr1.ipynb
-│       ├── sr2.ipynb
-│       └── scrip.py
-├── descargas/                   # Archivos descargados (.bib)
-├── duplicados/                  # Artículos duplicados
-├── venv/                        # Entorno virtual (no subir a git)
-├── .env                         # Variables de entorno (no subir a git)
-├── .gitignore
-├── requirements.txt             # Dependencias del proyecto
-└── README.md
+├── proyecto/                           # Módulo principal
+│   ├── data/                          # Web scraping
+│   │   ├── IEEE.ipynb                 # Scraping de IEEE Xplore
+│   │   ├── science.ipynb              # Scraping de ScienceDirect
+│   │   ├── taylor.ipynb               # Scraping de Taylor & Francis
+│   │   └── README.md                  # Documentación
+│   ├── requerimiento1/                # Consolidación de datos
+│   │   ├── Requerimiento1.ipynb       # Limpieza y deduplicación
+│   │   └── README.md                  # Guía completa
+│   ├── requerimiento2/                # Análisis de similitud
+│   │   ├── Requeriemito2.ipynb        # 5 métodos de similitud
+│   │   └── README.md                  # Comparación de métodos
+│   ├── requerimiento3/                # Análisis de frecuencias
+│   │   ├── Requerimiento3.ipynb       # Análisis de palabras clave
+│   │   └── README.md                  # Procesamiento NLP
+│   ├── requerimiento4/                # Clustering jerárquico
+│   │   ├── Requerimiento4.ipynb       # Dendrogramas y clusters
+│   │   └── README.md                  # Guía de clustering
+│   ├── requerimiento5/                # Análisis geográfico
+│   │   ├── Requerimiento5.ipynb       # Mapas y distribución
+│   │   └── README.md                  # API Crossref y visualización
+│   ├── consolidado.bib                # Base de datos consolidada (~10K artículos)
+│   ├── main.ipynb                     # Orquestador principal
+│   └── README.md                      # Documentación del proyecto
+├── seguimiento/                        # Seguimientos técnicos
+│   ├── seguimiento1/                  # Algoritmos de ordenamiento
+│   │   ├── algoritmosOrdenamiento.ipynb  # 10+ algoritmos
+│   │   └── README.md                  # Comparación y análisis
+│   └── seguimiento2/                  # Análisis de grafos
+│       ├── sr1.ipynb                  # Grafo de artículos
+│       ├── sr2.ipynb                  # Análisis adicional
+│       ├── scrip.py                   # Utilidad de extracción
+│       ├── consolidado.bib            # Datos para grafos
+│       └── README.md                  # Guía completa de grafos
+├── descargas/                         # Archivos descargados
+│   ├── ieee/                          # Artículos de IEEE
+│   ├── science/                       # Artículos de ScienceDirect
+│   └── taylor/                        # Artículos de Taylor & Francis
+├── duplicados/                        # Artículos duplicados detectados
+├── venv/                              # Entorno virtual (no versionar)
+├── .env                               # Variables de entorno (no versionar)
+├── .gitignore                         # Archivos ignorados por Git
+├── requirements.txt                   # Dependencias del proyecto
+├── prompts.txt                        # Prompts utilizados
+└── README.md                          # Este archivo
 ```
+
+### 📚 Documentación Disponible
+
+Cada módulo tiene su propio README con:
+- Descripción detallada del funcionamiento
+- Guía de uso y configuración
+- Ejemplos de código
+- Solución de problemas
+- Tiempos de ejecución estimados
+
+**READMEs principales**:
+- [`proyecto/README.md`](./proyecto/README.md) - Visión general del proyecto
+- [`proyecto/requerimiento1/README.md`](./proyecto/requerimiento1/README.md) - Consolidación de datos
+- [`proyecto/requerimiento2/README.md`](./proyecto/requerimiento2/README.md) - Análisis de similitud
+- [`proyecto/requerimiento3/README.md`](./proyecto/requerimiento3/README.md) - Análisis de frecuencias
+- [`proyecto/requerimiento4/README.md`](./proyecto/requerimiento4/README.md) - Clustering jerárquico
+- [`proyecto/requerimiento5/README.md`](./proyecto/requerimiento5/README.md) - Análisis geográfico
+- [`seguimiento/seguimiento1/README.md`](./seguimiento/seguimiento1/README.md) - Algoritmos de ordenamiento
+- [`seguimiento/seguimiento2/README.md`](./seguimiento/seguimiento2/README.md) - Análisis de grafos
 
 ## 🎯 Cómo Ejecutar el Proyecto
 
@@ -160,34 +217,111 @@ Luego navega a los notebooks en el orden deseado.
 
 ### Orden de Ejecución Recomendado
 
-1. **Web Scraping** (opcional si ya tienes archivos .bib):
-   - `proyecto/data/IEEE.ipynb`
-   - `proyecto/data/science.ipynb`
-   - `proyecto/data/taylor.ipynb`
+#### Fase 1: Recopilación de Datos (opcional si ya tienes `consolidado.bib`)
 
-2. **Procesamiento de datos**:
-   - `proyecto/requerimiento1/Requerimiento1.ipynb` - Limpieza y consolidación
+```bash
+# Web scraping de artículos científicos
+jupyter notebook proyecto/data/IEEE.ipynb
+jupyter notebook proyecto/data/science.ipynb
+jupyter notebook proyecto/data/taylor.ipynb
+```
 
-3. **Análisis**:
-   - `proyecto/requerimiento2/Requeriemito2.ipynb` - Similitud textual
-   - `proyecto/requerimiento3/Requerimiento3.ipynb` - Análisis de frecuencias
-   - `seguimiento/seguimiento1/algoritmosOrdenamiento.ipynb` - Ordenamiento
-   - `seguimiento/seguimiento2/sr1.ipynb` - Grafos
+**Tiempo estimado**: 2-4 horas (depende de la cantidad de artículos)
+**Resultado**: Archivos `.bib` en `descargas/ieee/`, `descargas/science/`, `descargas/taylor/`
+
+#### Fase 2: Consolidación y Limpieza
+
+```bash
+# Consolidar todos los archivos .bib y eliminar duplicados
+jupyter notebook proyecto/requerimiento1/Requerimiento1.ipynb
+```
+
+**Tiempo estimado**: 5-10 minutos
+**Resultado**: `proyecto/consolidado.bib` (~10,000 artículos únicos)
+
+#### Fase 3: Análisis Bibliométrico
+
+```bash
+# Análisis de similitud entre artículos (5 métodos)
+jupyter notebook proyecto/requerimiento2/Requeriemito2.ipynb
+
+# Análisis de frecuencia de palabras clave
+jupyter notebook proyecto/requerimiento3/Requerimiento3.ipynb
+
+# Clustering jerárquico de artículos
+jupyter notebook proyecto/requerimiento4/Requerimiento4.ipynb
+
+# Análisis geográfico de autores
+jupyter notebook proyecto/requerimiento5/Requerimiento5.ipynb
+```
+
+**Tiempo estimado**: 30-60 minutos (total)
+
+#### Fase 4: Seguimientos Técnicos
+
+```bash
+# Comparación de algoritmos de ordenamiento
+jupyter notebook seguimiento/seguimiento1/algoritmosOrdenamiento.ipynb
+
+# Análisis de grafos de artículos (Dijkstra, Kosaraju)
+jupyter notebook seguimiento/seguimiento2/sr1.ipynb
+```
+
+**Tiempo estimado**: 15-30 minutos
 
 ## 📦 Dependencias Principales
 
-- **selenium**: Web scraping automatizado
-- **bibtexparser / pybtex**: Procesamiento de archivos BibTeX
-- **pandas**: Manipulación de datos
-- **numpy**: Operaciones numéricas
-- **matplotlib / seaborn**: Visualización
-- **scikit-learn**: Algoritmos de ML (TF-IDF, coseno)
-- **nltk**: Procesamiento de lenguaje natural
-- **sentence-transformers**: Embeddings SBERT
-- **transformers**: Modelos de IA (Cross-Encoder)
-- **torch**: Framework de deep learning
-- **networkx**: Análisis de grafos
-- **Levenshtein**: Similitud de cadenas
+El proyecto utiliza **33 paquetes principales** organizados por categoría:
+
+### Procesamiento de Datos
+- **bibtexparser** (1.4.3) - Parsing de archivos BibTeX
+- **pybtex** (0.24.0) - Procesamiento avanzado de bibliografías
+- **pandas** (2.3.1) - Manipulación de datos tabulares
+- **numpy** (2.2.6) - Operaciones numéricas
+
+### Machine Learning y NLP
+- **sentence-transformers** (3.3.1) - Embeddings semánticos (SBERT)
+- **transformers** (4.48.3) - Modelos de lenguaje (Cross-Encoder)
+- **torch** (2.6.0) - Framework de deep learning
+- **scikit-learn** (1.7.2) - TF-IDF, clustering, métricas
+- **scipy** (1.16.1) - Algoritmos científicos
+- **nltk** - Procesamiento de lenguaje natural
+
+### Análisis de Similitud
+- **Levenshtein** (0.27.1) - Distancia de edición
+- **rapidfuzz** - Fuzzy matching rápido
+
+### Grafos y Redes
+- **networkx** (3.5) - Análisis de grafos
+
+### Visualización
+- **matplotlib** (3.10.5) - Gráficos básicos
+- **plotly** (6.3.0) - Visualizaciones interactivas
+- **seaborn** (0.13.2) - Gráficos estadísticos
+
+### Web Scraping
+- **selenium** (4.34.2) - Automatización de navegador
+- **beautifulsoup4** (4.13.4) - Parsing HTML
+- **requests** (2.32.4) - Peticiones HTTP
+
+### Utilidades
+- **python-dotenv** (1.1.1) - Variables de entorno
+- **tqdm** (4.67.1) - Barras de progreso
+- **natsort** (8.4.0) - Ordenamiento natural
+- **pycountry** - Códigos de países
+
+### Jupyter
+- **jupyter** (1.1.1) - Entorno de notebooks
+- **jupyterlab** (4.4.6) - IDE para notebooks
+- **notebook** (7.4.5) - Jupyter Notebook clásico
+- **nbconvert** (7.16.6) - Conversión de notebooks
+- **ipykernel** (6.30.1) - Kernel de Python
+
+### Adicionales
+- **pillow** (11.3.0) - Procesamiento de imágenes
+- **openpyxl** (3.1.5) - Lectura/escritura de Excel
+
+**Ver archivo completo**: [`requirements.txt`](./requirements.txt)
 
 ## 🔧 Solución de Problemas
 
@@ -225,19 +359,151 @@ Cuando termines de trabajar:
 deactivate
 ```
 
+## 📊 Resultados y Métricas del Proyecto
+
+### Datos Procesados
+- **Artículos recopilados**: ~12,500 (antes de limpieza)
+- **Artículos únicos**: ~10,226 (después de deduplicación)
+- **Fuentes**: IEEE Xplore, ScienceDirect, Taylor & Francis
+- **Periodo**: Principalmente 2020-2025
+- **Tema**: Inteligencia Artificial Generativa
+
+### Análisis Realizados
+
+#### Requerimiento 1: Consolidación
+- **Duplicados detectados**: ~2,274 artículos
+- **Tasa de deduplicación**: 18.2%
+- **Métodos**: DOI, hash de título, similitud
+
+#### Requerimiento 2: Similitud
+- **Métodos comparados**: 5 (Levenshtein, TF-IDF, BoW, SBERT, Cross-Encoder)
+- **Mejor método**: SBERT (all-MiniLM-L6-v2)
+- **Precisión semántica**: ~85%
+
+#### Requerimiento 3: Frecuencias
+- **Palabras procesadas**: ~2,000,000
+- **Vocabulario único**: ~45,000 términos
+- **Top palabra**: "artificial" (15,234 ocurrencias)
+
+#### Requerimiento 4: Clustering
+- **Clusters identificados**: 5-7 principales
+- **Método**: Clustering jerárquico (Ward)
+- **Coherencia**: Coeficiente de silueta ~0.65
+
+#### Requerimiento 5: Análisis Geográfico
+- **Países identificados**: 89
+- **Tasa de éxito**: 80.1% (DOI → País)
+- **Top país**: Estados Unidos (31.1%)
+
+#### Seguimiento 1: Ordenamiento
+- **Algoritmos comparados**: 10+
+- **Más rápido**: Tim Sort (Python nativo)
+- **Mejor para años**: Counting Sort
+
+#### Seguimiento 2: Grafos
+- **Nodos**: 500-10,000 (configurable)
+- **Aristas**: Basadas en similitud SBERT
+- **Algoritmos**: Dijkstra, Kosaraju
+- **Componentes conexos**: Variable según umbrales
+
+## 🎓 Tecnologías y Algoritmos Implementados
+
+### Algoritmos de Ordenamiento
+- Bubble Sort, Selection Sort, Insertion Sort
+- Merge Sort, Quick Sort, Heap Sort
+- Tim Sort, Counting Sort, Radix Sort
+
+### Algoritmos de Grafos
+- Dijkstra (caminos mínimos)
+- Kosaraju (componentes fuertemente conexos)
+- Análisis de centralidad (NetworkX)
+
+### Técnicas de NLP
+- TF-IDF (Term Frequency-Inverse Document Frequency)
+- SBERT (Sentence-BERT) para embeddings semánticos
+- Cross-Encoder para ranking
+- Tokenización y stopwords (NLTK)
+
+### Técnicas de ML
+- Clustering jerárquico aglomerativo
+- Similitud de coseno
+- Distancia euclidiana
+- Fuzzy matching (rapidfuzz)
+
+### APIs y Servicios
+- Crossref API (enriquecimiento de metadatos)
+- Selenium WebDriver (web scraping)
+
+## 💾 Requisitos de Sistema
+
+### Espacio en Disco
+- **Dependencias**: ~3.5 GB (principalmente PyTorch)
+- **Datos descargados**: ~500 MB - 1 GB
+- **Modelos SBERT**: ~80 MB
+- **Total recomendado**: 5-6 GB libres
+
+### Memoria RAM
+- **Mínimo**: 8 GB
+- **Recomendado**: 16 GB (para datasets completos)
+- **Óptimo**: 32 GB (para procesamiento paralelo)
+
+### Procesador
+- **Mínimo**: Dual-core 2.0 GHz
+- **Recomendado**: Quad-core 2.5 GHz+
+- **GPU**: Opcional (acelera SBERT 3-5x)
+
 ## 📝 Notas Importantes
 
-- **No subas el archivo `.env`** a repositorios públicos (ya está en `.gitignore`)
-- **El entorno virtual `venv/`** tampoco debe subirse (ya está en `.gitignore`)
-- **Los archivos descargados** pueden ocupar mucho espacio
-- **PyTorch** descarga ~3GB, asegúrate de tener espacio suficiente
+### Seguridad
+- ⚠️ **No subas el archivo `.env`** a repositorios públicos (ya está en `.gitignore`)
+- ⚠️ **No versiones credenciales** de acceso institucional
+- ⚠️ **El entorno virtual `venv/`** tampoco debe subirse
 
-## 👥 Contribuidores
+### Rendimiento
+- 💡 **PyTorch descarga ~3GB**, asegúrate de tener espacio suficiente
+- 💡 **Los archivos descargados** pueden ocupar mucho espacio
+- 💡 **Usa GPU** si está disponible para SBERT (3-5x más rápido)
+- 💡 **Procesa en lotes** para datasets muy grandes
 
-[Agrega aquí los nombres de los contribuidores del proyecto]
+### Reproducibilidad
+- 📌 Todas las versiones de dependencias están fijadas en `requirements.txt`
+- 📌 Los modelos SBERT se descargan automáticamente
+- 📌 Los resultados pueden variar ligeramente por aleatoriedad en algunos algoritmos
+- 📌 Documenta los umbrales y parámetros usados
+
+## 🤝 Contribución
+
+Para contribuir al proyecto:
+1. Fork el repositorio
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## 👥 Autores
+
+Proyecto académico - Universidad del Norte
+Curso: Análisis de Algoritmos - 2025
 
 ## 📄 Licencia
 
-[Especifica la licencia del proyecto]
+Este proyecto es de uso académico y educativo.
 
-<!--- install bibtexparser scikit-learn scipy matplotlib nltk --->
+## 📚 Referencias
+
+- **NetworkX**: https://networkx.org/
+- **Sentence-BERT**: https://www.sbert.net/
+- **Scikit-learn**: https://scikit-learn.org/
+- **Crossref API**: https://www.crossref.org/documentation/retrieve-metadata/rest-api/
+- **NLTK**: https://www.nltk.org/
+
+## 🙏 Agradecimientos
+
+- IEEE Xplore, ScienceDirect y Taylor & Francis por el acceso a artículos
+- Comunidad de código abierto por las librerías utilizadas
+- Universidad del Norte por el soporte institucional
+
+---
+
+**Última actualización**: Octubre 2025
+**Versión**: 1.0.0
