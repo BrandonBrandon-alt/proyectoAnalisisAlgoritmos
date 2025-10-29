@@ -1,0 +1,56 @@
+Que librerías de Python puedo usar para leer archivos .bib y procesar texto?
+-----------------------------------------------------------------------------------------------------
+Tengo los abstracts en una lista, como puedo unirlos todos para analizarlos como un solo texto?
+-----------------------------------------------------------------------------------------------------
+Estoy usando word_tokenize, pero no entiendo bien que son los tokens ni para que sirven en el análisis.
+-----------------------------------------------------------------------------------------------------
+Por que es importante eliminar stopwords cuando analizo los abstracts?
+-----------------------------------------------------------------------------------------------------
+Ya tengo una lista de palabras clave, ¿cómo puedo contar cuántas veces aparece cada una en los abstracts?
+-----------------------------------------------------------------------------------------------------
+Tengo este código:
+
+import re
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+
+# Unir todos los abstracts en un solo texto
+texto = " ".join(abstracts).lower()
+
+# Eliminar caracteres especiales y números
+texto = re.sub(r'[^a-z\s]', '', texto)
+
+# Tokenizar
+tokens = word_tokenize(texto)
+
+# Eliminar stopwords en inglés y palabras muy cortas
+stop_words = set(stopwords.words("english"))
+tokens = [word for word in tokens if word not in stop_words and len(word) > 2]
+
+print(f"Cantidad total de tokens limpios: {len(tokens)}")
+print("Ejemplo de tokens:", tokens[:20])
+
+Y me sale este error:
+
+LookupError                               Traceback (most recent call last) Cell In[3], line 12       
+9 texto = re.sub(r'[^a-z\s]', '', texto)      
+11 # Tokenizar ---> 12 tokens = word_tokenize(texto)      
+14 # Eliminar stopwords en inglés y palabras muy cortas      
+15 stop_words = set(stopwords.words("english"))  
+File ~\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\nltk\tokenize\__init__.py:142, in word_tokenize(text, language, preserve_line)     
+127 def word_tokenize(text, language="english", preserve_line=False):     
+128     """     
+129     Return a tokenized copy of *text*,     
+130     using NLTK's recommended word tokenizer    (...)    
+140     :type preserve_line: bool     
+141     """ --> 
+142     sentences = [text] if preserve_line else sent_tokenize(text, language)     
+143     return [     
+144     token for sent in sentences for token in _treebank_word_tokenizer.tokenize(sent)     
+145     ]  File ~\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\nltk\tokenize\__init__.py:119, in sent_tokenize(text, language)     
+109 def sent_tokenize(text, language="english"):     
+110     """     
+111     Return a sentence-tokenized copy of *text*,
+...
+- 'C:\\nltk_data'     - 'D:\\nltk_data'     - 'E:\\nltk_data' **********************************************************************
+
