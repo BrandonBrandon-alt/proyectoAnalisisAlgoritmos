@@ -1,4 +1,10 @@
-Que librerías de Python puedo usar para leer archivos .bib y procesar texto?
+--------------------------------------------- REQUERIMIENTO 3 ---------------------------------------------
+
+Explícame qué pide exactamente el requerimiento 4 del proyecto y como puedo abordarlo en Python usando mi archivo consolidado.bib.
+-----------------------------------------------------------------------------------------------------
+Que librerías de Python puedo usar para leer archivos consolidado.bib y procesar texto?
+-----------------------------------------------------------------------------------------------------
+Ya tengo un archivo consolidado.bib con abstracts, ¿cómo puedo leerlo en Python y extraer solo los campos de resumen?
 -----------------------------------------------------------------------------------------------------
 Tengo los abstracts en una lista, como puedo unirlos todos para analizarlos como un solo texto?
 -----------------------------------------------------------------------------------------------------
@@ -54,3 +60,27 @@ File ~\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0
 ...
 - 'C:\\nltk_data'     - 'D:\\nltk_data'     - 'E:\\nltk_data' **********************************************************************
 
+
+
+--------------------------------------------- REQUERIMIENTO 4 ---------------------------------------------
+
+Explícame que pide exactamente el requerimiento 4 del proyecto y cOmo puedo abordarlo en Python usando mi archivo consolidado.bib?
+-----------------------------------------------------------------------------------------------------
+Que pasa si mi archivo consolidado.bib tiene muchos registros y se demora cargando?
+-----------------------------------------------------------------------------------------------------
+Ayudame a escoger los primeros 100 abstracts
+-----------------------------------------------------------------------------------------------------
+Por que el método single me muestra solo una línea en 0 en el dendrograma?
+-----------------------------------------------------------------------------------------------------
+Por que la creación del dendrograma se demora tanto y cómo puedo optimizarlo?
+-----------------------------------------------------------------------------------------------------
+Que representa el eje Y en un dendrograma jerárquico?
+-----------------------------------------------------------------------------------------------------
+Me salió el error:
+TypeError: linkage() got an unexpected keyword argument 'metodo'. 
+Que significa?
+-----------------------------------------------------------------------------------------------------
+Me da ValueError: The condensed distance matrix must contain only finite values. 
+Que causa eso y como lo soluciono?
+-----------------------------------------------------------------------------------------------------
+Segun los dendogramas, cual de los algoritmos produce agrupamientos más coherentes? (Se adjunta fotos de los dendogramas) 
