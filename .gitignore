@@ -61,7 +61,7 @@ data/raw/**/*.csv
 
 # Archivos procesados grandes
 data/processed/*.bib
-*.bib
+#*.bib
 !data/processed/.gitkeep
 
 # Archivos temporales de descarga
@@ -128,7 +128,7 @@ $RECYCLE.BIN/
 *.ipr
 
 # Sublime Text
-*.sublime-project
+*.sublime-.roject
 *.sublime-workspace
 
 # Vim
