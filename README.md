@@ -239,3 +239,5 @@ deactivate
 ## 📄 Licencia
 
 [Especifica la licencia del proyecto]
+
+<!--- install bibtexparser scikit-learn scipy matplotlib nltk --->
