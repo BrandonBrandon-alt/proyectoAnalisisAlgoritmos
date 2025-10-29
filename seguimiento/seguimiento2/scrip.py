@@ -42,9 +42,24 @@ def extraer_primeros_n_elementos(archivo_entrada, archivo_salida, n=500):
 
 # Uso del script
 if __name__ == "__main__":
-    # Configura aquí los nombres de tus archivos
-    archivo_entrada = "consolidado.bib"  # Tu archivo .bib original
-    archivo_salida = "primeros_500.bib"      # Archivo de salida
+    import os
+    from dotenv import load_dotenv
     
-    # Extraer los primeros 1000 elementos
+    # Cargar variables de entorno
+    load_dotenv()
+    
+    # Obtener rutas desde variables de entorno
+    archivo_entrada = os.getenv("CONSOLIDADO_PATH", "consolidado.bib")
+    archivo_salida = os.getenv("PRIMEROS_500", "primeros_500.bib")
+    
+    # Verificar que el archivo de entrada existe
+    if not os.path.exists(archivo_entrada):
+        print(f"✗ Error: No se encuentra el archivo de entrada '{archivo_entrada}'")
+        print(f"   Asegúrate de que la variable CONSOLIDADO_PATH esté configurada en el archivo .env")
+        exit(1)
+    
+    print(f"📖 Archivo de entrada: {archivo_entrada}")
+    print(f"💾 Archivo de salida: {archivo_salida}")
+    
+    # Extraer los primeros 500 elementos
     extraer_primeros_n_elementos(archivo_entrada, archivo_salida, n=500)
