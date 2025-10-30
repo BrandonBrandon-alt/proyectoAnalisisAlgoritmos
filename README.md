@@ -99,6 +99,7 @@ DUPLICATE_PATH=/ruta/absoluta/al/proyecto/duplicados
 CONSOLIDADO_PATH=/ruta/absoluta/al/proyecto/proyecto/salidas/consolidado.bib
 ORDENAMIENTO_PATH=/ruta/absoluta/al/proyecto/proyecto/salidas/ordenamiento
 TIEMPOS_PATH=/ruta/absoluta/al/proyecto/proyecto/salidas/tiempoAlgoritmos
+PRIMEROS_500=/ruta/absoluta/al/proyecto/proyecto/primeros_500.bib
 ```
 
 **Ejemplo para Linux:**
@@ -112,6 +113,7 @@ DUPLICATE_PATH=/home/usuario/Documentos/proyectoAnalisisAlgoritmos/duplicados
 CONSOLIDADO_PATH=/home/usuario/Documentos/proyectoAnalisisAlgoritmos/proyecto/salidas/consolidado.bib
 ORDENAMIENTO_PATH=/home/usuario/Documentos/proyectoAnalisisAlgoritmos/proyecto/salidas/ordenamiento
 TIEMPOS_PATH=/home/usuario/Documentos/proyectoAnalisisAlgoritmos/proyecto/salidas/tiempoAlgoritmos
+PRIMEROS_500=/home/yep/Documentos/proyectoAnalisisAlgoritmos/proyecto/primeros_500.bib
 ```
 
 ### 6. Crear las carpetas necesarias
