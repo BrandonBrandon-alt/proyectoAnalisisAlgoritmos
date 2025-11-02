@@ -73,15 +73,7 @@ data/processed/*.bib
 # SALIDAS Y RESULTADOS
 # ============================================================================
 salidas/
-outputs/
 resultados/
-*.pdf
-*.png
-*.jpg
-*.jpeg
-*.svg
-!docs/**/*.png
-!docs/**/*.jpg
 
 # ============================================================================
 # LOGS Y METADATOS
