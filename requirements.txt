@@ -29,6 +29,7 @@ networkx==3.5
 matplotlib==3.10.5
 plotly==6.3.0
 seaborn==0.13.2
+kaleido==1.1.0
 
 # --- Web scraping ---
 selenium==4.34.2
