@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Requerimiento 5 — Resultados</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Resultados — Requerimiento 5</h1>
+    <p class="lead">Pulsa el botón para cargar los resultados generados por el notebook (archivos esperados en la carpeta del proyecto).</p>
+
+    <div>
+        <button id="loadBtn">Cargar resultados</button>
+        <span id="msg" class="muted" style="margin-left:12px"></span>
+    </div>
+
+    <div class="grid">
+        <div>
+            <div id="summary" class="card">
+                <strong>Resumen</strong>
+                <div class="status" id="summaryText">No se ha cargado ningún archivo todavía.</div>
+                <div id="counts" style="margin-top:8px"></div>
+            </div>
+
+            <div id="topCountriesCard" class="card" style="margin-top:12px; display:none;">
+                <strong>Top países (primer autor)</strong>
+                <div class="top-list" id="topCountries"></div>
+            </div>
+
+            
+        </div>
+
+        <div>
+            <div class="card">
+                <strong>Visualizaciones</strong>
+                <div id="visuals" style="margin-top:8px">
+                    <div id="mapContainer" style="margin-bottom:12px;">
+                        <div class="muted">Mapa de países (mapa_paises.png)</div>
+                        <img id="mapImg" class="preview" alt="Mapa de países" style="display:none" />
+                        <div id="mapMsg" class="muted" style="margin-top:6px"></div>
+                    </div>
+
+                    <div id="cloudContainer" style="margin-bottom:12px;">
+                        <div class="muted">Nube de palabras (nube_palabras.png)</div>
+                        <img id="cloudImg" class="preview" alt="Nube de palabras" style="display:none" />
+                        <div id="cloudMsg" class="muted" style="margin-top:6px"></div>
+                    </div>
+
+                    <div id="timelineContainer" style="margin-bottom:12px;">
+                        <div class="muted">Línea temporal (linea_tiempo_by_source.png)</div>
+                        <img id="timelineImg" class="preview" alt="Línea temporal" style="display:none" />
+                        <div id="timelineMsg" class="muted" style="margin-top:6px"></div>
+                        <div style="margin-top:6px;">
+                            <a id="timelinePdfLink" class="btn-link" target="_blank" style="display:none">Abrir línea temporal (PDF)</a>
+                        </div>
+                    </div>
+
+                    <div id="pdfContainer">
+                        <div class="muted">Informe combinado (requerimiento5_report.pdf)</div>
+                        <a id="reportLink" class="btn-link" target="_blank" style="display:none">Abrir informe (PDF)</a>
+                        <div id="pdfMsg" class="muted" style="margin-top:6px"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top:12px;">
+                <strong>Logs</strong>
+                <pre id="log" style="height:220px">Esperando acción...</pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Rutas relativas desde este archivo (requerimiento5/index.html)
+        // Los archivos generados por el notebook se colocan en la carpeta `outputs/`
+        const paths = {
+            records: 'data/records.csv',
+            cache: 'data/country_lookup.csv',
+            mapa: 'outputs/mapa_paises.png',
+            nube: 'outputs/nube_palabras.png',
+            timeline_png: 'outputs/linea_tiempo_by_source.png',
+            timeline_pdf: 'outputs/linea_tiempo_by_source.pdf',
+            report: 'outputs/requerimiento5_report.pdf'
+        };
+
+        const logEl = document.getElementById('log');
+        function log(...args){ logEl.textContent = args.join(' ') + "\n\n" + logEl.textContent; }
+
+        function showMsg(text){ document.getElementById('msg').textContent = text; }
+
+        async function fetchText(path){
+            try{
+                const res = await fetch(path);
+                if(!res.ok) throw new Error('HTTP ' + res.status);
+                return await res.text();
+            } catch(e){
+                throw new Error(`No disponible: ${path} (${e.message})`);
+            }
+        }
+
+        function parseCSVSimple(text){
+            // Parse CSV simple: as fallback splits by lines and commas.
+            // No robust quoting support; suficiente para mostrar columnas principales.
+            const lines = text.split(/\r?\n/).filter(l => l.trim() !== '');
+            if(lines.length === 0) return {headers:[], rows:[]};
+            const headers = lines[0].split(',').map(h => h.replace(/^"|"$/g,'').trim());
+            const rows = lines.slice(1).map(line => {
+                // naive split but keep quoted values together
+                const values = [];
+                let cur = '', inQ=false;
+                for(let i=0;i<line.length;i++){
+                    const ch = line[i];
+                    if(ch === '"' ) { inQ = !inQ; continue; }
+                    if(ch === ',' && !inQ){ values.push(cur); cur=''; continue; }
+                    cur += ch;
+                }
+                values.push(cur);
+                // pad to headers
+                while(values.length < headers.length) values.push('');
+                return headers.reduce((o,k,i)=>{ o[k]= (values[i]||'').trim(); return o; }, {});
+            });
+            return {headers, rows};
+        }
+
+        function topCounts(items, key, topN=10){
+            const counts = {};
+            items.forEach(it => {
+                const k = (it[key] || '').trim();
+                if(!k) return;
+                counts[k] = (counts[k] || 0) + 1;
+            });
+            const arr = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,topN);
+            return arr;
+        }
+
+        async function checkImage(url){
+            try{
+                const r = await fetch(url, {method:'HEAD'});
+                return r.ok;
+            }catch(e){
+                return false;
+            }
+        }
+
+        document.getElementById('loadBtn').addEventListener('click', async function(){
+            const btn = this;
+            btn.disabled = true;
+            showMsg('Cargando...');
+            log('Inicio de carga de resultados');
+            document.getElementById('summaryText').textContent = 'Cargando archivos...';
+            try{
+                // Fetch records.csv
+                let recordsText=null;
+                try{
+                    recordsText = await fetchText(paths.records);
+                    log('records.csv cargado:', paths.records);
+                } catch(e){
+                    log(e.message);
+                }
+
+                // Fetch country_lookup.csv
+                let cacheText=null;
+                try{
+                    cacheText = await fetchText(paths.cache);
+                    log('country_lookup.csv cargado:', paths.cache);
+                } catch(e){
+                    log(e.message);
+                }
+
+                // Try to show images and PDF (HEAD requests)
+                const mapaOk = await checkImage(paths.mapa);
+                const nubeOk = await checkImage(paths.nube);
+                const timelineOk = await checkImage(paths.timeline_png);
+                let reportOk = false;
+                try {
+                    const r = await fetch(paths.report, {method:'HEAD'});
+                    reportOk = r.ok;
+                } catch(e){ reportOk = false; }
+                let timelinePdfOk = false;
+                try {
+                    const r2 = await fetch(paths.timeline_pdf, {method:'HEAD'});
+                    timelinePdfOk = r2.ok;
+                } catch(e){ timelinePdfOk = false; }
+
+                // Process and display summary
+                const summaryEl = document.getElementById('summaryText');
+                if(!recordsText && !cacheText){
+                    summaryEl.textContent = 'No se encontraron archivos records.csv ni country_lookup.csv en las rutas esperadas.';
+                    document.getElementById('counts').textContent = '';
+                } else {
+                    // parse CSVs
+                    let records = {headers:[], rows:[]};
+                    let cache = {headers:[], rows:[]};
+                    if(recordsText) records = parseCSVSimple(recordsText);
+                    if(cacheText) cache = parseCSVSimple(cacheText);
+
+                    const totalRecords = records.rows.length;
+                    const identified = cache.rows.filter(r => (r.country || '').trim() !== '').length;
+                    const countriesList = cache.rows.map(r => ({country: r.country || '', iso: r.country_iso2 || ''}));
+                    const top = topCounts(cache.rows, 'country', 12);
+
+                    summaryEl.innerHTML = `Registros cargados: <strong>${totalRecords}</strong><br>Países identificados en cache: <strong>${identified}</strong>`;
+                    const countsEl = document.getElementById('counts');
+                    countsEl.innerHTML = `<div class="muted">Si los archivos no existen, verifica que el notebook guardó los resultados en: <code>requerimiento5/data/</code> y <code>outputs/</code></div>`;
+
+                    // Show top countries
+                    const topCard = document.getElementById('topCountriesCard');
+                    const topContainer = document.getElementById('topCountries');
+                    if(top.length){
+                        topCard.style.display = 'block';
+                        topContainer.innerHTML = '<table><thead><tr><th>País</th><th>Publicaciones</th></tr></thead><tbody>'
+                            + top.map(t => `<tr><td>${t[0]}</td><td>${t[1]}</td></tr>`).join('')
+                            + '</tbody></table>';
+                    } else {
+                        topCard.style.display = 'none';
+                    }
+
+                    // (Omitido) Vista previa de records.csv eliminada por petición del usuario
+                }
+
+                // Show visuals
+                const mapImg = document.getElementById('mapImg');
+                const cloudImg = document.getElementById('cloudImg');
+                const timelineImg = document.getElementById('timelineImg');
+                const mapMsg = document.getElementById('mapMsg');
+                const cloudMsg = document.getElementById('cloudMsg');
+                const timelineMsg = document.getElementById('timelineMsg');
+                const pdfMsg = document.getElementById('pdfMsg');
+                const reportLink = document.getElementById('reportLink');
+                const timelinePdfLink = document.getElementById('timelinePdfLink');
+
+                if(mapaOk){
+                    mapImg.src = paths.mapa;
+                    mapImg.style.display = 'block';
+                    mapMsg.textContent = '';
+                } else {
+                    mapImg.style.display = 'none';
+                    mapMsg.textContent = 'Mapa no encontrado en: ' + paths.mapa;
+                }
+
+                if(nubeOk){
+                    cloudImg.src = paths.nube;
+                    cloudImg.style.display = 'block';
+                    cloudMsg.textContent = '';
+                } else {
+                    cloudImg.style.display = 'none';
+                    cloudMsg.textContent = 'Nube no encontrada en: ' + paths.nube;
+                }
+
+                if(timelineOk){
+                    timelineImg.src = paths.timeline_png;
+                    timelineImg.style.display = 'block';
+                    timelineMsg.textContent = '';
+                } else {
+                    timelineImg.style.display = 'none';
+                    timelineMsg.textContent = 'Línea temporal no encontrada en: ' + paths.timeline_png;
+                }
+
+                if(timelinePdfOk){
+                    timelinePdfLink.href = paths.timeline_pdf;
+                    timelinePdfLink.style.display = 'inline-block';
+                    timelinePdfLink.textContent = 'Abrir línea temporal (PDF)';
+                } else {
+                    timelinePdfLink.style.display = 'none';
+                }
+
+                if(reportOk){
+                    reportLink.href = paths.report;
+                    reportLink.style.display = 'inline-block';
+                    reportLink.textContent = 'Abrir informe (requerimiento5_report.pdf)';
+                    pdfMsg.textContent = '';
+                } else {
+                    reportLink.style.display = 'none';
+                    pdfMsg.textContent = 'Informe PDF no encontrado en: ' + paths.report;
+                }
+
+                log('Carga finalizada.');
+                showMsg('Carga finalizada.');
+            } catch(err){
+                log('Error general:', err.message);
+                showMsg('Error: ' + err.message);
+            } finally {
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

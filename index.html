@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Proyecto — Análisis de Algoritmos</title>
+    <style>
+      :root{ --primary:#0b5fff; --muted:#666 }
+      body{ font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; margin:0; background:#fbfdff; color:#111 }
+      .wrap{ max-width:920px; margin:36px auto; padding:20px }
+      header{ display:flex; align-items:flex-start; gap:16px }
+      h1{ margin:0; font-size:1.4rem }
+      p.lead{ margin:6px 0 18px; color:#444 }
+      .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px }
+      .card{ background:white; border-radius:10px; padding:18px; box-shadow:0 8px 20px rgba(16,24,40,0.06); text-align:center }
+      .card a{ display:inline-block; margin-top:8px; padding:10px 12px; background:var(--primary); color:#fff; border-radius:8px; text-decoration:none; font-weight:700 }
+      .muted{ color:var(--muted); font-size:0.95rem }
+      footer{ margin-top:18px; color:#666; font-size:0.9rem }
+    </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Proyecto — Análisis de Algoritmos</h1>
+        <p class="lead">Selecciona un requerimiento para ver resultados o ejecutar el notebook correspondiente.</p>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <strong>Requerimiento 1</strong>
+        <div class="muted">Análisis y resultados del requerimiento 1.</div>
+        <a href="proyecto/requerimiento1/index.html">Abrir R1</a>
+      </div>
+
+      <div class="card">
+        <strong>Requerimiento 2</strong>
+        <div class="muted">Análisis y resultados del requerimiento 2.</div>
+        <a href="proyecto/requerimiento2/index.html">Abrir R2</a>
+      </div>
+
+      <div class="card">
+        <strong>Requerimiento 3</strong>
+        <div class="muted">Análisis y resultados del requerimiento 3.</div>
+        <a href="proyecto/requerimiento3/index.html">Abrir R3</a>
+      </div>
+
+      <div class="card">
+        <strong>Requerimiento 4</strong>
+        <div class="muted">Análisis y resultados del requerimiento 4.</div>
+        <a href="proyecto/requerimiento4/index.html">Abrir R4</a>
+      </div>
+
+      <div class="card">
+        <strong>Requerimiento 5</strong>
+        <div class="muted">Visualizaciones y reporte del requerimiento 5.</div>
+        <a href="proyecto/requerimiento5/index.html">Abrir R5</a>
+      </div>
+    </div>
+
+    <footer>
+      Archivos esperados en: <code>proyecto/requerimientoX/</code> y <code>proyecto/requerimiento5/outputs/</code>
+    </footer>
+  </div>
+</body>
+</html>
