@@ -23,7 +23,6 @@ Sistema completo de **recopilación, procesamiento y análisis** de literatura c
 - Documentación completa de todos los módulos
 
 ## 📋 Requisitos Previos
-
 - Python 3.9 o superior
 - Git (opcional, para clonar el repositorio)
 - Google Chrome (para web scraping con Selenium)
