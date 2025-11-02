@@ -1,0 +1,77 @@
+/* style.css — estilos para Requerimiento 5 */
+:root{
+  --primary:#0b5fff;
+  --muted:#666;
+  --bg:#ffffff;
+  --card-border:#e6e6e6;
+  --text:#111;
+}
+
+*{box-sizing:border-box}
+body{
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin:0;
+  color:var(--text);
+  background: linear-gradient(180deg,#fbfdff 0%, #f6f8ff 100%);
+  -webkit-font-smoothing:antialiased;
+}
+
+h1{ font-size:1.3rem; margin-bottom:4px }
+p.lead{ margin-top:0; color:#444 }
+
+button{
+  background:var(--primary); color:#fff; border:0; padding:10px 16px; border-radius:10px; cursor:pointer; font-weight:700; box-shadow: 0 6px 18px rgba(11,95,255,0.12);
+}
+button:disabled{ opacity:.6; cursor:default }
+
+/* Layout: forzar apilamiento vertical (todo hacia abajo) */
+.container{ max-width:980px; margin:28px auto; padding:0 20px; }
+.grid{ display:block; margin-top:16px; }
+.card{ border:1px solid var(--card-border); padding:14px; border-radius:12px; background:var(--bg); box-shadow: 0 6px 18px rgba(16,24,40,0.03); margin-bottom:16px }
+
+/* Header */
+header{ margin-bottom:6px }
+h1{ font-size:1.4rem; margin:0 0 6px }
+p.lead{ margin:0 0 12px }
+
+pre{ background:#ffffff; padding:12px; border-radius:8px; overflow:auto; max-height:260px; border:1px solid #f0f3ff }
+
+/* Visualizaciones: hacerlas grandes y centradas */
+.card strong { display:block; margin-bottom:8px; font-size:1rem }
+.visuals { display:flex; flex-direction:column; gap:18px }
+.visuals .muted{ margin-bottom:6px }
+.preview { width:85%; max-width:900px; height:auto; border-radius:8px; border:1px solid #e9eefc; box-shadow: 0 6px 12px rgba(11,95,255,0.05); max-height:480px; object-fit:contain; display:block; margin:12px auto }
+
+/* Table and lists */
+table{ width:100%; border-collapse:collapse; margin-top:8px }
+th,td{ text-align:left; padding:10px 12px; border-bottom:1px solid #f1f5ff; font-size:0.95rem }
+.muted{ color:var(--muted); font-size:0.95rem }
+.status{ margin-top:8px; font-size:0.95rem; color:#333 }
+.top-list{ max-height:320px; overflow:auto }
+a.btn-link{ display:inline-block; margin-top:8px; color:var(--primary); text-decoration:none; font-weight:700 }
+
+/* Make report/timeline links look like buttons */
+a.btn-link{ background:transparent; padding:6px 10px; border-radius:8px }
+
+/* Responsive (narrow screens) */
+
+@media (max-width:960px){
+  .container{ padding:0 18px; margin:18px auto }
+  .preview{ width:95%; max-height:420px; margin:10px auto }
+  .card{ padding:12px }
+}
+
+@media (max-width:600px){
+  body{ background: #ffffff }
+  .container{ padding:0 12px }
+  .preview{ max-height:320px }
+  h1{ font-size:1.2rem }
+  button{ width:100%; padding:12px 14px }
+}
+
+/* Small helpers */
+.small-muted{ font-size:0.85rem; color:var(--muted) }
+.preview-row{ display:block; gap:12px }
+
+/* Emphasis for counts */
+.count-badge{ background:#eef6ff; border-radius:8px; padding:8px 10px; color:var(--primary); font-weight:800 }
