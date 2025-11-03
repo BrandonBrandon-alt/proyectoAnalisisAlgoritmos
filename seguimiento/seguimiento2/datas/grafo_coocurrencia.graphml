@@ -2,179 +2,182 @@
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
   <key id="d0" for="edge" attr.name="weight" attr.type="long" />
   <graph edgedefault="undirected">
-    <node id="machine learning" />
-    <node id="privacy" />
-    <node id="generative models" />
-    <node id="training data" />
     <node id="transparency" />
+    <node id="privacy" />
+    <node id="prompting" />
     <node id="ethics" />
     <node id="explainability" />
+    <node id="generative models" />
     <node id="personalization" />
-    <node id="prompting" />
     <node id="algorithmic bias" />
-    <node id="multimodality" />
+    <node id="training data" />
     <node id="fine tuning" />
+    <node id="multimodality" />
+    <node id="machine learning" />
     <node id="human ai interaction" />
     <node id="ai literacy" />
     <node id="co creation" />
-    <node id="data" />
-    <node id="learning" />
-    <node id="model" />
     <node id="generative" />
-    <node id="models" />
-    <node id="image" />
-    <node id="images" />
-    <node id="network" />
-    <node id="proposed" />
-    <node id="methods" />
-    <node id="method" />
-    <node id="adversarial" />
-    <node id="paper" />
-    <node id="using" />
+    <node id="genai" />
     <node id="intelligence" />
-    <edge source="machine learning" target="learning">
-      <data key="d0">1242</data>
+    <node id="artificial" />
+    <node id="research" />
+    <node id="study" />
+    <node id="students" />
+    <node id="use" />
+    <node id="data" />
+    <node id="education" />
+    <node id="tools" />
+    <node id="using" />
+    <node id="models" />
+    <node id="gai" />
+    <node id="potential" />
+    <edge source="transparency" target="generative">
+      <data key="d0">85</data>
     </edge>
-    <edge source="machine learning" target="generative">
-      <data key="d0">587</data>
+    <edge source="transparency" target="intelligence">
+      <data key="d0">94</data>
     </edge>
-    <edge source="machine learning" target="models">
-      <data key="d0">616</data>
+    <edge source="transparency" target="artificial">
+      <data key="d0">94</data>
     </edge>
-    <edge source="machine learning" target="image">
-      <data key="d0">204</data>
+    <edge source="transparency" target="research">
+      <data key="d0">79</data>
     </edge>
-    <edge source="machine learning" target="images">
-      <data key="d0">177</data>
+    <edge source="transparency" target="models">
+      <data key="d0">83</data>
     </edge>
-    <edge source="machine learning" target="adversarial">
-      <data key="d0">387</data>
+    <edge source="transparency" target="potential">
+      <data key="d0">56</data>
     </edge>
-    <edge source="machine learning" target="paper">
-      <data key="d0">464</data>
-    </edge>
-    <edge source="machine learning" target="using">
-      <data key="d0">455</data>
-    </edge>
-    <edge source="machine learning" target="intelligence">
-      <data key="d0">643</data>
-    </edge>
-    <edge source="machine learning" target="privacy">
-      <data key="d0">106</data>
-    </edge>
-    <edge source="machine learning" target="algorithmic bias">
-      <data key="d0">2</data>
-    </edge>
-    <edge source="machine learning" target="data">
-      <data key="d0">800</data>
-    </edge>
-    <edge source="machine learning" target="transparency">
+    <edge source="transparency" target="machine learning">
       <data key="d0">31</data>
     </edge>
-    <edge source="machine learning" target="model">
-      <data key="d0">539</data>
+    <edge source="transparency" target="data">
+      <data key="d0">90</data>
     </edge>
-    <edge source="machine learning" target="network">
-      <data key="d0">375</data>
+    <edge source="transparency" target="explainability">
+      <data key="d0">25</data>
     </edge>
-    <edge source="machine learning" target="proposed">
-      <data key="d0">287</data>
+    <edge source="transparency" target="study">
+      <data key="d0">64</data>
     </edge>
-    <edge source="machine learning" target="methods">
-      <data key="d0">410</data>
+    <edge source="transparency" target="using">
+      <data key="d0">59</data>
     </edge>
-    <edge source="machine learning" target="method">
-      <data key="d0">230</data>
+    <edge source="transparency" target="training data">
+      <data key="d0">6</data>
     </edge>
-    <edge source="machine learning" target="generative models">
-      <data key="d0">44</data>
+    <edge source="transparency" target="use">
+      <data key="d0">39</data>
     </edge>
-    <edge source="machine learning" target="explainability">
-      <data key="d0">26</data>
+    <edge source="transparency" target="tools">
+      <data key="d0">23</data>
     </edge>
-    <edge source="machine learning" target="prompting">
-      <data key="d0">9</data>
+    <edge source="transparency" target="gai">
+      <data key="d0">8</data>
     </edge>
-    <edge source="machine learning" target="training data">
-      <data key="d0">61</data>
+    <edge source="transparency" target="privacy">
+      <data key="d0">45</data>
     </edge>
-    <edge source="machine learning" target="ethics">
+    <edge source="transparency" target="genai">
       <data key="d0">12</data>
     </edge>
-    <edge source="machine learning" target="co creation">
+    <edge source="transparency" target="ethics">
+      <data key="d0">13</data>
+    </edge>
+    <edge source="transparency" target="multimodality">
       <data key="d0">1</data>
     </edge>
-    <edge source="machine learning" target="personalization">
-      <data key="d0">10</data>
+    <edge source="transparency" target="education">
+      <data key="d0">17</data>
     </edge>
-    <edge source="machine learning" target="fine tuning">
-      <data key="d0">9</data>
+    <edge source="transparency" target="algorithmic bias">
+      <data key="d0">4</data>
     </edge>
-    <edge source="machine learning" target="multimodality">
+    <edge source="transparency" target="prompting">
+      <data key="d0">6</data>
+    </edge>
+    <edge source="transparency" target="human ai interaction">
       <data key="d0">2</data>
     </edge>
-    <edge source="privacy" target="method">
-      <data key="d0">109</data>
+    <edge source="transparency" target="students">
+      <data key="d0">8</data>
+    </edge>
+    <edge source="transparency" target="personalization">
+      <data key="d0">3</data>
+    </edge>
+    <edge source="transparency" target="generative models">
+      <data key="d0">6</data>
+    </edge>
+    <edge source="transparency" target="fine tuning">
+      <data key="d0">5</data>
+    </edge>
+    <edge source="transparency" target="ai literacy">
+      <data key="d0">1</data>
     </edge>
     <edge source="privacy" target="intelligence">
       <data key="d0">293</data>
     </edge>
+    <edge source="privacy" target="artificial">
+      <data key="d0">290</data>
+    </edge>
+    <edge source="privacy" target="research">
+      <data key="d0">217</data>
+    </edge>
     <edge source="privacy" target="algorithmic bias">
       <data key="d0">21</data>
+    </edge>
+    <edge source="privacy" target="machine learning">
+      <data key="d0">106</data>
     </edge>
     <edge source="privacy" target="data">
       <data key="d0">448</data>
     </edge>
-    <edge source="privacy" target="learning">
-      <data key="d0">308</data>
-    </edge>
     <edge source="privacy" target="models">
       <data key="d0">272</data>
+    </edge>
+    <edge source="privacy" target="potential">
+      <data key="d0">205</data>
+    </edge>
+    <edge source="privacy" target="genai">
+      <data key="d0">35</data>
     </edge>
     <edge source="privacy" target="generative">
       <data key="d0">343</data>
     </edge>
-    <edge source="privacy" target="proposed">
-      <data key="d0">137</data>
-    </edge>
-    <edge source="privacy" target="paper">
-      <data key="d0">247</data>
-    </edge>
     <edge source="privacy" target="fine tuning">
       <data key="d0">19</data>
     </edge>
-    <edge source="privacy" target="model">
-      <data key="d0">213</data>
+    <edge source="privacy" target="use">
+      <data key="d0">143</data>
     </edge>
     <edge source="privacy" target="using">
       <data key="d0">183</data>
     </edge>
-    <edge source="privacy" target="network">
-      <data key="d0">133</data>
-    </edge>
-    <edge source="privacy" target="methods">
-      <data key="d0">144</data>
+    <edge source="privacy" target="study">
+      <data key="d0">140</data>
     </edge>
     <edge source="privacy" target="training data">
       <data key="d0">33</data>
     </edge>
-    <edge source="privacy" target="images">
-      <data key="d0">94</data>
-    </edge>
-    <edge source="privacy" target="adversarial">
-      <data key="d0">157</data>
-    </edge>
-    <edge source="privacy" target="image">
-      <data key="d0">97</data>
+    <edge source="privacy" target="education">
+      <data key="d0">59</data>
     </edge>
     <edge source="privacy" target="ethics">
       <data key="d0">36</data>
     </edge>
+    <edge source="privacy" target="tools">
+      <data key="d0">71</data>
+    </edge>
+    <edge source="privacy" target="gai">
+      <data key="d0">37</data>
+    </edge>
     <edge source="privacy" target="generative models">
       <data key="d0">36</data>
     </edge>
-    <edge source="privacy" target="transparency">
-      <data key="d0">45</data>
+    <edge source="privacy" target="students">
+      <data key="d0">27</data>
     </edge>
     <edge source="privacy" target="explainability">
       <data key="d0">19</data>
@@ -197,254 +200,116 @@
     <edge source="privacy" target="personalization">
       <data key="d0">14</data>
     </edge>
-    <edge source="generative models" target="data">
-      <data key="d0">207</data>
-    </edge>
-    <edge source="generative models" target="learning">
-      <data key="d0">181</data>
-    </edge>
-    <edge source="generative models" target="model">
-      <data key="d0">222</data>
-    </edge>
-    <edge source="generative models" target="generative">
-      <data key="d0">394</data>
-    </edge>
-    <edge source="generative models" target="models">
-      <data key="d0">394</data>
-    </edge>
-    <edge source="generative models" target="image">
-      <data key="d0">145</data>
-    </edge>
-    <edge source="generative models" target="adversarial">
-      <data key="d0">114</data>
-    </edge>
-    <edge source="generative models" target="using">
-      <data key="d0">133</data>
-    </edge>
-    <edge source="generative models" target="intelligence">
-      <data key="d0">118</data>
-    </edge>
-    <edge source="generative models" target="network">
-      <data key="d0">100</data>
-    </edge>
-    <edge source="generative models" target="methods">
-      <data key="d0">129</data>
-    </edge>
-    <edge source="generative models" target="method">
-      <data key="d0">113</data>
-    </edge>
-    <edge source="generative models" target="paper">
-      <data key="d0">161</data>
-    </edge>
-    <edge source="generative models" target="images">
-      <data key="d0">123</data>
-    </edge>
-    <edge source="generative models" target="proposed">
-      <data key="d0">115</data>
-    </edge>
-    <edge source="generative models" target="fine tuning">
-      <data key="d0">15</data>
-    </edge>
-    <edge source="generative models" target="training data">
-      <data key="d0">28</data>
-    </edge>
-    <edge source="generative models" target="personalization">
-      <data key="d0">4</data>
-    </edge>
-    <edge source="generative models" target="ethics">
-      <data key="d0">3</data>
-    </edge>
-    <edge source="generative models" target="prompting">
-      <data key="d0">5</data>
-    </edge>
-    <edge source="generative models" target="algorithmic bias">
-      <data key="d0">1</data>
-    </edge>
-    <edge source="generative models" target="transparency">
-      <data key="d0">6</data>
-    </edge>
-    <edge source="generative models" target="explainability">
-      <data key="d0">3</data>
-    </edge>
-    <edge source="generative models" target="multimodality">
-      <data key="d0">1</data>
-    </edge>
-    <edge source="training data" target="data">
-      <data key="d0">397</data>
-    </edge>
-    <edge source="training data" target="learning">
-      <data key="d0">224</data>
-    </edge>
-    <edge source="training data" target="models">
-      <data key="d0">196</data>
-    </edge>
-    <edge source="training data" target="network">
-      <data key="d0">164</data>
-    </edge>
-    <edge source="training data" target="methods">
-      <data key="d0">156</data>
-    </edge>
-    <edge source="training data" target="using">
-      <data key="d0">163</data>
-    </edge>
-    <edge source="training data" target="intelligence">
-      <data key="d0">105</data>
-    </edge>
-    <edge source="training data" target="paper">
-      <data key="d0">173</data>
-    </edge>
-    <edge source="training data" target="model">
-      <data key="d0">241</data>
-    </edge>
-    <edge source="training data" target="generative">
-      <data key="d0">266</data>
-    </edge>
-    <edge source="training data" target="method">
-      <data key="d0">159</data>
-    </edge>
-    <edge source="training data" target="adversarial">
-      <data key="d0">191</data>
-    </edge>
-    <edge source="training data" target="images">
-      <data key="d0">147</data>
-    </edge>
-    <edge source="training data" target="proposed">
-      <data key="d0">167</data>
-    </edge>
-    <edge source="training data" target="transparency">
-      <data key="d0">6</data>
-    </edge>
-    <edge source="training data" target="image">
-      <data key="d0">125</data>
-    </edge>
-    <edge source="training data" target="ethics">
-      <data key="d0">2</data>
-    </edge>
-    <edge source="training data" target="personalization">
-      <data key="d0">2</data>
-    </edge>
-    <edge source="training data" target="fine tuning">
-      <data key="d0">11</data>
-    </edge>
-    <edge source="training data" target="ai literacy">
-      <data key="d0">1</data>
-    </edge>
-    <edge source="training data" target="human ai interaction">
-      <data key="d0">1</data>
-    </edge>
-    <edge source="training data" target="prompting">
-      <data key="d0">1</data>
-    </edge>
-    <edge source="training data" target="explainability">
-      <data key="d0">1</data>
-    </edge>
-    <edge source="transparency" target="generative">
-      <data key="d0">85</data>
-    </edge>
-    <edge source="transparency" target="models">
-      <data key="d0">83</data>
-    </edge>
-    <edge source="transparency" target="methods">
-      <data key="d0">51</data>
-    </edge>
-    <edge source="transparency" target="paper">
-      <data key="d0">60</data>
-    </edge>
-    <edge source="transparency" target="intelligence">
-      <data key="d0">94</data>
-    </edge>
-    <edge source="transparency" target="data">
-      <data key="d0">90</data>
-    </edge>
-    <edge source="transparency" target="learning">
-      <data key="d0">79</data>
-    </edge>
-    <edge source="transparency" target="model">
-      <data key="d0">68</data>
-    </edge>
-    <edge source="transparency" target="images">
-      <data key="d0">30</data>
-    </edge>
-    <edge source="transparency" target="network">
-      <data key="d0">27</data>
-    </edge>
-    <edge source="transparency" target="explainability">
-      <data key="d0">25</data>
-    </edge>
-    <edge source="transparency" target="image">
-      <data key="d0">21</data>
-    </edge>
-    <edge source="transparency" target="using">
+    <edge source="prompting" target="generative">
       <data key="d0">59</data>
     </edge>
-    <edge source="transparency" target="adversarial">
+    <edge source="prompting" target="data">
+      <data key="d0">37</data>
+    </edge>
+    <edge source="prompting" target="tools">
       <data key="d0">24</data>
     </edge>
-    <edge source="transparency" target="proposed">
-      <data key="d0">16</data>
+    <edge source="prompting" target="using">
+      <data key="d0">37</data>
     </edge>
-    <edge source="transparency" target="method">
-      <data key="d0">19</data>
+    <edge source="prompting" target="models">
+      <data key="d0">60</data>
     </edge>
-    <edge source="transparency" target="ethics">
-      <data key="d0">13</data>
+    <edge source="prompting" target="research">
+      <data key="d0">32</data>
     </edge>
-    <edge source="transparency" target="multimodality">
-      <data key="d0">1</data>
+    <edge source="prompting" target="intelligence">
+      <data key="d0">35</data>
     </edge>
-    <edge source="transparency" target="algorithmic bias">
-      <data key="d0">4</data>
+    <edge source="prompting" target="artificial">
+      <data key="d0">36</data>
     </edge>
-    <edge source="transparency" target="prompting">
-      <data key="d0">6</data>
+    <edge source="prompting" target="students">
+      <data key="d0">12</data>
     </edge>
-    <edge source="transparency" target="human ai interaction">
+    <edge source="prompting" target="education">
+      <data key="d0">10</data>
+    </edge>
+    <edge source="prompting" target="gai">
       <data key="d0">2</data>
     </edge>
-    <edge source="transparency" target="personalization">
-      <data key="d0">3</data>
+    <edge source="prompting" target="machine learning">
+      <data key="d0">9</data>
     </edge>
-    <edge source="transparency" target="fine tuning">
+    <edge source="prompting" target="potential">
+      <data key="d0">20</data>
+    </edge>
+    <edge source="prompting" target="fine tuning">
+      <data key="d0">9</data>
+    </edge>
+    <edge source="prompting" target="use">
+      <data key="d0">17</data>
+    </edge>
+    <edge source="prompting" target="genai">
+      <data key="d0">6</data>
+    </edge>
+    <edge source="prompting" target="study">
+      <data key="d0">27</data>
+    </edge>
+    <edge source="prompting" target="generative models">
       <data key="d0">5</data>
     </edge>
-    <edge source="transparency" target="ai literacy">
+    <edge source="prompting" target="ai literacy">
+      <data key="d0">1</data>
+    </edge>
+    <edge source="prompting" target="explainability">
+      <data key="d0">2</data>
+    </edge>
+    <edge source="prompting" target="co creation">
+      <data key="d0">1</data>
+    </edge>
+    <edge source="prompting" target="training data">
       <data key="d0">1</data>
     </edge>
     <edge source="ethics" target="generative">
       <data key="d0">65</data>
     </edge>
-    <edge source="ethics" target="models">
-      <data key="d0">38</data>
-    </edge>
-    <edge source="ethics" target="image">
-      <data key="d0">9</data>
-    </edge>
     <edge source="ethics" target="intelligence">
       <data key="d0">63</data>
     </edge>
-    <edge source="ethics" target="paper">
-      <data key="d0">35</data>
+    <edge source="ethics" target="artificial">
+      <data key="d0">64</data>
+    </edge>
+    <edge source="ethics" target="research">
+      <data key="d0">55</data>
+    </edge>
+    <edge source="ethics" target="use">
+      <data key="d0">32</data>
+    </edge>
+    <edge source="ethics" target="education">
+      <data key="d0">28</data>
+    </edge>
+    <edge source="ethics" target="models">
+      <data key="d0">38</data>
+    </edge>
+    <edge source="ethics" target="potential">
+      <data key="d0">32</data>
+    </edge>
+    <edge source="ethics" target="tools">
+      <data key="d0">29</data>
     </edge>
     <edge source="ethics" target="using">
       <data key="d0">26</data>
     </edge>
+    <edge source="ethics" target="gai">
+      <data key="d0">7</data>
+    </edge>
+    <edge source="ethics" target="study">
+      <data key="d0">43</data>
+    </edge>
+    <edge source="ethics" target="students">
+      <data key="d0">14</data>
+    </edge>
     <edge source="ethics" target="data">
       <data key="d0">54</data>
     </edge>
-    <edge source="ethics" target="methods">
-      <data key="d0">24</data>
-    </edge>
-    <edge source="ethics" target="learning">
-      <data key="d0">34</data>
-    </edge>
-    <edge source="ethics" target="model">
-      <data key="d0">21</data>
-    </edge>
-    <edge source="ethics" target="method">
-      <data key="d0">4</data>
-    </edge>
-    <edge source="ethics" target="adversarial">
-      <data key="d0">13</data>
+    <edge source="ethics" target="genai">
+      <data key="d0">11</data>
     </edge>
     <edge source="ethics" target="algorithmic bias">
       <data key="d0">9</data>
@@ -455,17 +320,17 @@
     <edge source="ethics" target="multimodality">
       <data key="d0">1</data>
     </edge>
-    <edge source="ethics" target="images">
-      <data key="d0">7</data>
+    <edge source="ethics" target="machine learning">
+      <data key="d0">12</data>
     </edge>
-    <edge source="ethics" target="proposed">
-      <data key="d0">7</data>
-    </edge>
-    <edge source="ethics" target="network">
-      <data key="d0">6</data>
+    <edge source="ethics" target="training data">
+      <data key="d0">2</data>
     </edge>
     <edge source="ethics" target="co creation">
       <data key="d0">1</data>
+    </edge>
+    <edge source="ethics" target="generative models">
+      <data key="d0">3</data>
     </edge>
     <edge source="ethics" target="ai literacy">
       <data key="d0">2</data>
@@ -479,100 +344,175 @@
     <edge source="explainability" target="generative">
       <data key="d0">51</data>
     </edge>
-    <edge source="explainability" target="adversarial">
-      <data key="d0">27</data>
-    </edge>
     <edge source="explainability" target="intelligence">
       <data key="d0">42</data>
     </edge>
-    <edge source="explainability" target="learning">
-      <data key="d0">49</data>
+    <edge source="explainability" target="artificial">
+      <data key="d0">42</data>
     </edge>
-    <edge source="explainability" target="model">
-      <data key="d0">49</data>
-    </edge>
-    <edge source="explainability" target="paper">
-      <data key="d0">34</data>
+    <edge source="explainability" target="study">
+      <data key="d0">41</data>
     </edge>
     <edge source="explainability" target="data">
       <data key="d0">55</data>
     </edge>
-    <edge source="explainability" target="models">
-      <data key="d0">67</data>
-    </edge>
-    <edge source="explainability" target="image">
-      <data key="d0">16</data>
-    </edge>
-    <edge source="explainability" target="images">
-      <data key="d0">14</data>
-    </edge>
-    <edge source="explainability" target="network">
-      <data key="d0">19</data>
-    </edge>
     <edge source="explainability" target="using">
       <data key="d0">37</data>
     </edge>
-    <edge source="explainability" target="proposed">
-      <data key="d0">22</data>
+    <edge source="explainability" target="models">
+      <data key="d0">67</data>
     </edge>
-    <edge source="explainability" target="methods">
-      <data key="d0">33</data>
+    <edge source="explainability" target="machine learning">
+      <data key="d0">26</data>
+    </edge>
+    <edge source="explainability" target="research">
+      <data key="d0">48</data>
+    </edge>
+    <edge source="explainability" target="use">
+      <data key="d0">21</data>
+    </edge>
+    <edge source="explainability" target="tools">
+      <data key="d0">16</data>
+    </edge>
+    <edge source="explainability" target="potential">
+      <data key="d0">22</data>
     </edge>
     <edge source="explainability" target="multimodality">
       <data key="d0">1</data>
     </edge>
+    <edge source="explainability" target="education">
+      <data key="d0">3</data>
+    </edge>
+    <edge source="explainability" target="gai">
+      <data key="d0">4</data>
+    </edge>
     <edge source="explainability" target="algorithmic bias">
       <data key="d0">8</data>
     </edge>
-    <edge source="explainability" target="method">
-      <data key="d0">11</data>
-    </edge>
-    <edge source="explainability" target="prompting">
+    <edge source="explainability" target="students">
       <data key="d0">2</data>
+    </edge>
+    <edge source="explainability" target="generative models">
+      <data key="d0">3</data>
     </edge>
     <edge source="explainability" target="fine tuning">
       <data key="d0">3</data>
     </edge>
+    <edge source="explainability" target="training data">
+      <data key="d0">1</data>
+    </edge>
+    <edge source="explainability" target="genai">
+      <data key="d0">1</data>
+    </edge>
+    <edge source="generative models" target="generative">
+      <data key="d0">394</data>
+    </edge>
+    <edge source="generative models" target="intelligence">
+      <data key="d0">118</data>
+    </edge>
+    <edge source="generative models" target="artificial">
+      <data key="d0">124</data>
+    </edge>
+    <edge source="generative models" target="study">
+      <data key="d0">85</data>
+    </edge>
+    <edge source="generative models" target="use">
+      <data key="d0">86</data>
+    </edge>
+    <edge source="generative models" target="data">
+      <data key="d0">207</data>
+    </edge>
+    <edge source="generative models" target="using">
+      <data key="d0">133</data>
+    </edge>
+    <edge source="generative models" target="models">
+      <data key="d0">394</data>
+    </edge>
+    <edge source="generative models" target="research">
+      <data key="d0">114</data>
+    </edge>
+    <edge source="generative models" target="education">
+      <data key="d0">7</data>
+    </edge>
+    <edge source="generative models" target="potential">
+      <data key="d0">83</data>
+    </edge>
+    <edge source="generative models" target="machine learning">
+      <data key="d0">44</data>
+    </edge>
+    <edge source="generative models" target="fine tuning">
+      <data key="d0">15</data>
+    </edge>
+    <edge source="generative models" target="training data">
+      <data key="d0">28</data>
+    </edge>
+    <edge source="generative models" target="tools">
+      <data key="d0">25</data>
+    </edge>
+    <edge source="generative models" target="gai">
+      <data key="d0">5</data>
+    </edge>
+    <edge source="generative models" target="personalization">
+      <data key="d0">4</data>
+    </edge>
+    <edge source="generative models" target="genai">
+      <data key="d0">9</data>
+    </edge>
+    <edge source="generative models" target="students">
+      <data key="d0">4</data>
+    </edge>
+    <edge source="generative models" target="algorithmic bias">
+      <data key="d0">1</data>
+    </edge>
+    <edge source="generative models" target="multimodality">
+      <data key="d0">1</data>
+    </edge>
     <edge source="personalization" target="generative">
       <data key="d0">49</data>
     </edge>
-    <edge source="personalization" target="using">
-      <data key="d0">15</data>
+    <edge source="personalization" target="genai">
+      <data key="d0">9</data>
     </edge>
     <edge source="personalization" target="intelligence">
       <data key="d0">53</data>
     </edge>
-    <edge source="personalization" target="model">
-      <data key="d0">23</data>
+    <edge source="personalization" target="artificial">
+      <data key="d0">51</data>
     </edge>
-    <edge source="personalization" target="network">
-      <data key="d0">5</data>
+    <edge source="personalization" target="research">
+      <data key="d0">30</data>
     </edge>
-    <edge source="personalization" target="learning">
-      <data key="d0">36</data>
+    <edge source="personalization" target="study">
+      <data key="d0">26</data>
     </edge>
-    <edge source="personalization" target="proposed">
-      <data key="d0">10</data>
-    </edge>
-    <edge source="personalization" target="methods">
+    <edge source="personalization" target="tools">
       <data key="d0">15</data>
     </edge>
-    <edge source="personalization" target="paper">
-      <data key="d0">26</data>
+    <edge source="personalization" target="using">
+      <data key="d0">15</data>
+    </edge>
+    <edge source="personalization" target="potential">
+      <data key="d0">28</data>
+    </edge>
+    <edge source="personalization" target="students">
+      <data key="d0">12</data>
+    </edge>
+    <edge source="personalization" target="education">
+      <data key="d0">16</data>
     </edge>
     <edge source="personalization" target="data">
       <data key="d0">39</data>
     </edge>
+    <edge source="personalization" target="use">
+      <data key="d0">13</data>
+    </edge>
     <edge source="personalization" target="models">
       <data key="d0">33</data>
     </edge>
-    <edge source="personalization" target="image">
-      <data key="d0">8</data>
+    <edge source="personalization" target="gai">
+      <data key="d0">4</data>
     </edge>
-    <edge source="personalization" target="adversarial">
-      <data key="d0">8</data>
-    </edge>
-    <edge source="personalization" target="images">
+    <edge source="personalization" target="machine learning">
       <data key="d0">10</data>
     </edge>
     <edge source="personalization" target="co creation">
@@ -581,164 +521,143 @@
     <edge source="personalization" target="algorithmic bias">
       <data key="d0">1</data>
     </edge>
-    <edge source="personalization" target="ai literacy">
+    <edge source="personalization" target="training data">
       <data key="d0">2</data>
     </edge>
-    <edge source="personalization" target="method">
-      <data key="d0">4</data>
+    <edge source="personalization" target="ai literacy">
+      <data key="d0">2</data>
     </edge>
     <edge source="personalization" target="fine tuning">
       <data key="d0">1</data>
     </edge>
-    <edge source="prompting" target="data">
-      <data key="d0">37</data>
-    </edge>
-    <edge source="prompting" target="generative">
-      <data key="d0">59</data>
-    </edge>
-    <edge source="prompting" target="models">
-      <data key="d0">60</data>
-    </edge>
-    <edge source="prompting" target="images">
-      <data key="d0">25</data>
-    </edge>
-    <edge source="prompting" target="using">
-      <data key="d0">37</data>
-    </edge>
-    <edge source="prompting" target="learning">
-      <data key="d0">38</data>
-    </edge>
-    <edge source="prompting" target="model">
-      <data key="d0">29</data>
-    </edge>
-    <edge source="prompting" target="proposed">
-      <data key="d0">12</data>
-    </edge>
-    <edge source="prompting" target="methods">
-      <data key="d0">27</data>
-    </edge>
-    <edge source="prompting" target="image">
-      <data key="d0">12</data>
-    </edge>
-    <edge source="prompting" target="method">
-      <data key="d0">11</data>
-    </edge>
-    <edge source="prompting" target="paper">
-      <data key="d0">23</data>
-    </edge>
-    <edge source="prompting" target="intelligence">
-      <data key="d0">35</data>
-    </edge>
-    <edge source="prompting" target="network">
-      <data key="d0">5</data>
-    </edge>
-    <edge source="prompting" target="adversarial">
-      <data key="d0">8</data>
-    </edge>
-    <edge source="prompting" target="fine tuning">
-      <data key="d0">9</data>
-    </edge>
-    <edge source="prompting" target="ai literacy">
-      <data key="d0">1</data>
-    </edge>
-    <edge source="prompting" target="co creation">
-      <data key="d0">1</data>
-    </edge>
-    <edge source="algorithmic bias" target="data">
-      <data key="d0">23</data>
-    </edge>
-    <edge source="algorithmic bias" target="learning">
-      <data key="d0">12</data>
-    </edge>
-    <edge source="algorithmic bias" target="models">
-      <data key="d0">15</data>
+    <edge source="algorithmic bias" target="machine learning">
+      <data key="d0">2</data>
     </edge>
     <edge source="algorithmic bias" target="intelligence">
       <data key="d0">18</data>
     </edge>
-    <edge source="algorithmic bias" target="paper">
-      <data key="d0">10</data>
+    <edge source="algorithmic bias" target="artificial">
+      <data key="d0">18</data>
+    </edge>
+    <edge source="algorithmic bias" target="research">
+      <data key="d0">19</data>
+    </edge>
+    <edge source="algorithmic bias" target="data">
+      <data key="d0">23</data>
+    </edge>
+    <edge source="algorithmic bias" target="models">
+      <data key="d0">15</data>
+    </edge>
+    <edge source="algorithmic bias" target="potential">
+      <data key="d0">15</data>
+    </edge>
+    <edge source="algorithmic bias" target="use">
+      <data key="d0">6</data>
     </edge>
     <edge source="algorithmic bias" target="generative">
       <data key="d0">22</data>
     </edge>
-    <edge source="algorithmic bias" target="proposed">
-      <data key="d0">1</data>
+    <edge source="algorithmic bias" target="study">
+      <data key="d0">14</data>
     </edge>
-    <edge source="algorithmic bias" target="methods">
+    <edge source="algorithmic bias" target="tools">
       <data key="d0">9</data>
-    </edge>
-    <edge source="algorithmic bias" target="model">
-      <data key="d0">10</data>
-    </edge>
-    <edge source="algorithmic bias" target="adversarial">
-      <data key="d0">10</data>
     </edge>
     <edge source="algorithmic bias" target="using">
       <data key="d0">10</data>
     </edge>
-    <edge source="algorithmic bias" target="image">
-      <data key="d0">3</data>
+    <edge source="algorithmic bias" target="education">
+      <data key="d0">6</data>
     </edge>
-    <edge source="algorithmic bias" target="method">
-      <data key="d0">2</data>
-    </edge>
-    <edge source="multimodality" target="data">
-      <data key="d0">4</data>
-    </edge>
-    <edge source="multimodality" target="learning">
-      <data key="d0">4</data>
-    </edge>
-    <edge source="multimodality" target="image">
-      <data key="d0">4</data>
-    </edge>
-    <edge source="multimodality" target="intelligence">
-      <data key="d0">3</data>
-    </edge>
-    <edge source="multimodality" target="model">
-      <data key="d0">5</data>
-    </edge>
-    <edge source="multimodality" target="generative">
-      <data key="d0">5</data>
-    </edge>
-    <edge source="multimodality" target="images">
+    <edge source="algorithmic bias" target="genai">
       <data key="d0">1</data>
     </edge>
-    <edge source="multimodality" target="paper">
-      <data key="d0">4</data>
-    </edge>
-    <edge source="multimodality" target="network">
-      <data key="d0">4</data>
-    </edge>
-    <edge source="multimodality" target="methods">
-      <data key="d0">5</data>
-    </edge>
-    <edge source="multimodality" target="method">
+    <edge source="algorithmic bias" target="students">
       <data key="d0">2</data>
     </edge>
-    <edge source="multimodality" target="adversarial">
-      <data key="d0">2</data>
+    <edge source="algorithmic bias" target="gai">
+      <data key="d0">1</data>
     </edge>
-    <edge source="multimodality" target="models">
-      <data key="d0">2</data>
+    <edge source="training data" target="intelligence">
+      <data key="d0">105</data>
     </edge>
-    <edge source="multimodality" target="using">
-      <data key="d0">2</data>
-    </edge>
-    <edge source="fine tuning" target="learning">
-      <data key="d0">75</data>
-    </edge>
-    <edge source="fine tuning" target="model">
+    <edge source="training data" target="artificial">
       <data key="d0">112</data>
+    </edge>
+    <edge source="training data" target="data">
+      <data key="d0">397</data>
+    </edge>
+    <edge source="training data" target="using">
+      <data key="d0">163</data>
+    </edge>
+    <edge source="training data" target="models">
+      <data key="d0">196</data>
+    </edge>
+    <edge source="training data" target="research">
+      <data key="d0">70</data>
+    </edge>
+    <edge source="training data" target="generative">
+      <data key="d0">266</data>
+    </edge>
+    <edge source="training data" target="use">
+      <data key="d0">87</data>
+    </edge>
+    <edge source="training data" target="study">
+      <data key="d0">77</data>
+    </edge>
+    <edge source="training data" target="education">
+      <data key="d0">13</data>
+    </edge>
+    <edge source="training data" target="potential">
+      <data key="d0">64</data>
+    </edge>
+    <edge source="training data" target="machine learning">
+      <data key="d0">61</data>
+    </edge>
+    <edge source="training data" target="tools">
+      <data key="d0">18</data>
+    </edge>
+    <edge source="training data" target="genai">
+      <data key="d0">8</data>
+    </edge>
+    <edge source="training data" target="students">
+      <data key="d0">4</data>
+    </edge>
+    <edge source="training data" target="gai">
+      <data key="d0">3</data>
+    </edge>
+    <edge source="training data" target="fine tuning">
+      <data key="d0">11</data>
+    </edge>
+    <edge source="training data" target="ai literacy">
+      <data key="d0">1</data>
+    </edge>
+    <edge source="training data" target="human ai interaction">
+      <data key="d0">1</data>
     </edge>
     <edge source="fine tuning" target="generative">
       <data key="d0">116</data>
     </edge>
-    <edge source="fine tuning" target="paper">
-      <data key="d0">55</data>
-    </edge>
     <edge source="fine tuning" target="intelligence">
       <data key="d0">71</data>
+    </edge>
+    <edge source="fine tuning" target="artificial">
+      <data key="d0">69</data>
+    </edge>
+    <edge source="fine tuning" target="research">
+      <data key="d0">57</data>
+    </edge>
+    <edge source="fine tuning" target="study">
+      <data key="d0">41</data>
+    </edge>
+    <edge source="fine tuning" target="education">
+      <data key="d0">5</data>
+    </edge>
+    <edge source="fine tuning" target="potential">
+      <data key="d0">42</data>
+    </edge>
+    <edge source="fine tuning" target="use">
+      <data key="d0">39</data>
     </edge>
     <edge source="fine tuning" target="data">
       <data key="d0">103</data>
@@ -746,452 +665,539 @@
     <edge source="fine tuning" target="using">
       <data key="d0">73</data>
     </edge>
-    <edge source="fine tuning" target="network">
-      <data key="d0">42</data>
-    </edge>
-    <edge source="fine tuning" target="proposed">
-      <data key="d0">55</data>
-    </edge>
-    <edge source="fine tuning" target="adversarial">
-      <data key="d0">31</data>
-    </edge>
     <edge source="fine tuning" target="models">
       <data key="d0">111</data>
     </edge>
-    <edge source="fine tuning" target="method">
-      <data key="d0">55</data>
+    <edge source="fine tuning" target="gai">
+      <data key="d0">8</data>
     </edge>
-    <edge source="fine tuning" target="methods">
-      <data key="d0">52</data>
+    <edge source="fine tuning" target="genai">
+      <data key="d0">7</data>
     </edge>
-    <edge source="fine tuning" target="image">
-      <data key="d0">48</data>
+    <edge source="fine tuning" target="machine learning">
+      <data key="d0">9</data>
     </edge>
-    <edge source="fine tuning" target="images">
-      <data key="d0">41</data>
+    <edge source="fine tuning" target="tools">
+      <data key="d0">10</data>
     </edge>
-    <edge source="human ai interaction" target="model">
-      <data key="d0">1</data>
+    <edge source="fine tuning" target="students">
+      <data key="d0">2</data>
     </edge>
-    <edge source="human ai interaction" target="paper">
+    <edge source="multimodality" target="intelligence">
+      <data key="d0">3</data>
+    </edge>
+    <edge source="multimodality" target="artificial">
+      <data key="d0">2</data>
+    </edge>
+    <edge source="multimodality" target="research">
+      <data key="d0">3</data>
+    </edge>
+    <edge source="multimodality" target="data">
       <data key="d0">4</data>
     </edge>
-    <edge source="human ai interaction" target="using">
+    <edge source="multimodality" target="education">
+      <data key="d0">1</data>
+    </edge>
+    <edge source="multimodality" target="generative">
       <data key="d0">5</data>
+    </edge>
+    <edge source="multimodality" target="machine learning">
+      <data key="d0">2</data>
+    </edge>
+    <edge source="multimodality" target="models">
+      <data key="d0">2</data>
+    </edge>
+    <edge source="multimodality" target="potential">
+      <data key="d0">4</data>
+    </edge>
+    <edge source="multimodality" target="using">
+      <data key="d0">2</data>
+    </edge>
+    <edge source="machine learning" target="generative">
+      <data key="d0">587</data>
+    </edge>
+    <edge source="machine learning" target="intelligence">
+      <data key="d0">643</data>
+    </edge>
+    <edge source="machine learning" target="artificial">
+      <data key="d0">653</data>
+    </edge>
+    <edge source="machine learning" target="using">
+      <data key="d0">455</data>
+    </edge>
+    <edge source="machine learning" target="models">
+      <data key="d0">616</data>
+    </edge>
+    <edge source="machine learning" target="research">
+      <data key="d0">487</data>
+    </edge>
+    <edge source="machine learning" target="data">
+      <data key="d0">800</data>
+    </edge>
+    <edge source="machine learning" target="potential">
+      <data key="d0">307</data>
+    </edge>
+    <edge source="machine learning" target="study">
+      <data key="d0">343</data>
+    </edge>
+    <edge source="machine learning" target="use">
+      <data key="d0">282</data>
+    </edge>
+    <edge source="machine learning" target="tools">
+      <data key="d0">126</data>
+    </edge>
+    <edge source="machine learning" target="students">
+      <data key="d0">19</data>
+    </edge>
+    <edge source="machine learning" target="education">
+      <data key="d0">36</data>
+    </edge>
+    <edge source="machine learning" target="genai">
+      <data key="d0">30</data>
+    </edge>
+    <edge source="machine learning" target="gai">
+      <data key="d0">12</data>
+    </edge>
+    <edge source="machine learning" target="co creation">
+      <data key="d0">1</data>
     </edge>
     <edge source="human ai interaction" target="intelligence">
       <data key="d0">6</data>
     </edge>
-    <edge source="human ai interaction" target="data">
+    <edge source="human ai interaction" target="artificial">
+      <data key="d0">6</data>
+    </edge>
+    <edge source="human ai interaction" target="research">
+      <data key="d0">8</data>
+    </edge>
+    <edge source="human ai interaction" target="tools">
       <data key="d0">3</data>
     </edge>
-    <edge source="human ai interaction" target="learning">
+    <edge source="human ai interaction" target="using">
+      <data key="d0">5</data>
+    </edge>
+    <edge source="human ai interaction" target="potential">
+      <data key="d0">4</data>
+    </edge>
+    <edge source="human ai interaction" target="students">
       <data key="d0">1</data>
+    </edge>
+    <edge source="human ai interaction" target="use">
+      <data key="d0">2</data>
+    </edge>
+    <edge source="human ai interaction" target="data">
+      <data key="d0">3</data>
     </edge>
     <edge source="human ai interaction" target="generative">
       <data key="d0">4</data>
     </edge>
-    <edge source="human ai interaction" target="adversarial">
-      <data key="d0">1</data>
+    <edge source="human ai interaction" target="study">
+      <data key="d0">4</data>
     </edge>
-    <edge source="human ai interaction" target="image">
-      <data key="d0">1</data>
+    <edge source="human ai interaction" target="education">
+      <data key="d0">2</data>
     </edge>
-    <edge source="ai literacy" target="data">
-      <data key="d0">13</data>
+    <edge source="human ai interaction" target="gai">
+      <data key="d0">1</data>
     </edge>
     <edge source="ai literacy" target="intelligence">
       <data key="d0">24</data>
     </edge>
-    <edge source="ai literacy" target="learning">
-      <data key="d0">21</data>
+    <edge source="ai literacy" target="artificial">
+      <data key="d0">24</data>
+    </edge>
+    <edge source="ai literacy" target="study">
+      <data key="d0">26</data>
+    </edge>
+    <edge source="ai literacy" target="students">
+      <data key="d0">24</data>
+    </edge>
+    <edge source="ai literacy" target="use">
+      <data key="d0">15</data>
+    </edge>
+    <edge source="ai literacy" target="data">
+      <data key="d0">13</data>
+    </edge>
+    <edge source="ai literacy" target="education">
+      <data key="d0">27</data>
+    </edge>
+    <edge source="ai literacy" target="potential">
+      <data key="d0">9</data>
     </edge>
     <edge source="ai literacy" target="generative">
       <data key="d0">30</data>
     </edge>
-    <edge source="ai literacy" target="methods">
-      <data key="d0">11</data>
+    <edge source="ai literacy" target="genai">
+      <data key="d0">8</data>
     </edge>
     <edge source="ai literacy" target="using">
       <data key="d0">13</data>
     </edge>
-    <edge source="ai literacy" target="model">
-      <data key="d0">3</data>
+    <edge source="ai literacy" target="tools">
+      <data key="d0">18</data>
     </edge>
-    <edge source="ai literacy" target="proposed">
-      <data key="d0">3</data>
+    <edge source="ai literacy" target="research">
+      <data key="d0">22</data>
+    </edge>
+    <edge source="ai literacy" target="gai">
+      <data key="d0">5</data>
     </edge>
     <edge source="ai literacy" target="models">
       <data key="d0">8</data>
     </edge>
-    <edge source="ai literacy" target="paper">
-      <data key="d0">9</data>
+    <edge source="co creation" target="study">
+      <data key="d0">8</data>
     </edge>
-    <edge source="ai literacy" target="method">
-      <data key="d0">2</data>
-    </edge>
-    <edge source="ai literacy" target="images">
-      <data key="d0">2</data>
-    </edge>
-    <edge source="ai literacy" target="image">
-      <data key="d0">1</data>
-    </edge>
-    <edge source="ai literacy" target="network">
-      <data key="d0">1</data>
-    </edge>
-    <edge source="co creation" target="model">
-      <data key="d0">3</data>
-    </edge>
-    <edge source="co creation" target="proposed">
-      <data key="d0">4</data>
-    </edge>
-    <edge source="co creation" target="learning">
+    <edge source="co creation" target="students">
       <data key="d0">4</data>
     </edge>
     <edge source="co creation" target="generative">
       <data key="d0">11</data>
     </edge>
-    <edge source="co creation" target="models">
-      <data key="d0">8</data>
+    <edge source="co creation" target="intelligence">
+      <data key="d0">11</data>
     </edge>
-    <edge source="co creation" target="image">
+    <edge source="co creation" target="artificial">
+      <data key="d0">11</data>
+    </edge>
+    <edge source="co creation" target="use">
+      <data key="d0">7</data>
+    </edge>
+    <edge source="co creation" target="education">
       <data key="d0">4</data>
+    </edge>
+    <edge source="co creation" target="tools">
+      <data key="d0">5</data>
     </edge>
     <edge source="co creation" target="using">
       <data key="d0">3</data>
     </edge>
-    <edge source="co creation" target="intelligence">
-      <data key="d0">11</data>
-    </edge>
-    <edge source="co creation" target="paper">
-      <data key="d0">6</data>
+    <edge source="co creation" target="models">
+      <data key="d0">8</data>
     </edge>
     <edge source="co creation" target="data">
       <data key="d0">3</data>
     </edge>
-    <edge source="co creation" target="images">
-      <data key="d0">5</data>
+    <edge source="co creation" target="potential">
+      <data key="d0">6</data>
     </edge>
-    <edge source="co creation" target="method">
-      <data key="d0">1</data>
+    <edge source="co creation" target="research">
+      <data key="d0">4</data>
     </edge>
-    <edge source="co creation" target="methods">
-      <data key="d0">1</data>
-    </edge>
-    <edge source="data" target="methods">
-      <data key="d0">1582</data>
-    </edge>
-    <edge source="data" target="intelligence">
-      <data key="d0">1659</data>
-    </edge>
-    <edge source="data" target="learning">
-      <data key="d0">2482</data>
-    </edge>
-    <edge source="data" target="model">
-      <data key="d0">2294</data>
-    </edge>
-    <edge source="data" target="generative">
-      <data key="d0">2656</data>
-    </edge>
-    <edge source="data" target="models">
-      <data key="d0">1922</data>
-    </edge>
-    <edge source="data" target="image">
-      <data key="d0">1109</data>
-    </edge>
-    <edge source="data" target="adversarial">
-      <data key="d0">1668</data>
-    </edge>
-    <edge source="data" target="using">
-      <data key="d0">1656</data>
-    </edge>
-    <edge source="data" target="network">
-      <data key="d0">1641</data>
-    </edge>
-    <edge source="data" target="proposed">
-      <data key="d0">1549</data>
-    </edge>
-    <edge source="data" target="method">
-      <data key="d0">1405</data>
-    </edge>
-    <edge source="data" target="paper">
-      <data key="d0">1734</data>
-    </edge>
-    <edge source="data" target="images">
-      <data key="d0">1080</data>
-    </edge>
-    <edge source="learning" target="generative">
-      <data key="d0">2523</data>
-    </edge>
-    <edge source="learning" target="models">
-      <data key="d0">1908</data>
-    </edge>
-    <edge source="learning" target="proposed">
-      <data key="d0">1622</data>
-    </edge>
-    <edge source="learning" target="methods">
-      <data key="d0">1754</data>
-    </edge>
-    <edge source="learning" target="method">
-      <data key="d0">1375</data>
-    </edge>
-    <edge source="learning" target="adversarial">
-      <data key="d0">1655</data>
-    </edge>
-    <edge source="learning" target="model">
-      <data key="d0">2245</data>
-    </edge>
-    <edge source="learning" target="image">
-      <data key="d0">1244</data>
-    </edge>
-    <edge source="learning" target="using">
-      <data key="d0">1642</data>
-    </edge>
-    <edge source="learning" target="intelligence">
-      <data key="d0">1708</data>
-    </edge>
-    <edge source="learning" target="images">
-      <data key="d0">1159</data>
-    </edge>
-    <edge source="learning" target="paper">
-      <data key="d0">1811</data>
-    </edge>
-    <edge source="learning" target="network">
-      <data key="d0">1677</data>
-    </edge>
-    <edge source="model" target="generative">
-      <data key="d0">2584</data>
-    </edge>
-    <edge source="model" target="models">
-      <data key="d0">2007</data>
-    </edge>
-    <edge source="model" target="methods">
-      <data key="d0">1568</data>
-    </edge>
-    <edge source="model" target="paper">
-      <data key="d0">1729</data>
-    </edge>
-    <edge source="model" target="intelligence">
-      <data key="d0">1299</data>
-    </edge>
-    <edge source="model" target="image">
-      <data key="d0">1340</data>
-    </edge>
-    <edge source="model" target="adversarial">
-      <data key="d0">1588</data>
-    </edge>
-    <edge source="model" target="using">
-      <data key="d0">1593</data>
-    </edge>
-    <edge source="model" target="images">
-      <data key="d0">1272</data>
-    </edge>
-    <edge source="model" target="network">
-      <data key="d0">1733</data>
-    </edge>
-    <edge source="model" target="proposed">
-      <data key="d0">1762</data>
-    </edge>
-    <edge source="model" target="method">
-      <data key="d0">1502</data>
-    </edge>
-    <edge source="generative" target="models">
-      <data key="d0">2308</data>
-    </edge>
-    <edge source="generative" target="methods">
-      <data key="d0">1714</data>
-    </edge>
-    <edge source="generative" target="paper">
-      <data key="d0">2153</data>
+    <edge source="co creation" target="genai">
+      <data key="d0">2</data>
     </edge>
     <edge source="generative" target="intelligence">
       <data key="d0">2219</data>
     </edge>
-    <edge source="generative" target="proposed">
-      <data key="d0">1849</data>
+    <edge source="generative" target="artificial">
+      <data key="d0">2250</data>
     </edge>
-    <edge source="generative" target="method">
-      <data key="d0">1569</data>
+    <edge source="generative" target="students">
+      <data key="d0">374</data>
     </edge>
-    <edge source="generative" target="adversarial">
-      <data key="d0">2572</data>
+    <edge source="generative" target="models">
+      <data key="d0">2308</data>
     </edge>
-    <edge source="generative" target="image">
-      <data key="d0">1502</data>
+    <edge source="generative" target="potential">
+      <data key="d0">1212</data>
+    </edge>
+    <edge source="generative" target="study">
+      <data key="d0">1480</data>
+    </edge>
+    <edge source="generative" target="use">
+      <data key="d0">1152</data>
+    </edge>
+    <edge source="generative" target="data">
+      <data key="d0">2656</data>
     </edge>
     <edge source="generative" target="using">
       <data key="d0">1919</data>
     </edge>
-    <edge source="generative" target="images">
-      <data key="d0">1416</data>
+    <edge source="generative" target="research">
+      <data key="d0">1568</data>
     </edge>
-    <edge source="generative" target="network">
-      <data key="d0">2020</data>
+    <edge source="generative" target="gai">
+      <data key="d0">244</data>
     </edge>
-    <edge source="models" target="methods">
-      <data key="d0">1119</data>
+    <edge source="generative" target="education">
+      <data key="d0">454</data>
     </edge>
-    <edge source="models" target="paper">
-      <data key="d0">1395</data>
-    </edge>
-    <edge source="models" target="intelligence">
-      <data key="d0">1390</data>
-    </edge>
-    <edge source="models" target="proposed">
-      <data key="d0">1090</data>
-    </edge>
-    <edge source="models" target="method">
-      <data key="d0">924</data>
-    </edge>
-    <edge source="models" target="adversarial">
-      <data key="d0">1126</data>
-    </edge>
-    <edge source="models" target="image">
-      <data key="d0">1015</data>
-    </edge>
-    <edge source="models" target="using">
-      <data key="d0">1320</data>
-    </edge>
-    <edge source="models" target="images">
-      <data key="d0">923</data>
-    </edge>
-    <edge source="models" target="network">
-      <data key="d0">1083</data>
-    </edge>
-    <edge source="image" target="adversarial">
-      <data key="d0">1152</data>
-    </edge>
-    <edge source="image" target="using">
-      <data key="d0">958</data>
-    </edge>
-    <edge source="image" target="intelligence">
-      <data key="d0">597</data>
-    </edge>
-    <edge source="image" target="images">
-      <data key="d0">1646</data>
-    </edge>
-    <edge source="image" target="network">
-      <data key="d0">1225</data>
-    </edge>
-    <edge source="image" target="proposed">
-      <data key="d0">1123</data>
-    </edge>
-    <edge source="image" target="methods">
-      <data key="d0">1108</data>
-    </edge>
-    <edge source="image" target="method">
-      <data key="d0">1036</data>
-    </edge>
-    <edge source="image" target="paper">
-      <data key="d0">1107</data>
-    </edge>
-    <edge source="images" target="network">
-      <data key="d0">1119</data>
-    </edge>
-    <edge source="images" target="proposed">
-      <data key="d0">1054</data>
-    </edge>
-    <edge source="images" target="methods">
-      <data key="d0">1033</data>
-    </edge>
-    <edge source="images" target="method">
-      <data key="d0">996</data>
-    </edge>
-    <edge source="images" target="adversarial">
-      <data key="d0">1125</data>
-    </edge>
-    <edge source="images" target="paper">
-      <data key="d0">981</data>
-    </edge>
-    <edge source="images" target="using">
-      <data key="d0">969</data>
-    </edge>
-    <edge source="images" target="intelligence">
+    <edge source="generative" target="tools">
       <data key="d0">543</data>
     </edge>
-    <edge source="network" target="proposed">
-      <data key="d0">1582</data>
+    <edge source="generative" target="genai">
+      <data key="d0">326</data>
     </edge>
-    <edge source="network" target="methods">
-      <data key="d0">1331</data>
+    <edge source="genai" target="potential">
+      <data key="d0">138</data>
     </edge>
-    <edge source="network" target="method">
-      <data key="d0">1355</data>
+    <edge source="genai" target="use">
+      <data key="d0">116</data>
     </edge>
-    <edge source="network" target="adversarial">
-      <data key="d0">1785</data>
+    <edge source="genai" target="intelligence">
+      <data key="d0">262</data>
     </edge>
-    <edge source="network" target="using">
-      <data key="d0">1175</data>
+    <edge source="genai" target="artificial">
+      <data key="d0">259</data>
     </edge>
-    <edge source="network" target="intelligence">
-      <data key="d0">829</data>
+    <edge source="genai" target="research">
+      <data key="d0">145</data>
     </edge>
-    <edge source="network" target="paper">
-      <data key="d0">1370</data>
+    <edge source="genai" target="study">
+      <data key="d0">131</data>
     </edge>
-    <edge source="proposed" target="methods">
-      <data key="d0">1350</data>
+    <edge source="genai" target="tools">
+      <data key="d0">96</data>
     </edge>
-    <edge source="proposed" target="method">
-      <data key="d0">1501</data>
+    <edge source="genai" target="using">
+      <data key="d0">104</data>
     </edge>
-    <edge source="proposed" target="adversarial">
-      <data key="d0">1411</data>
+    <edge source="genai" target="data">
+      <data key="d0">143</data>
     </edge>
-    <edge source="proposed" target="using">
-      <data key="d0">1080</data>
+    <edge source="genai" target="models">
+      <data key="d0">156</data>
     </edge>
-    <edge source="proposed" target="paper">
-      <data key="d0">1364</data>
+    <edge source="genai" target="education">
+      <data key="d0">81</data>
     </edge>
-    <edge source="proposed" target="intelligence">
-      <data key="d0">780</data>
+    <edge source="genai" target="students">
+      <data key="d0">76</data>
     </edge>
-    <edge source="methods" target="paper">
-      <data key="d0">1310</data>
+    <edge source="intelligence" target="artificial">
+      <data key="d0">3371</data>
     </edge>
-    <edge source="methods" target="intelligence">
-      <data key="d0">874</data>
+    <edge source="intelligence" target="students">
+      <data key="d0">319</data>
     </edge>
-    <edge source="methods" target="method">
-      <data key="d0">1338</data>
+    <edge source="intelligence" target="models">
+      <data key="d0">1390</data>
     </edge>
-    <edge source="methods" target="adversarial">
-      <data key="d0">1232</data>
+    <edge source="intelligence" target="potential">
+      <data key="d0">1053</data>
     </edge>
-    <edge source="methods" target="using">
-      <data key="d0">1104</data>
+    <edge source="intelligence" target="study">
+      <data key="d0">1134</data>
     </edge>
-    <edge source="method" target="adversarial">
-      <data key="d0">1210</data>
+    <edge source="intelligence" target="use">
+      <data key="d0">851</data>
     </edge>
-    <edge source="method" target="intelligence">
-      <data key="d0">566</data>
+    <edge source="intelligence" target="data">
+      <data key="d0">1659</data>
     </edge>
-    <edge source="method" target="using">
-      <data key="d0">1039</data>
-    </edge>
-    <edge source="method" target="paper">
-      <data key="d0">1204</data>
-    </edge>
-    <edge source="adversarial" target="using">
-      <data key="d0">1130</data>
-    </edge>
-    <edge source="adversarial" target="intelligence">
-      <data key="d0">734</data>
-    </edge>
-    <edge source="adversarial" target="paper">
-      <data key="d0">1306</data>
-    </edge>
-    <edge source="paper" target="intelligence">
-      <data key="d0">1313</data>
-    </edge>
-    <edge source="paper" target="using">
-      <data key="d0">1195</data>
-    </edge>
-    <edge source="using" target="intelligence">
+    <edge source="intelligence" target="using">
       <data key="d0">1113</data>
+    </edge>
+    <edge source="intelligence" target="research">
+      <data key="d0">1396</data>
+    </edge>
+    <edge source="intelligence" target="education">
+      <data key="d0">425</data>
+    </edge>
+    <edge source="intelligence" target="tools">
+      <data key="d0">495</data>
+    </edge>
+    <edge source="intelligence" target="gai">
+      <data key="d0">218</data>
+    </edge>
+    <edge source="artificial" target="students">
+      <data key="d0">321</data>
+    </edge>
+    <edge source="artificial" target="models">
+      <data key="d0">1400</data>
+    </edge>
+    <edge source="artificial" target="potential">
+      <data key="d0">1050</data>
+    </edge>
+    <edge source="artificial" target="study">
+      <data key="d0">1151</data>
+    </edge>
+    <edge source="artificial" target="use">
+      <data key="d0">861</data>
+    </edge>
+    <edge source="artificial" target="data">
+      <data key="d0">1693</data>
+    </edge>
+    <edge source="artificial" target="using">
+      <data key="d0">1148</data>
+    </edge>
+    <edge source="artificial" target="research">
+      <data key="d0">1403</data>
+    </edge>
+    <edge source="artificial" target="gai">
+      <data key="d0">217</data>
+    </edge>
+    <edge source="artificial" target="education">
+      <data key="d0">427</data>
+    </edge>
+    <edge source="artificial" target="tools">
+      <data key="d0">486</data>
+    </edge>
+    <edge source="research" target="models">
+      <data key="d0">1135</data>
+    </edge>
+    <edge source="research" target="potential">
+      <data key="d0">856</data>
+    </edge>
+    <edge source="research" target="use">
+      <data key="d0">617</data>
+    </edge>
+    <edge source="research" target="data">
+      <data key="d0">1289</data>
+    </edge>
+    <edge source="research" target="study">
+      <data key="d0">1028</data>
+    </edge>
+    <edge source="research" target="using">
+      <data key="d0">889</data>
+    </edge>
+    <edge source="research" target="gai">
+      <data key="d0">107</data>
+    </edge>
+    <edge source="research" target="students">
+      <data key="d0">219</data>
+    </edge>
+    <edge source="research" target="education">
+      <data key="d0">316</data>
+    </edge>
+    <edge source="research" target="tools">
+      <data key="d0">351</data>
+    </edge>
+    <edge source="study" target="use">
+      <data key="d0">578</data>
+    </edge>
+    <edge source="study" target="data">
+      <data key="d0">1119</data>
+    </edge>
+    <edge source="study" target="using">
+      <data key="d0">967</data>
+    </edge>
+    <edge source="study" target="models">
+      <data key="d0">966</data>
+    </edge>
+    <edge source="study" target="potential">
+      <data key="d0">704</data>
+    </edge>
+    <edge source="study" target="gai">
+      <data key="d0">116</data>
+    </edge>
+    <edge source="study" target="students">
+      <data key="d0">288</data>
+    </edge>
+    <edge source="study" target="education">
+      <data key="d0">332</data>
+    </edge>
+    <edge source="study" target="tools">
+      <data key="d0">350</data>
+    </edge>
+    <edge source="students" target="models">
+      <data key="d0">102</data>
+    </edge>
+    <edge source="students" target="potential">
+      <data key="d0">169</data>
+    </edge>
+    <edge source="students" target="education">
+      <data key="d0">310</data>
+    </edge>
+    <edge source="students" target="tools">
+      <data key="d0">183</data>
+    </edge>
+    <edge source="students" target="use">
+      <data key="d0">211</data>
+    </edge>
+    <edge source="students" target="gai">
+      <data key="d0">41</data>
+    </edge>
+    <edge source="students" target="data">
+      <data key="d0">147</data>
+    </edge>
+    <edge source="students" target="using">
+      <data key="d0">190</data>
+    </edge>
+    <edge source="use" target="data">
+      <data key="d0">939</data>
+    </edge>
+    <edge source="use" target="using">
+      <data key="d0">761</data>
+    </edge>
+    <edge source="use" target="models">
+      <data key="d0">717</data>
+    </edge>
+    <edge source="use" target="potential">
+      <data key="d0">466</data>
+    </edge>
+    <edge source="use" target="tools">
+      <data key="d0">305</data>
+    </edge>
+    <edge source="use" target="education">
+      <data key="d0">222</data>
+    </edge>
+    <edge source="use" target="gai">
+      <data key="d0">57</data>
+    </edge>
+    <edge source="data" target="using">
+      <data key="d0">1656</data>
+    </edge>
+    <edge source="data" target="models">
+      <data key="d0">1922</data>
+    </edge>
+    <edge source="data" target="potential">
+      <data key="d0">982</data>
+    </edge>
+    <edge source="data" target="tools">
+      <data key="d0">330</data>
+    </edge>
+    <edge source="data" target="education">
+      <data key="d0">202</data>
+    </edge>
+    <edge source="data" target="gai">
+      <data key="d0">127</data>
+    </edge>
+    <edge source="education" target="models">
+      <data key="d0">184</data>
+    </edge>
+    <edge source="education" target="potential">
+      <data key="d0">251</data>
+    </edge>
+    <edge source="education" target="tools">
+      <data key="d0">195</data>
+    </edge>
+    <edge source="education" target="using">
+      <data key="d0">200</data>
+    </edge>
+    <edge source="education" target="gai">
+      <data key="d0">51</data>
+    </edge>
+    <edge source="tools" target="using">
+      <data key="d0">334</data>
+    </edge>
+    <edge source="tools" target="potential">
+      <data key="d0">267</data>
+    </edge>
+    <edge source="tools" target="models">
+      <data key="d0">286</data>
+    </edge>
+    <edge source="tools" target="gai">
+      <data key="d0">47</data>
+    </edge>
+    <edge source="using" target="models">
+      <data key="d0">1320</data>
+    </edge>
+    <edge source="using" target="potential">
+      <data key="d0">619</data>
+    </edge>
+    <edge source="using" target="gai">
+      <data key="d0">59</data>
+    </edge>
+    <edge source="models" target="potential">
+      <data key="d0">872</data>
+    </edge>
+    <edge source="models" target="gai">
+      <data key="d0">80</data>
+    </edge>
+    <edge source="gai" target="potential">
+      <data key="d0">100</data>
     </edge>
   </graph>
 </graphml>

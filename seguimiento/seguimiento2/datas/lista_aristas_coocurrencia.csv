@@ -1,367 +1,372 @@
 termino_a,termino_b,peso
-generative,model,2584
-model,models,2007
-methods,model,1568
-model,paper,1729
-intelligence,model,1299
-generative,models,2308
-generative,methods,1714
-generative,paper,2153
 generative,intelligence,2219
-methods,models,1119
-models,paper,1395
+artificial,generative,2250
+generative,students,374
+generative,models,2308
+generative,potential,1212
+artificial,intelligence,3371
+intelligence,students,319
 intelligence,models,1390
-methods,paper,1310
-intelligence,methods,874
-intelligence,paper,1313
-data,methods,1582
+intelligence,potential,1053
+artificial,students,321
+artificial,models,1400
+artificial,potential,1050
+models,students,102
+potential,students,169
+models,potential,872
+intelligence,study,1134
+intelligence,use,851
 data,intelligence,1659
-generative,learning,2523
-learning,models,1908
-learning,proposed,1622
-learning,methods,1754
-learning,method,1375
-adversarial,learning,1655
-generative,proposed,1849
-generative,method,1569
-adversarial,generative,2572
-models,proposed,1090
-method,models,924
-adversarial,models,1126
-methods,proposed,1350
-method,proposed,1501
-adversarial,proposed,1411
-method,methods,1338
-adversarial,methods,1232
-adversarial,method,1210
-data,generative models,207
-generative models,learning,181
-generative models,model,222
+artificial,study,1151
+artificial,use,861
+artificial,data,1693
+study,use,578
+data,study,1119
+data,use,939
 generative,generative models,394
-generative models,models,394
-generative models,image,145
-adversarial,generative models,114
-generative models,using,133
 generative models,intelligence,118
-data,learning,2482
-data,model,2294
+artificial,generative models,124
+generative models,study,85
+generative models,use,86
+data,generative models,207
+generative models,using,133
+generative models,models,394
+generative,study,1480
+generative,use,1152
 data,generative,2656
-data,models,1922
-data,image,1109
-adversarial,data,1668
-data,using,1656
-learning,model,2245
-image,learning,1244
-learning,using,1642
-intelligence,learning,1708
-image,model,1340
-adversarial,model,1588
-model,using,1593
-generative,image,1502
 generative,using,1919
-image,models,1015
-models,using,1320
-adversarial,image,1152
-image,using,958
-image,intelligence,597
-adversarial,using,1130
-adversarial,intelligence,734
 intelligence,using,1113
-method,privacy,109
+artificial,using,1148
+study,using,967
+models,study,966
+use,using,761
+models,use,717
+data,using,1656
+data,models,1922
+models,using,1320
 intelligence,privacy,293
-intelligence,method,566
-images,model,1272
-model,network,1733
-model,proposed,1762
-method,model,1502
-generative,images,1416
-generative,network,2020
-image,images,1646
-image,network,1225
-image,proposed,1123
-image,methods,1108
-image,method,1036
-images,network,1119
-images,proposed,1054
-images,methods,1033
-images,method,996
-adversarial,images,1125
-network,proposed,1582
-methods,network,1331
-method,network,1355
-adversarial,network,1785
-images,models,923
-images,learning,1159
-learning,paper,1811
-image,paper,1107
-images,paper,981
-images,using,969
-methods,using,1104
-adversarial,paper,1306
-paper,using,1195
-data,network,1641
-models,network,1083
-network,using,1175
-data,proposed,1549
-data,method,1405
-learning,network,1677
-proposed,using,1080
-method,using,1039
+artificial,privacy,290
+privacy,research,217
+intelligence,research,1396
+artificial,research,1403
 generative,transparency,85
-models,transparency,83
-methods,transparency,51
-paper,transparency,60
 intelligence,transparency,94
-intelligence,network,829
-data,paper,1734
-data,training data,397
-learning,training data,224
-models,training data,196
-network,training data,164
-methods,training data,156
-training data,using,163
+artificial,transparency,94
+research,transparency,79
+models,transparency,83
+potential,transparency,56
+generative,research,1568
+models,research,1135
+potential,research,856
 intelligence,training data,105
-learning,machine learning,1242
+artificial,training data,112
+data,training data,397
+training data,using,163
+models,training data,196
 generative,machine learning,587
-machine learning,models,616
-image,machine learning,204
-images,machine learning,177
-adversarial,machine learning,387
-machine learning,paper,464
-machine learning,using,455
 intelligence,machine learning,643
-images,intelligence,543
-network,paper,1370
-paper,proposed,1364
-intelligence,proposed,780
-machine learning,privacy,106
-algorithmic bias,machine learning,2
-data,machine learning,800
+artificial,machine learning,653
+machine learning,using,455
+machine learning,models,616
+research,use,617
+data,research,1289
+potential,use,466
+data,potential,982
 algorithmic bias,privacy,21
+machine learning,privacy,106
 data,privacy,448
-learning,privacy,308
 models,privacy,272
-algorithmic bias,data,23
-algorithmic bias,learning,12
-algorithmic bias,models,15
+potential,privacy,205
+algorithmic bias,machine learning,2
 algorithmic bias,intelligence,18
+algorithmic bias,artificial,18
+algorithmic bias,research,19
+algorithmic bias,data,23
+algorithmic bias,models,15
+algorithmic bias,potential,15
+machine learning,research,487
+data,machine learning,800
+machine learning,potential,307
+machine learning,study,343
+research,study,1028
+potential,study,704
 machine learning,transparency,31
-machine learning,model,539
-machine learning,network,375
 data,transparency,90
-learning,transparency,79
-model,transparency,68
-images,transparency,30
-network,transparency,27
-data,images,1080
-machine learning,proposed,287
-machine learning,methods,410
-generative models,network,100
-generative models,methods,129
-generative models,method,113
-generative models,paper,161
-method,paper,1204
-fine tuning,learning,75
-fine tuning,model,112
+research,using,889
+gai,generative,244
+artificial,gai,217
+gai,research,107
+gai,study,116
+gai,potential,100
+potential,using,619
+education,generative,454
+education,intelligence,425
+artificial,education,427
+research,students,219
+education,research,316
+students,study,288
+education,study,332
+education,students,310
+education,models,184
+genai,privacy,35
+genai,potential,138
 fine tuning,generative,116
-fine tuning,paper,55
 fine tuning,intelligence,71
+artificial,fine tuning,69
+fine tuning,research,57
+fine tuning,study,41
+education,fine tuning,5
+fine tuning,potential,42
+education,potential,251
 generative,privacy,343
-privacy,proposed,137
-paper,privacy,247
 explainability,generative,51
-adversarial,explainability,27
 explainability,intelligence,42
-paper,training data,173
-co creation,model,3
-co creation,proposed,4
+artificial,explainability,42
+explainability,study,41
+research,training data,70
+generative,tools,543
+intelligence,tools,495
+artificial,tools,486
+research,tools,351
+tools,use,305
+tools,using,334
+genai,generative,326
+genai,use,116
+machine learning,use,282
+students,tools,183
+co creation,study,8
+co creation,students,4
 fine tuning,privacy,19
-model,privacy,213
+privacy,use,143
 privacy,using,183
+fine tuning,use,39
 data,fine tuning,103
 fine tuning,using,73
+genai,intelligence,262
+artificial,genai,259
+genai,research,145
+genai,study,131
+genai,tools,96
+study,tools,350
+potential,tools,267
 ethics,generative,65
-ethics,models,38
-ethics,image,9
 ethics,intelligence,63
+artificial,ethics,64
+ethics,research,55
+ethics,use,32
+education,ethics,28
+ethics,models,38
+ethics,potential,32
+education,use,222
+gai,intelligence,218
+students,use,211
+gai,students,41
+gai,use,57
 generative,personalization,49
-personalization,using,15
+genai,personalization,9
 intelligence,personalization,53
-model,training data,241
+artificial,personalization,51
+personalization,research,30
+personalization,study,26
+personalization,tools,15
+personalization,using,15
+personalization,potential,28
+genai,using,104
+education,tools,195
 generative,training data,266
-method,training data,159
-adversarial,training data,191
-network,privacy,133
-machine learning,method,230
-methods,privacy,144
-ai literacy,data,13
+data,students,147
+students,using,190
+data,tools,330
+machine learning,tools,126
+data,genai,143
+genai,models,156
 ai literacy,intelligence,24
+ai literacy,artificial,24
+ai literacy,study,26
+ai literacy,students,24
+ai literacy,use,15
+ai literacy,data,13
+ai literacy,education,27
+ai literacy,potential,9
+data,education,202
+education,using,200
+education,gai,51
+gai,using,59
 explainability,transparency,25
-explainability,learning,49
-explainability,model,49
-explainability,paper,34
-generative models,images,123
-model,personalization,23
-network,personalization,5
-images,training data,147
-fine tuning,network,42
-fine tuning,proposed,55
-adversarial,fine tuning,31
-image,transparency,21
+study,transparency,64
+machine learning,students,19
+education,machine learning,36
+training data,use,87
+data,gai,127
+generative models,research,114
+education,generative models,7
+generative models,potential,83
+study,training data,77
 transparency,using,59
+models,tools,286
+education,genai,81
 generative models,machine learning,44
+privacy,study,140
 data,explainability,55
-explainability,models,67
-explainability,image,16
-explainability,images,14
-explainability,network,19
 explainability,using,37
+explainability,models,67
 privacy,training data,33
-images,privacy,94
-proposed,training data,167
-generative models,proposed,115
+education,privacy,59
+education,training data,13
 training data,transparency,6
-adversarial,transparency,24
 fine tuning,generative models,15
 fine tuning,models,111
-learning,personalization,36
+genai,students,76
 explainability,machine learning,26
-adversarial,privacy,157
-personalization,proposed,10
-methods,personalization,15
-paper,personalization,26
-data,prompting,37
+explainability,research,48
+potential,training data,64
+personalization,students,12
+education,personalization,16
+transparency,use,39
+tools,transparency,23
+explainability,use,21
+explainability,tools,16
 generative,prompting,59
-models,prompting,60
-images,prompting,25
+data,prompting,37
+prompting,tools,24
 prompting,using,37
-image,privacy,97
+models,prompting,60
+explainability,potential,22
 ethics,privacy,36
-ethics,paper,35
+privacy,tools,71
+gai,privacy,37
+ethics,tools,29
 ethics,using,26
-proposed,transparency,16
-image,training data,125
-learning,prompting,38
-model,prompting,29
-prompting,proposed,12
-methods,prompting,27
+ethics,gai,7
+gai,tools,47
+gai,models,80
+ethics,study,43
+ethics,students,14
 data,ethics,54
-ethics,methods,24
-fine tuning,method,55
-image,prompting,12
-method,prompting,11
-method,transparency,19
+prompting,research,32
 generative models,privacy,36
 generative models,training data,28
-ethics,learning,34
-ethics,model,21
-ethics,method,4
-explainability,proposed,22
-explainability,methods,33
-paper,prompting,23
+generative models,tools,25
 intelligence,prompting,35
+artificial,prompting,36
+prompting,students,12
+education,prompting,10
+gai,prompting,2
 machine learning,prompting,9
+potential,prompting,20
 machine learning,training data,61
+tools,training data,18
 data,personalization,39
-network,prompting,5
-adversarial,prompting,8
 fine tuning,prompting,9
-fine tuning,methods,52
-ai literacy,learning,21
+prompting,use,17
 ai literacy,generative,30
-ai literacy,methods,11
+genai,machine learning,30
+gai,transparency,8
+gai,generative models,5
+ai literacy,genai,8
 ai literacy,using,13
-ai literacy,model,3
+ai literacy,tools,18
+privacy,students,27
+genai,prompting,6
+prompting,study,27
 privacy,transparency,45
 generative models,personalization,4
+personalization,use,13
 models,personalization,33
-image,personalization,8
-adversarial,personalization,8
-adversarial,ethics,13
-ai literacy,proposed,3
+ethics,genai,11
+gai,machine learning,12
+genai,transparency,12
+ai literacy,research,22
+genai,training data,8
 algorithmic bias,ethics,9
-algorithmic bias,paper,10
+algorithmic bias,use,6
 ethics,transparency,13
+ai literacy,gai,5
+multimodality,transparency,1
+education,transparency,17
 explainability,privacy,19
 multimodality,privacy,2
-multimodality,transparency,1
 ethics,explainability,12
 ethics,multimodality,1
 explainability,multimodality,1
-data,multimodality,4
-learning,multimodality,4
-image,multimodality,4
+education,explainability,3
 intelligence,multimodality,3
+artificial,multimodality,2
+multimodality,research,3
+data,multimodality,4
+education,multimodality,1
 algorithmic bias,transparency,4
 ethics,machine learning,12
 co creation,machine learning,1
-co creation,learning,4
 co creation,generative,11
-co creation,models,8
-co creation,image,4
-co creation,using,3
 co creation,intelligence,11
+artificial,co creation,11
+co creation,use,7
+co creation,education,4
+co creation,tools,5
+co creation,using,3
+co creation,models,8
+gai,personalization,4
 algorithmic bias,generative,22
+algorithmic bias,study,14
 ai literacy,privacy,4
 ai literacy,models,8
-ai literacy,paper,9
-ethics,images,7
-ethics,proposed,7
-ai literacy,method,2
-algorithmic bias,proposed,1
+genai,generative models,9
+fine tuning,gai,8
 prompting,transparency,6
-ethics,network,6
-human ai interaction,model,1
-human ai interaction,paper,4
-human ai interaction,using,5
+fine tuning,genai,7
 human ai interaction,intelligence,6
-human ai interaction,privacy,2
+artificial,human ai interaction,6
+human ai interaction,research,8
+human ai interaction,tools,3
+human ai interaction,using,5
+human ai interaction,potential,4
 human ai interaction,transparency,2
+students,transparency,8
+human ai interaction,privacy,2
+human ai interaction,students,1
+human ai interaction,use,2
 data,human ai interaction,3
-human ai interaction,learning,1
 ethics,training data,2
-ai literacy,images,2
-algorithmic bias,methods,9
+students,training data,4
+gai,training data,3
 co creation,privacy,1
 co creation,ethics,1
-co creation,paper,6
 machine learning,personalization,10
-images,personalization,10
+explainability,gai,4
 algorithmic bias,explainability,8
-algorithmic bias,model,10
-adversarial,algorithmic bias,10
+algorithmic bias,tools,9
 algorithmic bias,using,10
 generative,human ai interaction,4
+human ai interaction,study,4
+education,human ai interaction,2
+gai,human ai interaction,1
 co creation,personalization,1
 co creation,data,3
-co creation,images,5
+co creation,potential,6
 ethics,generative models,3
-algorithmic bias,image,3
-ai literacy,image,1
-fine tuning,machine learning,9
+explainability,students,2
+algorithmic bias,education,6
 privacy,prompting,4
 generative models,prompting,5
-fine tuning,image,48
-explainability,method,11
-algorithmic bias,method,2
+fine tuning,machine learning,9
+generative models,students,4
 ai literacy,prompting,1
-personalization,privacy,14
 personalization,transparency,3
+personalization,privacy,14
 algorithmic bias,personalization,1
+algorithmic bias,genai,1
 algorithmic bias,generative models,1
 personalization,training data,2
-fine tuning,images,41
 fine tuning,training data,11
+fine tuning,tools,10
 ai literacy,ethics,2
 generative models,transparency,6
-adversarial,human ai interaction,1
-co creation,method,1
+co creation,research,4
 explainability,generative models,3
-ai literacy,network,1
-co creation,methods,1
 explainability,prompting,2
+co creation,genai,2
 explainability,fine tuning,3
-model,multimodality,5
 generative,multimodality,5
 ai literacy,training data,1
 fine tuning,transparency,5
@@ -370,19 +375,16 @@ ai literacy,personalization,2
 co creation,prompting,1
 ethics,fine tuning,2
 machine learning,multimodality,2
-images,multimodality,1
-multimodality,paper,4
-method,personalization,4
-multimodality,network,4
-methods,multimodality,5
-method,multimodality,2
-adversarial,multimodality,2
+algorithmic bias,students,2
+algorithmic bias,gai,1
 models,multimodality,2
+multimodality,potential,4
 human ai interaction,training data,1
-human ai interaction,image,1
 ai literacy,transparency,1
 prompting,training data,1
 multimodality,using,2
 fine tuning,personalization,1
 generative models,multimodality,1
 explainability,training data,1
+fine tuning,students,2
+explainability,genai,1
