@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Requerimiento 4 – Resultados</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 28px;
+        }
+
+        .lead {
+            color: #7f8c8d;
+            margin-bottom: 24px;
+            font-size: 15px;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        button:hover:not(:disabled) {
+            background: #2980b9;
+        }
+
+        button:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .muted {
+            color: #95a5a6;
+            font-size: 13px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .card strong {
+            display: block;
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .status {
+            padding: 12px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .preview {
+            max-width: 100%;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            margin-top: 8px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .preview:hover {
+            opacity: 0.9;
+        }
+
+        .clickable-hint {
+            text-align: center;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 12px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 12px;
+            font-family: 'Courier New', monospace;
+        }
+
+        code {
+            background: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* 🔧 Nuevo contenedor que permite desplazamiento vertical */
+        .modal-body {
+            max-height: 90vh;
+            /* altura máxima del área visible */
+            overflow-y: auto;
+            /* scroll vertical si la imagen es más alta */
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        /* Estilo personalizado para el scrollbar */
+        .modal-body::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 6px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Imagen dentro del modal */
+        .modal-content {
+            display: block;
+            margin: 0 auto;
+            max-width: 95%;
+            height: auto;
+            animation: zoomIn 0.3s;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .modal-close {
+            position: fixed;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+            z-index: 1001;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: #bbb;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-title {
+            position: fixed;
+            top: 20px;
+            left: 35px;
+            color: #f1f1f1;
+            font-size: 20px;
+            font-weight: bold;
+            z-index: 1001;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Resultados – Requerimiento 4</h1>
+    <p class="lead">Análisis de clustering jerárquico. Pulsa el botón para cargar los dendogramas generados por el
+        notebook.</p>
+
+    <div>
+        <button id="loadBtn">Cargar resultados</button>
+        <span id="msg" class="muted" style="margin-left:12px"></span>
+    </div>
+
+    <div class="grid">
+        <!-- Resumen -->
+        <div id="summary" class="card full-width">
+            <strong>Resumen del Análisis</strong>
+            <div class="status" id="summaryText">No se ha cargado ningún archivo todavía.</div>
+            <div id="counts" style="margin-top:8px"></div>
+        </div>
+
+        <!-- Dendograma Single -->
+        <div class="card" id="singleCard" style="display:none;">
+            <strong>Dendograma - Single Linkage</strong>
+            <div class="muted" style="margin-bottom:8px;">Método de enlace simple (distancia mínima entre clusters)
+            </div>
+            <img id="singleImg" class="preview" alt="Dendograma Single" style="display:none" />
+            <div id="singleMsg" class="muted" style="margin-top:6px"></div>
+            <div class="clickable-hint" id="singleHint" style="display:none;">👆 Clic para ampliar</div>
+        </div>
+
+        <!-- Dendograma Complete -->
+        <div class="card" id="completeCard" style="display:none;">
+            <strong>Dendograma - Complete Linkage</strong>
+            <div class="muted" style="margin-bottom:8px;">Método de enlace completo (distancia máxima entre clusters)
+            </div>
+            <img id="completeImg" class="preview" alt="Dendograma Complete" style="display:none" />
+            <div id="completeMsg" class="muted" style="margin-top:6px"></div>
+            <div class="clickable-hint" id="completeHint" style="display:none;">👆 Clic para ampliar</div>
+        </div>
+
+        <!-- Dendograma Average -->
+        <div class="card" id="averageCard" style="display:none;">
+            <strong>Dendograma - Average Linkage</strong>
+            <div class="muted" style="margin-bottom:8px;">Método de enlace promedio (distancia media entre clusters)
+            </div>
+            <img id="averageImg" class="preview" alt="Dendograma Average" style="display:none" />
+            <div id="averageMsg" class="muted" style="margin-top:6px"></div>
+            <div class="clickable-hint" id="averageHint" style="display:none;">👆 Clic para ampliar</div>
+        </div>
+
+        <!-- Logs -->
+        <div class="card full-width">
+            <strong>Logs</strong>
+            <pre id="log" style="height:180px">Esperando acción...</pre>
+        </div>
+    </div>
+
+    <!-- Modal para ampliar imagen -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close" id="modalClose">&times;</span>
+        <div class="modal-title" id="modalTitle"></div>
+
+        <!-- 🔧 Nuevo contenedor con scroll -->
+        <div class="modal-body">
+            <img class="modal-content" id="modalImg">
+        </div>
+    </div>
+
+
+    <script>
+        // Rutas relativas desde este archivo (requerimiento4/index.html)
+        // Todos los archivos están en la misma carpeta del HTML
+        const paths = {
+            single: 'dendrograma_single.png',
+            complete: 'dendrograma_complete.png',
+            average: 'dendrograma_average.png'
+        };
+
+        const logEl = document.getElementById('log');
+        function log(...args) { logEl.textContent = args.join(' ') + "\n\n" + logEl.textContent; }
+
+        function showMsg(text) { document.getElementById('msg').textContent = text; }
+
+        async function checkImage(url) {
+            try {
+                const r = await fetch(url, { method: 'HEAD' });
+                return r.ok;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        // Modal functionality
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImg');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalClose = document.getElementById('modalClose');
+
+        function openModal(imgSrc, title) {
+            modal.classList.add('active');
+            modalImg.src = imgSrc;
+            modalTitle.textContent = title;
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        modalClose.onclick = closeModal;
+        modal.onclick = function (e) {
+            if (e.target === modal || e.target === modalImg) {
+                closeModal();
+            }
+        };
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        document.getElementById('loadBtn').addEventListener('click', async function () {
+            const btn = this;
+            btn.disabled = true;
+            showMsg('Cargando...');
+            log('Inicio de carga de resultados');
+            document.getElementById('summaryText').textContent = 'Verificando archivos...';
+
+            try {
+                // Check all dendograms
+                const singleOk = await checkImage(paths.single);
+                const completeOk = await checkImage(paths.complete);
+                const averageOk = await checkImage(paths.average);
+
+                log(`Dendograma Single: ${singleOk ? 'OK' : 'No encontrado'}`);
+                log(`Dendograma Complete: ${completeOk ? 'OK' : 'No encontrado'}`);
+                log(`Dendograma Average: ${averageOk ? 'OK' : 'No encontrado'}`);
+
+                // Update summary
+                const summaryEl = document.getElementById('summaryText');
+                const found = [singleOk, completeOk, averageOk].filter(Boolean).length;
+
+                if (found === 0) {
+                    summaryEl.textContent = 'No se encontraron dendogramas en la carpeta.';
+                    document.getElementById('counts').innerHTML = '<div class="muted">Verifica que los archivos PNG estén en la misma carpeta que este HTML.</div>';
+                } else {
+                    summaryEl.innerHTML = `Dendogramas encontrados: <strong>${found} de 3</strong>`;
+                    document.getElementById('counts').innerHTML = '<div class="muted">Los dendogramas muestran diferentes métodos de clustering jerárquico.</div>';
+                }
+
+                // Single Linkage
+                const singleCard = document.getElementById('singleCard');
+                const singleImg = document.getElementById('singleImg');
+                const singleMsg = document.getElementById('singleMsg');
+                const singleHint = document.getElementById('singleHint');
+
+                if (singleOk) {
+                    singleCard.style.display = 'block';
+                    singleImg.src = paths.single;
+                    singleImg.style.display = 'block';
+                    singleMsg.textContent = '';
+                    singleHint.style.display = 'block';
+                    singleImg.onclick = () => openModal(paths.single, 'Dendograma - Single Linkage');
+                } else {
+                    singleCard.style.display = 'block';
+                    singleImg.style.display = 'none';
+                    singleMsg.textContent = 'Imagen no encontrada: ' + paths.single;
+                    singleHint.style.display = 'none';
+                }
+
+                // Complete Linkage
+                const completeCard = document.getElementById('completeCard');
+                const completeImg = document.getElementById('completeImg');
+                const completeMsg = document.getElementById('completeMsg');
+                const completeHint = document.getElementById('completeHint');
+
+                if (completeOk) {
+                    completeCard.style.display = 'block';
+                    completeImg.src = paths.complete;
+                    completeImg.style.display = 'block';
+                    completeMsg.textContent = '';
+                    completeHint.style.display = 'block';
+                    completeImg.onclick = () => openModal(paths.complete, 'Dendograma - Complete Linkage');
+                } else {
+                    completeCard.style.display = 'block';
+                    completeImg.style.display = 'none';
+                    completeMsg.textContent = 'Imagen no encontrada: ' + paths.complete;
+                    completeHint.style.display = 'none';
+                }
+
+                // Average Linkage
+                const averageCard = document.getElementById('averageCard');
+                const averageImg = document.getElementById('averageImg');
+                const averageMsg = document.getElementById('averageMsg');
+                const averageHint = document.getElementById('averageHint');
+
+                if (averageOk) {
+                    averageCard.style.display = 'block';
+                    averageImg.src = paths.average;
+                    averageImg.style.display = 'block';
+                    averageMsg.textContent = '';
+                    averageHint.style.display = 'block';
+                    averageImg.onclick = () => openModal(paths.average, 'Dendograma - Average Linkage');
+                } else {
+                    averageCard.style.display = 'block';
+                    averageImg.style.display = 'none';
+                    averageMsg.textContent = 'Imagen no encontrada: ' + paths.average;
+                    averageHint.style.display = 'none';
+                }
+
+                log('Carga finalizada.');
+                showMsg('Carga finalizada.');
+            } catch (err) {
+                log('Error general:', err.message);
+                showMsg('Error: ' + err.message);
+            } finally {
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+
+</html>

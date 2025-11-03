@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Requerimiento 3 – Resultados</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 28px;
+        }
+        .lead {
+            color: #7f8c8d;
+            margin-bottom: 24px;
+            font-size: 15px;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        button:hover:not(:disabled) { background: #2980b9; }
+        button:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+        .muted {
+            color: #95a5a6;
+            font-size: 13px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 24px;
+        }
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        @media (max-width: 900px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .card strong {
+            display: block;
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        .status {
+            padding: 12px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .preview {
+            max-width: 100%;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            margin-top: 8px;
+        }
+        .btn-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #27ae60;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .btn-link:hover { background: #229954; }
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 12px;
+            border-radius: 6px;
+            overflow: auto;
+            font-size: 12px;
+            font-family: 'Courier New', monospace;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+            font-size: 13px;
+        }
+        th {
+            background: #34495e;
+            color: white;
+            padding: 8px;
+            text-align: left;
+            font-weight: 500;
+        }
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        tbody tr:hover { background: #f8f9fa; }
+        code {
+            background: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+        .top-list table { margin-top: 0; }
+        .table-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Resultados – Requerimiento 3</h1>
+    <p class="lead">Pulsa el botón para cargar los resultados del análisis de texto generados por el notebook.</p>
+
+    <div>
+        <button id="loadBtn">Cargar resultados</button>
+        <span id="msg" class="muted" style="margin-left:12px"></span>
+    </div>
+
+    <div class="grid">
+        <!-- Fila 0: Resumen (fusionada) -->
+        <div id="summary" class="card full-width">
+            <strong>Resumen del Análisis</strong>
+            <div class="status" id="summaryText">No se ha cargado ningún archivo todavía.</div>
+            <div id="counts" style="margin-top:8px"></div>
+        </div>
+
+        <!-- Fila 1: Top 15 -->
+        <div id="top15Card" class="card" style="display:none;">
+            <strong>Top 15 Palabras Más Frecuentes</strong>
+            <div class="table-container">
+                <div class="top-list" id="top15Words"></div>
+            </div>
+            <div style="margin-top:12px;">
+                <a id="top15Link" class="btn-link" download style="display:none;">Descargar CSV</a>
+            </div>
+        </div>
+
+        <div class="card" style="display:none;" id="top15ImgCard">
+            <strong>Visualización Top 15</strong>
+            <img id="top15Img" class="preview" alt="Top 15 palabras" style="display:none" />
+            <div id="top15Msg" class="muted" style="margin-top:6px"></div>
+        </div>
+
+        <!-- Fila 2: Categorías -->
+        <div id="categoriesCard" class="card" style="display:none;">
+            <strong>Frecuencias por Categoría</strong>
+            <div class="table-container">
+                <div class="top-list" id="categoriesTable"></div>
+            </div>
+            <div style="margin-top:12px;">
+                <a id="categoriesLink" class="btn-link" download style="display:none;">Descargar CSV</a>
+            </div>
+        </div>
+
+        <div class="card" style="display:none;" id="categoriesImgCard">
+            <strong>Visualización Categorías</strong>
+            <img id="categoriesImg" class="preview" alt="Frecuencias por categoría" style="display:none" />
+            <div id="categoriesMsg" class="muted" style="margin-top:6px"></div>
+        </div>
+
+        <!-- Fila 3: Logs (fusionada) -->
+        <div class="card full-width">
+            <strong>Logs</strong>
+            <pre id="log" style="height:180px">Esperando acción...</pre>
+        </div>
+    </div>
+
+    <script>
+        // Rutas relativas desde este archivo (requerimiento3/index.html)
+        // Todos los archivos están en la misma carpeta del HTML
+        const paths = {
+            freqCategories: 'frecuencias_palabras_categoria.csv',
+            top15: 'top15_palabras_frecuentes.csv',
+            imgCategories: 'frecuencia_palabras_categoria.png',
+            imgTop15: 'top15_palabras.png'
+        };
+
+        const logEl = document.getElementById('log');
+        function log(...args){ logEl.textContent = args.join(' ') + "\n\n" + logEl.textContent; }
+
+        function showMsg(text){ document.getElementById('msg').textContent = text; }
+
+        async function fetchText(path){
+            try{
+                const res = await fetch(path);
+                if(!res.ok) throw new Error('HTTP ' + res.status);
+                return await res.text();
+            } catch(e){
+                throw new Error(`No disponible: ${path} (${e.message})`);
+            }
+        }
+
+        function parseCSVSimple(text){
+            const lines = text.split(/\r?\n/).filter(l => l.trim() !== '');
+            if(lines.length === 0) return {headers:[], rows:[]};
+            const headers = lines[0].split(',').map(h => h.replace(/^"|"$/g,'').trim());
+            const rows = lines.slice(1).map(line => {
+                const values = [];
+                let cur = '', inQ=false;
+                for(let i=0;i<line.length;i++){
+                    const ch = line[i];
+                    if(ch === '"' ) { inQ = !inQ; continue; }
+                    if(ch === ',' && !inQ){ values.push(cur); cur=''; continue; }
+                    cur += ch;
+                }
+                values.push(cur);
+                while(values.length < headers.length) values.push('');
+                return headers.reduce((o,k,i)=>{ o[k]= (values[i]||'').trim(); return o; }, {});
+            });
+            return {headers, rows};
+        }
+
+        async function checkImage(url){
+            try{
+                const r = await fetch(url, {method:'HEAD'});
+                return r.ok;
+            }catch(e){
+                return false;
+            }
+        }
+
+        document.getElementById('loadBtn').addEventListener('click', async function(){
+            const btn = this;
+            btn.disabled = true;
+            showMsg('Cargando...');
+            log('Inicio de carga de resultados');
+            
+            try{
+                // Fetch top15_palabras_frecuentes.csv
+                let top15Text=null;
+                try{
+                    top15Text = await fetchText(paths.top15);
+                    log('top15_palabras_frecuentes.csv cargado:', paths.top15);
+                } catch(e){
+                    log(e.message);
+                }
+
+                // Fetch frecuencia_palabras_categoria.csv
+                let categoriesText=null;
+                try{
+                    categoriesText = await fetchText(paths.freqCategories);
+                    log('frecuencias_palabras_categoria.csv cargado:', paths.freqCategories);
+                } catch(e){
+                    log(e.message);
+                }
+
+                // Check images
+                const top15ImgOk = await checkImage(paths.imgTop15);
+                const categoriesImgOk = await checkImage(paths.imgCategories);
+
+                // Update summary
+                const summaryEl = document.getElementById('summaryText');
+                if(!top15Text && !categoriesText){
+                    summaryEl.textContent = 'No se encontraron los archivos CSV en la ruta esperada.';
+                    document.getElementById('counts').textContent = '';
+                } else {
+                    let top15Data = {headers:[], rows:[]};
+                    let categoriesData = {headers:[], rows:[]};
+                    
+                    if(top15Text) top15Data = parseCSVSimple(top15Text);
+                    if(categoriesText) categoriesData = parseCSVSimple(categoriesText);
+
+                    const totalTop15 = top15Data.rows.length;
+                    const totalCategories = categoriesData.rows.length;
+
+                    summaryEl.innerHTML = `Top 15 palabras cargadas: <strong>${totalTop15}</strong><br>Categorías analizadas: <strong>${totalCategories}</strong>`;
+                    const countsEl = document.getElementById('counts');
+                    countsEl.innerHTML = `<div class="muted">Todos los archivos deben estar en la misma carpeta que este HTML.</div>`;
+                }
+
+                // Process Top 15
+                const top15Card = document.getElementById('top15Card');
+                const top15Container = document.getElementById('top15Words');
+                const top15Link = document.getElementById('top15Link');
+                const top15ImgCard = document.getElementById('top15ImgCard');
+                const top15Img = document.getElementById('top15Img');
+                const top15ImgMsg = document.getElementById('top15Msg');
+
+                if(top15Text){
+                    const top15Data = parseCSVSimple(top15Text);
+                    top15Card.style.display = 'block';
+                    const headers = top15Data.headers;
+                    top15Container.innerHTML = '<table><thead><tr>' 
+                        + headers.map(h => `<th>${h}</th>`).join('')
+                        + '</tr></thead><tbody>'
+                        + top15Data.rows.map(r => '<tr>' + headers.map(h => `<td>${r[h] || ''}</td>`).join('') + '</tr>').join('')
+                        + '</tbody></table>';
+                    
+                    top15Link.href = paths.top15;
+                    top15Link.style.display = 'inline-block';
+                } else {
+                    top15Card.style.display = 'none';
+                }
+
+                if(top15ImgOk){
+                    top15ImgCard.style.display = 'block';
+                    top15Img.src = paths.imgTop15;
+                    top15Img.style.display = 'block';
+                    top15ImgMsg.textContent = '';
+                } else {
+                    top15ImgCard.style.display = 'none';
+                    top15ImgMsg.textContent = 'Imagen no encontrada: ' + paths.imgTop15;
+                }
+
+                // Process Categories
+                const categoriesCard = document.getElementById('categoriesCard');
+                const categoriesContainer = document.getElementById('categoriesTable');
+                const categoriesLink = document.getElementById('categoriesLink');
+                const categoriesImgCard = document.getElementById('categoriesImgCard');
+                const categoriesImg = document.getElementById('categoriesImg');
+                const categoriesImgMsg = document.getElementById('categoriesMsg');
+
+                if(categoriesText){
+                    const categoriesData = parseCSVSimple(categoriesText);
+                    categoriesCard.style.display = 'block';
+                    const headers = categoriesData.headers;
+                    categoriesContainer.innerHTML = '<table><thead><tr>' 
+                        + headers.map(h => `<th>${h}</th>`).join('')
+                        + '</tr></thead><tbody>'
+                        + categoriesData.rows.map(r => '<tr>' + headers.map(h => `<td>${r[h] || ''}</td>`).join('') + '</tr>').join('')
+                        + '</tbody></table>';
+                    
+                    categoriesLink.href = paths.freqCategories;
+                    categoriesLink.style.display = 'inline-block';
+                } else {
+                    categoriesCard.style.display = 'none';
+                }
+
+                if(categoriesImgOk){
+                    categoriesImgCard.style.display = 'block';
+                    categoriesImg.src = paths.imgCategories;
+                    categoriesImg.style.display = 'block';
+                    categoriesImgMsg.textContent = '';
+                } else {
+                    categoriesImgCard.style.display = 'none';
+                    categoriesImgMsg.textContent = 'Imagen no encontrada: ' + paths.imgCategories;
+                }
+
+                log('Carga finalizada.');
+                showMsg('Carga finalizada.');
+            } catch(err){
+                log('Error general:', err.message);
+                showMsg('Error: ' + err.message);
+            } finally {
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

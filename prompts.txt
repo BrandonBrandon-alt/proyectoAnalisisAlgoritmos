@@ -59,6 +59,9 @@ File ~\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0
 111     Return a sentence-tokenized copy of *text*,
 ...
 - 'C:\\nltk_data'     - 'D:\\nltk_data'     - 'E:\\nltk_data' **********************************************************************
+-----------------------------------------------------------------------------------------------------
+(Se manda el index.html del requerimiento 5) Basate en este y haz una pagina nueva para el requerimiento 3
+
 
 
 
@@ -84,3 +87,7 @@ Me da ValueError: The condensed distance matrix must contain only finite values.
 Que causa eso y como lo soluciono?
 -----------------------------------------------------------------------------------------------------
 Segun los dendogramas, cual de los algoritmos produce agrupamientos más coherentes? (Se adjunta fotos de los dendogramas) 
+-----------------------------------------------------------------------------------------------------
+Ahora ayudame con el requerimiento 4, recuerda que son 3 dendogramas, que se carguen los png, se llaman dendograma_average.png, 
+dendograma_complete.png y dendograma_single. Que se muestren los 3, primero el single, despues el complete y por ultimo el average. 
+Puedes ponerlos en card y al darle clic que la imagen se abra y se vea mas grande
