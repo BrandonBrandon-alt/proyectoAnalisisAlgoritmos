@@ -1,3 +1,129 @@
+--------------------------------------------- REQUERIMIENTO 4 ---------------------------------------------
+Por que la creación del dendrograma se demora tanto y cómo puedo optimizarlo?
+-----------------------------------------------------------------------------------------------------
+Que representa el eje Y en un dendrograma jerárquico?
+-----------------------------------------------------------------------------------------------------
+Me salió el error:
+TypeError: linkage() got an unexpected keyword argument 'metodo'. 
+Que significa?
+-----------------------------------------------------------------------------------------------------
+Me da ValueError: The condensed distance matrix must contain only finite values. 
+Que causa eso y como lo soluciono?
+-----------------------------------------------------------------------------------------------------
+Segun los dendogramas, cual de los algoritmos produce agrupamientos más coherentes? (Se adjunta fotos de los dendogramas)
+
+
+--------------------------------------------- REQUERIMIENTO 5 ---------------------------------------------
+Cómo puedo calcular el grado de cada nodo en el grafo?
+-----------------------------------------------------------------------------------------------------
+Qué diferencia hay entre grado simple y grado ponderado?
+-----------------------------------------------------------------------------------------------------
+Este es mi código actual para grado y componentes conexas:
+
+# grado (número de vecinos). Para grafo no ponderado:
+degree_dict = dict(G.degree())  # grado simple
+
+# también grado ponderado por peso:
+weighted_degree = {n: sum(d.get('weight', 1) for _, _, d in G.edges(n, data=True)) for n in G.nodes()}
+-----------------------------------------------------------------------------------------------------
+Cómo puedo obtener las componentes conexas más grandes del grafo y visualizarlas?
+-----------------------------------------------------------------------------------------------------
+Puedo filtrar las componentes pequeñas automáticamente?
+Por que la creación del dendrograma se demora tanto y cómo puedo optimizarlo?
+-----------------------------------------------------------------------------------------------------
+Que representa el eje Y en un dendrograma jerárquico?
+-----------------------------------------------------------------------------------------------------
+Me salió el error:
+TypeError: linkage() got an unexpected keyword argument 'metodo'. 
+Que significa?
+-----------------------------------------------------------------------------------------------------
+Me da ValueError: The condensed distance matrix must contain only finite values. 
+Que causa eso y como lo soluciono?
+-----------------------------------------------------------------------------------------------------
+Segun los dendogramas, cual de los algoritmos produce agrupamientos más coherentes? (Se adjunta fotos de los dendogramas) 
+
+
+--------------------------------------------- REQUERIMIENTO 5 ---------------------------------------------
+Cómo puedo calcular el grado de cada nodo en el grafo?
+-----------------------------------------------------------------------------------------------------
+Qué diferencia hay entre grado simple y grado ponderado?
+-----------------------------------------------------------------------------------------------------
+Este es mi código actual para grado y componentes conexas:
+
+# grado (número de vecinos). Para grafo no ponderado:
+degree_dict = dict(G.degree())  # grado simple
+
+# también grado ponderado por peso:
+weighted_degree = {n: sum(d.get('weight', 1) for _, _, d in G.edges(n, data=True)) for n in G.nodes()}
+-----------------------------------------------------------------------------------------------------
+Cómo puedo obtener las componentes conexas más grandes del grafo y visualizarlas?
+-----------------------------------------------------------------------------------------------------
+Puedo filtrar las componentes pequeñas automáticamente?
+--------------------------------------------- PROMPTS LIMPIOS — proyectoAnalisisAlgoritmos ---------------------------------------------
+
+REQUERIMIENTO 3
+
+1) ¿Qué pide exactamente el requerimiento 3 del proyecto y cómo puedo abordarlo en Python usando mi archivo consolidado (.bib)?
+2) ¿Qué librerías de Python puedo usar para leer archivos .bib y procesar texto (por ejemplo: bibtexparser, pandas, nltk, spaCy, scikit-learn)?
+3) Ya tengo un archivo consolidado.bib con abstracts; ¿cómo puedo leerlo en Python y extraer solo los campos de resumen?
+4) Tengo los abstracts en una lista; ¿cómo puedo unirlos todos para analizarlos como un solo texto?
+5) ¿Por qué es importante eliminar stopwords cuando analizo los abstracts?
+7) Ya tengo una lista de palabras clave; ¿cómo puedo contar cuántas veces aparece cada una en los abstracts?
+
+Código relacionado (mantener tal cual):
+
+import re
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+
+# Unir todos los abstracts en un solo texto
+texto = " ".join(abstracts).lower()
+
+# Eliminar caracteres especiales y números
+texto = re.sub(r'[^a-z\\s]', '', texto)
+
+# Tokenizar
+tokens = word_tokenize(texto)
+
+# Eliminar stopwords en inglés y palabras muy cortas
+stop_words = set(stopwords.words("english"))
+tokens = [word for word in tokens if word not in stop_words and len(word) > 2]
+
+print(f"Cantidad total de tokens limpios: {len(tokens)}")
+print("Ejemplo de tokens:", tokens[:20])
+
+Nota: si aparece LookupError al usar NLTK, normalmente faltan recursos (por ejemplo 'punkt' o 'stopwords'). Solución: ejecutar nltk.download('punkt') y nltk.download('stopwords') o instalar los recursos necesarios.
+
+--------------------------------------------- REQUERIMIENTO 4 ---------------------------------------------
+
+1) ¿Qué pide exactamente el requerimiento 4 del proyecto y cómo puedo abordarlo en Python usando mi archivo consolidado.bib?
+2) ¿Qué pasa si mi archivo consolidado.bib tiene muchos registros y la carga es lenta? (Sugerencias: muestreo, lectura por lotes, uso de SQLite, streaming.)
+3) ¿Cómo construir un grafo de coocurrencia a partir de los términos de los abstracts? (Herramientas: NetworkX, CountVectorizer/TF-IDF de scikit-learn.)
+4) Ayúdame a escoger los primeros 100 abstracts (métodos: ordenar, muestreo aleatorio, filtros por año o relevancia).
+5) ¿Qué filtro aplicar para eliminar nodos con baja frecuencia? (por ejemplo, eliminar nodos con grado < umbral o frecuencia < umbral).
+6) ¿Por qué el método 'single' puede mostrar una sola línea en 0 en el dendrograma? (posible causa: distancias muy pequeñas o datos idénticos → revisar matriz de distancias)
+7) ¿Por qué la creación del dendrograma se demora tanto y cómo optimizarlo? (reducir muestra, usar representaciones vectoriales más compactas, usar clustering aproximado)
+8) ¿Qué representa el eje Y en un dendrograma jerárquico? (distancia o disimilitud en las fusiones)
+9) Error: TypeError: linkage() got an unexpected keyword argument 'metodo' — explicación: el argumento correcto es 'method' en scipy.cluster.hierarchy.linkage.
+10) Error: ValueError: The condensed distance matrix must contain only finite values — explicación: la matriz de distancias contiene NaN o Inf; limpiar o imputar datos antes de calcular distancias.
+11) Según los dendrogramas, ¿qué algoritmo produce agrupamientos más coherentes? (comparar visualmente y con métricas como silhouette score)
+
+--------------------------------------------- REQUERIMIENTO 5 ---------------------------------------------
+
+1) ¿Cómo puedo calcular el grado de cada nodo en el grafo?
+2) ¿Qué diferencia hay entre grado simple y grado ponderado?
+
+Código relacionado (mantener tal cual):
+
+# grado (número de vecinos). Para grafo no ponderado:
+degree_dict = dict(G.degree())  # grado simple
+
+# también grado ponderado por peso:
+weighted_degree = {n: sum(d.get('weight', 1) for _, _, d in G.edges(n, data=True)) for n in G.nodes()}
+
+3) ¿Cómo obtener las componentes conexas más grandes del grafo y visualizarlas?
+4) ¿Puedo filtrar las componentes pequeñas automáticamente? (sí: eliminar componentes con tamaño menor que un umbral)
+
 --------------------------------------------- REQUERIMIENTO 3 ---------------------------------------------
 
 Explícame qué pide exactamente el requerimiento 4 del proyecto y como puedo abordarlo en Python usando mi archivo consolidado.bib.
@@ -68,7 +194,12 @@ Explícame que pide exactamente el requerimiento 4 del proyecto y cOmo puedo abo
 -----------------------------------------------------------------------------------------------------
 Que pasa si mi archivo consolidado.bib tiene muchos registros y se demora cargando?
 -----------------------------------------------------------------------------------------------------
+Cómo puedo construir un grafo de coocurrencia a partir de los términos de los abstracts?
+-----------------------------------------------------------------------------------------------------
 Ayudame a escoger los primeros 100 abstracts
+-----------------------------------------------------------------------------------------------------
+Qué filtro puedo aplicar para eliminar nodos con baja frecuencia?
+-----------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------
 Por que el método single me muestra solo una línea en 0 en el dendrograma?
 -----------------------------------------------------------------------------------------------------
@@ -84,3 +215,23 @@ Me da ValueError: The condensed distance matrix must contain only finite values.
 Que causa eso y como lo soluciono?
 -----------------------------------------------------------------------------------------------------
 Segun los dendogramas, cual de los algoritmos produce agrupamientos más coherentes? (Se adjunta fotos de los dendogramas) 
+
+
+--------------------------------------------- REQUERIMIENTO 5 ---------------------------------------------
+Cómo puedo calcular el grado de cada nodo en el grafo?
+-----------------------------------------------------------------------------------------------------
+Qué diferencia hay entre grado simple y grado ponderado?
+-----------------------------------------------------------------------------------------------------
+Este es mi código actual para grado y componentes conexas:
+
+# grado (número de vecinos). Para grafo no ponderado:
+degree_dict = dict(G.degree())  # grado simple
+
+# también grado ponderado por peso:
+weighted_degree = {n: sum(d.get('weight', 1) for _, _, d in G.edges(n, data=True)) for n in G.nodes()}
+-----------------------------------------------------------------------------------------------------
+Cómo puedo obtener las componentes conexas más grandes del grafo y visualizarlas?
+-----------------------------------------------------------------------------------------------------
+Puedo filtrar las componentes pequeñas automáticamente?
+
+
