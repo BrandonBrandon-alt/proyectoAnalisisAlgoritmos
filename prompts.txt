@@ -1,3 +1,12 @@
+
+Las IA que fueron utilizadas fueron las siguientes:
+
+Chat GPT
+Claude.ia
+Tanto cada una en su pagina web oficial como integradas dentro de Github Copilot u otras herramientas de IA 
+disponibles en los editores de codigo
+
+
 --------------------------------------------- REQUERIMIENTO 4 ---------------------------------------------
 Por que la creación del dendrograma se demora tanto y cómo puedo optimizarlo?
 -----------------------------------------------------------------------------------------------------
