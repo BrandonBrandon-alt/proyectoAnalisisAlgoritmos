@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Requerimiento 2 – Benchmark de Similitud</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial; background:#fbfdff; color:#111; padding:20px }
+        .wrap{ max-width:980px; margin:28px auto }
+        h1{ font-size:26px; color:#0b3a66; margin-bottom:6px }
+        .lead{ color:#556; margin-bottom:18px }
+        .grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px }
+        @media (max-width:900px){ .grid{ grid-template-columns:1fr } }
+        .card{ background:white; border-radius:10px; padding:16px; box-shadow:0 6px 18px rgba(16,24,40,0.06) }
+        .card strong{ display:block; margin-bottom:8px }
+        .muted{ color:#667; font-size:14px }
+        .preview{ max-width:100%; border-radius:8px; border:1px solid #e6eef8; margin-top:8px }
+        pre{ background:#0f1724; color:#e6eef8; padding:12px; border-radius:8px; overflow:auto; font-family:monospace; font-size:13px }
+        table{ width:100%; border-collapse:collapse; margin-top:8px }
+        th{ text-align:left; padding:8px; background:#0b5fff; color:#fff }
+        td{ padding:8px; border-bottom:1px solid #f1f5f9 }
+        .controls{ display:flex; gap:12px; align-items:center; margin-bottom:12px }
+        .btn{ background:#0b5fff; color:#fff; padding:10px 14px; border-radius:8px; text-decoration:none; font-weight:700; border:none; cursor:pointer }
+        .btn:disabled{ background:#b8c7ff; cursor:not-allowed }
+        .download{ background:#16a34a }
+    </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Requerimiento 2 — Benchmark de Similitud</h1>
+    <p class="lead">Carga los resultados generados por el notebook. Se muestran las gráficas (tiempos y similitudes) y el texto legible con los valores.</p>
+
+    <div class="controls">
+      <button id="loadBtn" class="btn">Cargar resultados</button>
+      <a id="downloadCsv" class="btn download" style="display:none" download>Descargar CSV</a>
+      <a id="downloadJson" class="btn" style="display:none" download>Descargar JSON</a>
+      <a id="downloadTxt" class="btn" style="display:none" download>Descargar TXT</a>
+      <span id="status" class="muted"></span>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <strong>Gráfica: Tiempo de inferencia</strong>
+        <img id="imgTimes" class="preview" alt="Tiempos de inferencia" style="display:none" />
+        <div id="timesMsg" class="muted" style="margin-top:8px">Imagen: <code>outputs/benchmark_times.png</code></div>
+      </div>
+
+      <div class="card">
+        <strong>Gráfica: Similitudes</strong>
+        <img id="imgSims" class="preview" alt="Similitudes" style="display:none" />
+        <div id="simsMsg" class="muted" style="margin-top:8px">Imagen: <code>outputs/benchmark_similarities.png</code></div>
+      </div>
+
+      <div class="card full-width" style="grid-column:1/-1">
+        <strong>Resultados (legible)</strong>
+        <pre id="txtResults" style="height:260px">Presiona "Cargar resultados" para ver el texto y valores guardados por el notebook.</pre>
+      </div>
+
+      <div class="card">
+        <strong>Tabla: Datos (CSV)</strong>
+        <div id="tableContainer" class="table-wrap"></div>
+      </div>
+
+      <div class="card">
+        <strong>JSON raw</strong>
+        <pre id="jsonRaw" style="height:200px">—</pre>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Rutas relativas desde este archivo (requerimiento2/index.html)
+    const base = 'outputs/';
+    const paths = {
+      timesImg: base + 'benchmark_times.png',
+      simsImg: base + 'benchmark_similarities.png',
+      csv: base + 'benchmark_results.csv',
+      json: base + 'benchmark_results.json',
+      txt: base + 'benchmark_results.txt'
+    };
+
+    const statusEl = document.getElementById('status');
+    const log = (m)=> { statusEl.textContent = m; };
+
+    async function exists(url){
+      try{ const r = await fetch(url, {method:'HEAD'}); return r.ok; } catch(e){ return false; }
+    }
+
+    async function fetchText(url){
+      const r = await fetch(url);
+      if(!r.ok) throw new Error('HTTP ' + r.status);
+      return await r.text();
+    }
+
+    function parseCSVSimple(text){
+      const lines = text.split(/\r?\n/).filter(l=>l.trim()!=='');
+      if(lines.length===0) return {headers:[], rows:[]};
+      const headers = lines[0].split(',').map(h=>h.replace(/^"|"$/g,'').trim());
+      const rows = lines.slice(1).map(line => {
+        const values = [];
+        let cur = '', inQ=false;
+        for(let i=0;i<line.length;i++){
+          const ch = line[i];
+          if(ch === '"'){ inQ = !inQ; continue; }
+          if(ch === ',' && !inQ){ values.push(cur); cur=''; continue; }
+          cur += ch;
+        }
+        values.push(cur);
+        while(values.length < headers.length) values.push('');
+        const obj = {};
+        headers.forEach((h,i)=> obj[h]= (values[i]||'').trim());
+        return obj;
+      });
+      return {headers, rows};
+    }
+
+    document.getElementById('loadBtn').addEventListener('click', async function(){
+      const btn = this; btn.disabled = true; log('Cargando...');
+      try{
+        // check files
+        const [tImgOk, sImgOk, csvOk, jsonOk, txtOk] = await Promise.all([
+          exists(paths.timesImg), exists(paths.simsImg), exists(paths.csv), exists(paths.json), exists(paths.txt)
+        ]);
+
+        // images
+        const imgTimes = document.getElementById('imgTimes');
+        const imgSims = document.getElementById('imgSims');
+        if(tImgOk){ imgTimes.src = paths.timesImg; imgTimes.style.display='block'; } else { imgTimes.style.display='none'; }
+        if(sImgOk){ imgSims.src = paths.simsImg; imgSims.style.display='block'; } else { imgSims.style.display='none'; }
+
+        // txt
+        const txtEl = document.getElementById('txtResults');
+        if(txtOk){
+          try{ const txt = await fetchText(paths.txt); txtEl.textContent = txt; document.getElementById('downloadTxt').style.display='inline-block'; document.getElementById('downloadTxt').href = paths.txt; } catch(e){ txtEl.textContent = 'Error leyendo TXT: '+e.message }
+        } else { txtEl.textContent = 'No se encontró: ' + paths.txt }
+
+        // csv -> table
+        const tableContainer = document.getElementById('tableContainer');
+        const downloadCsv = document.getElementById('downloadCsv');
+        if(csvOk){
+          const csvText = await fetchText(paths.csv);
+          const parsed = parseCSVSimple(csvText);
+          if(parsed.headers.length){
+            let html = '<table><thead><tr>' + parsed.headers.map(h=>`<th>${h}</th>`).join('') + '</tr></thead><tbody>';
+            html += parsed.rows.map(r=> '<tr>' + parsed.headers.map(h=>`<td>${r[h]||''}</td>`).join('') + '</tr>').join('');
+            html += '</tbody></table>';
+            tableContainer.innerHTML = html;
+            downloadCsv.style.display='inline-block'; downloadCsv.href = paths.csv;
+          } else { tableContainer.innerHTML = '<div class="muted">CSV vacío o con formato inesperado.</div>'; }
+        } else { tableContainer.innerHTML = '<div class="muted">No se encontró: ' + paths.csv + '</div>'; downloadCsv.style.display='none'; }
+
+        // json raw
+        const jsonRaw = document.getElementById('jsonRaw');
+        const downloadJson = document.getElementById('downloadJson');
+        if(jsonOk){
+          try{ const jsonText = await fetchText(paths.json); const obj = JSON.parse(jsonText); jsonRaw.textContent = JSON.stringify(obj, null, 2); downloadJson.style.display='inline-block'; downloadJson.href = paths.json; }
+          catch(e){ jsonRaw.textContent = 'Error leyendo JSON: ' + e.message }
+        } else { jsonRaw.textContent = 'No se encontró: ' + paths.json; downloadJson.style.display='none'; }
+
+        log('Carga finalizada.');
+      } catch(err){ console.error(err); log('Error: '+err.message); }
+      finally{ btn.disabled = false; }
+    });
+  </script>
+</body>
+</html>

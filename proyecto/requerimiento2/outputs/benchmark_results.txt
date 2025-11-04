@@ -1,0 +1,19 @@
+Resultados (similitudes):
+ - Levenshtein: 0.21857923497267762
+ - TFIDF_Cosine: 0.03875150217190518
+ - Jaccard: 0.0782122905027933
+ - Euclidean: 0.06972691561653295
+ - SBERT: 0.1889268010854721
+ - CrossEncoder: 0.0011512970086187124
+
+Tiempos de inferencia (segundos):
+ - Levenshtein: 0.018638 s
+ - TFIDF_Cosine: 0.080159 s
+ - Jaccard: 0.000188 s
+ - Euclidean: 0.010983 s
+ - SBERT: 0.610057 s
+ - CrossEncoder: 0.427661 s
+
+Tiempos de carga de modelos (si aplicable):
+ - sbert_load_s: 3.799 s
+ - cross_load_s: 2.205 s
