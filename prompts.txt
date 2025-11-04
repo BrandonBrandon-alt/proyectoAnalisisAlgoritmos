@@ -194,6 +194,9 @@ File ~\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0
 111     Return a sentence-tokenized copy of *text*,
 ...
 - 'C:\\nltk_data'     - 'D:\\nltk_data'     - 'E:\\nltk_data' **********************************************************************
+-----------------------------------------------------------------------------------------------------
+(Se manda el index.html del requerimiento 5) Basate en este y haz una pagina nueva para el requerimiento 3
+
 
 
 
