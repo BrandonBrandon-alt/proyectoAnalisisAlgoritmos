@@ -1,16 +1,16 @@
 Palabra,Frecuencia
-machine learning,1608
-privacy,887
-generative models,681
-training data,495
-transparency,198
-ethics,125
-explainability,123
-personalization,104
-prompting,103
-algorithmic bias,31
-multimodality,25
-fine-tuning,9
+machine learning,636
+privacy,395
+generative models,239
+transparency,183
+ethics,149
+training data,92
+explainability,67
+personalization,62
+algorithmic bias,48
+prompting,41
+multimodality,8
+fine-tuning,2
 human-ai interaction,0
 ai literacy,0
 co-creation,0

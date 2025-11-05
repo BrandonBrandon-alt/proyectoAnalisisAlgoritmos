@@ -8,6 +8,15 @@
   --text:#111;
   --entry-bg:#f8fafc;
 }
+h1{
+  font-size: 1.4rem;
+}
+h2{
+  font-size: 1.2rem;
+}
+h3{
+  font-size: 1rem;
+}
 
 *{box-sizing:border-box}
 body{

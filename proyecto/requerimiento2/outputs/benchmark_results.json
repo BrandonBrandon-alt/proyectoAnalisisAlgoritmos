@@ -1,38 +1,38 @@
 [
   {
     "algorithm":"Levenshtein",
-    "similarity":0.218579235,
-    "inference_time_s":0.0186384,
+    "similarity":0.2743961353,
+    "inference_time_s":0.000065605,
     "model_load_s":null
   },
   {
     "algorithm":"TFIDF_Cosine",
-    "similarity":0.0387515022,
-    "inference_time_s":0.0801591,
+    "similarity":0.1252120012,
+    "inference_time_s":0.002354242,
     "model_load_s":null
   },
   {
     "algorithm":"Jaccard",
-    "similarity":0.0782122905,
-    "inference_time_s":0.0001884,
+    "similarity":0.1022727273,
+    "inference_time_s":0.000051377,
     "model_load_s":null
   },
   {
     "algorithm":"Euclidean",
-    "similarity":0.0697269156,
-    "inference_time_s":0.0109825,
+    "similarity":0.0691868003,
+    "inference_time_s":0.001236911,
     "model_load_s":null
   },
   {
     "algorithm":"SBERT",
-    "similarity":0.1889268011,
-    "inference_time_s":0.6100568,
-    "model_load_s":3.7990592
+    "similarity":0.4486328959,
+    "inference_time_s":0.06281313,
+    "model_load_s":1.131329911
   },
   {
     "algorithm":"CrossEncoder",
-    "similarity":0.001151297,
-    "inference_time_s":0.427661,
-    "model_load_s":2.2049125
+    "similarity":0.0805664062,
+    "inference_time_s":0.070432818,
+    "model_load_s":0.458075137
   }
 ]
