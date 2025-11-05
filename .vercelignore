@@ -1,3 +1,4 @@
+# Archivos Python y entornos virtuales
 venv/
 __pycache__/
 *.pyc
@@ -9,16 +10,37 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+
+# Notebooks y checkpoints
 .ipynb_checkpoints/
 *.ipynb
+
+# Archivos de desarrollo
 descargas/
 .git/
 .gitignore
-README.md
-proyecto/requerimiento*/README.md
+prompts.txt
+deploy.sh
+DEPLOY.md
+ARCHIVOS_INCLUIDOS.md
+installed.txt
+seguimiento/
 
-# Permitir archivos necesarios para visualización
+# READMEs (excepto el principal)
+proyecto/requerimiento*/README.md
+proyecto/README.md
+
+# IMPORTANTE: Permitir archivos necesarios para visualización
+!duplicados/
 !duplicados/duplicados.bib
+!proyecto/requerimiento*/data/
 !proyecto/requerimiento*/data/*.csv
+!proyecto/requerimiento*/outputs/
 !proyecto/requerimiento*/outputs/*.png
 !proyecto/requerimiento*/outputs/*.pdf
+!proyecto/requerimiento*/outputs/*.html
+!proyecto/requerimiento*/outputs/*.json
+!proyecto/requerimiento*/outputs/*.txt
+!proyecto/requerimiento*/outputs/*.csv
+!proyecto/requerimiento*/*.css
+!proyecto/requerimiento*/*.html
