@@ -5,29 +5,227 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Requerimiento 2 – Benchmark de Similitud</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial; background:#fbfdff; color:#111; padding:20px }
-        .wrap{ max-width:980px; margin:28px auto }
-        h1{ font-size:26px; color:#0b3a66; margin-bottom:6px }
-        .lead{ color:#556; margin-bottom:18px }
-        .grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px }
-        @media (max-width:900px){ .grid{ grid-template-columns:1fr } }
-        .card{ background:white; border-radius:10px; padding:16px; box-shadow:0 6px 18px rgba(16,24,40,0.06) }
-        .card strong{ display:block; margin-bottom:8px }
-        .muted{ color:#667; font-size:14px }
-        .preview{ max-width:100%; border-radius:8px; border:1px solid #e6eef8; margin-top:8px }
-        pre{ background:#0f1724; color:#e6eef8; padding:12px; border-radius:8px; overflow:auto; font-family:monospace; font-size:13px }
-        table{ width:100%; border-collapse:collapse; margin-top:8px }
-        th{ text-align:left; padding:8px; background:#0b5fff; color:#fff }
-        td{ padding:8px; border-bottom:1px solid #f1f5f9 }
-        .controls{ display:flex; gap:12px; align-items:center; margin-bottom:12px }
-        .btn{ background:#0b5fff; color:#fff; padding:10px 14px; border-radius:8px; text-decoration:none; font-weight:700; border:none; cursor:pointer }
-        .btn:disabled{ background:#b8c7ff; cursor:not-allowed }
-        .download{ background:#16a34a }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary: #7c3aed;
+  --primary-dark: #6d28d9;
+  --primary-light: #a78bfa;
+  --secondary: #06b6d4;
+  --background: #0f172a;
+  --surface: #1e293b;
+  --card: #334155;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --accent: #f59e0b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  background: var(--background);
+  color: var(--text);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  padding: 20px;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.15) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.lead {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+button, .btn {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+  text-decoration: none;
+  display: inline-block;
+}
+
+button:hover:not(:disabled), .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5);
+}
+
+button:disabled {
+  background: var(--card);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.download {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+}
+
+.download:hover {
+  background: linear-gradient(135deg, #15803d, #166534);
+}
+
+.muted {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  transition: all 0.3s;
+}
+
+.card:hover {
+  border-color: rgba(124, 58, 237, 0.3);
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.2);
+}
+
+.card strong {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.preview {
+  max-width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  margin-top: 12px;
+  transition: transform 0.3s;
+}
+
+.preview:hover {
+  transform: scale(1.02);
+}
+
+pre {
+  background: var(--card);
+  color: var(--text);
+  padding: 16px;
+  border-radius: 10px;
+  overflow: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  line-height: 1.5;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+th {
+  background: var(--card);
+  color: var(--text);
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--primary);
+}
+
+td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+tr:hover {
+  background: var(--card);
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+code {
+  background: var(--card);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: var(--primary-light);
+}
     </style>
 </head>
 <body>
   <div class="wrap">
+    <div style="margin-bottom: 24px;">
+        <a href="../../index.html" style="display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">
+            <span style="font-size: 1.2rem;">←</span> Volver al inicio
+        </a>
+    </div>
+    
     <h1>Requerimiento 2 — Benchmark de Similitud</h1>
     <p class="lead">Carga los resultados generados por el notebook. Se muestran las gráficas (tiempos y similitudes) y el texto legible con los valores.</p>
 
@@ -58,15 +256,11 @@
         <pre id="txtResults" style="height:260px">Presiona "Cargar resultados" para ver el texto y valores guardados por el notebook.</pre>
       </div>
 
-      <div class="card">
+      <div class="card full-width">
         <strong>Tabla: Datos (CSV)</strong>
         <div id="tableContainer" class="table-wrap"></div>
       </div>
 
-      <div class="card">
-        <strong>JSON raw</strong>
-        <pre id="jsonRaw" style="height:200px">—</pre>
-      </div>
     </div>
   </div>
 
@@ -164,5 +358,6 @@
       finally{ btn.disabled = false; }
     });
   </script>
+  </div>
 </body>
 </html>

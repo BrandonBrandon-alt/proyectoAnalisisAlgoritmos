@@ -5,135 +5,265 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Requerimiento 3 – Resultados</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f5f5f5;
-            padding: 20px;
-        }
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 8px;
-            font-size: 28px;
-        }
-        .lead {
-            color: #7f8c8d;
-            margin-bottom: 24px;
-            font-size: 15px;
-        }
-        button {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
-        button:hover:not(:disabled) { background: #2980b9; }
-        button:disabled {
-            background: #bdc3c7;
-            cursor: not-allowed;
-        }
-        .muted {
-            color: #95a5a6;
-            font-size: 13px;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 24px;
-        }
-        .full-width {
-            grid-column: 1 / -1;
-        }
-        @media (max-width: 900px) {
-            .grid { grid-template-columns: 1fr; }
-        }
-        .card {
-            background: white;
-            border-radius: 8px;
-            padding: 16px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .card strong {
-            display: block;
-            font-size: 16px;
-            color: #2c3e50;
-            margin-bottom: 12px;
-        }
-        .status {
-            padding: 12px;
-            background: #ecf0f1;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-        .preview {
-            max-width: 100%;
-            border-radius: 6px;
-            border: 1px solid #ddd;
-            margin-top: 8px;
-        }
-        .btn-link {
-            display: inline-block;
-            padding: 8px 16px;
-            background: #27ae60;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
-        .btn-link:hover { background: #229954; }
-        pre {
-            background: #2c3e50;
-            color: #ecf0f1;
-            padding: 12px;
-            border-radius: 6px;
-            overflow: auto;
-            font-size: 12px;
-            font-family: 'Courier New', monospace;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 8px;
-            font-size: 13px;
-        }
-        th {
-            background: #34495e;
-            color: white;
-            padding: 8px;
-            text-align: left;
-            font-weight: 500;
-        }
-        td {
-            padding: 8px;
-            border-bottom: 1px solid #ecf0f1;
-        }
-        tbody tr:hover { background: #f8f9fa; }
-        code {
-            background: #ecf0f1;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-        }
-        .top-list table { margin-top: 0; }
-        .table-container {
-            max-height: 400px;
-            overflow-y: auto;
-        }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary: #7c3aed;
+  --primary-dark: #6d28d9;
+  --primary-light: #a78bfa;
+  --secondary: #06b6d4;
+  --background: #0f172a;
+  --surface: #1e293b;
+  --card: #334155;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --accent: #f59e0b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  background: var(--background);
+  color: var(--text);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  padding: 20px;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.15) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.lead {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+button {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5);
+}
+
+button:disabled {
+  background: var(--card);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.muted {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  transition: all 0.3s;
+}
+
+.card:hover {
+  border-color: rgba(124, 58, 237, 0.3);
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.2);
+}
+
+.card strong {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.status {
+  padding: 16px;
+  background: var(--card);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.preview {
+  max-width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  margin-top: 12px;
+  transition: transform 0.3s;
+}
+
+.preview:hover {
+  transform: scale(1.02);
+}
+
+.btn-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+}
+
+.btn-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.5);
+  background: linear-gradient(135deg, #15803d, #166534);
+}
+
+pre {
+  background: var(--card);
+  color: var(--text);
+  padding: 16px;
+  border-radius: 10px;
+  overflow: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  line-height: 1.5;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-size: 0.9rem;
+}
+
+th {
+  background: var(--card);
+  color: var(--text);
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--primary);
+}
+
+td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+tbody tr:hover {
+  background: var(--card);
+}
+
+code {
+  background: var(--card);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: var(--primary-light);
+}
+
+.top-list table {
+  margin-top: 0;
+}
+
+.table-container {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.table-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: var(--card);
+  border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
     </style>
 </head>
 <body>
-    <h1>Resultados – Requerimiento 3</h1>
+<div class="wrap">
+    <div style="margin-bottom: 24px;">
+        <a href="../../index.html" style="display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.3s;">
+            <span style="font-size: 1.2rem;">←</span> Volver al inicio
+        </a>
+    </div>
+    
+    <h1>Requerimiento 3 — Análisis de Texto</h1>
     <p class="lead">Pulsa el botón para cargar los resultados del análisis de texto generados por el notebook.</p>
 
     <div>
@@ -371,5 +501,6 @@
             }
         });
     </script>
+</div>
 </body>
 </html>
