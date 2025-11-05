@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Requerimiento 1 — Duplicados BibTeX</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Resultados — Requerimiento 1</h1>
+    <p class="lead">Visualización de entradas duplicadas detectadas en el proceso de consolidación BibTeX.</p>
+
+    <div>
+        <button id="loadBtn">Cargar duplicados</button>
+        <span id="msg" class="muted" style="margin-left:12px"></span>
+    </div>
+
+    <div class="grid">
+        <div>
+            <div id="summary" class="card">
+                <strong>Resumen de Duplicados</strong>
+                <div class="status" id="summaryText">No se ha cargado ningún archivo todavía.</div>
+                <div id="counts" style="margin-top:8px"></div>
+            </div>
+
+            <div id="statsCard" class="card" style="margin-top:12px; display:none;">
+                <strong>Estadísticas por Tipo</strong>
+                <div class="top-list" id="typeStats"></div>
+            </div>
+
+            <div id="topAuthorsCard" class="card" style="margin-top:12px; display:none;">
+                <strong>Autores más frecuentes en duplicados</strong>
+                <div class="top-list" id="topAuthors"></div>
+            </div>
+        </div>
+
+        <div>
+            <div class="card">
+                <strong>Entradas Duplicadas</strong>
+                <div id="entriesContainer" style="margin-top:8px">
+                    <div class="muted">Las entradas duplicadas se mostrarán aquí una vez cargadas.</div>
+                    <div id="entriesList" style="margin-top:12px"></div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top:12px;">
+                <strong>Logs</strong>
+                <pre id="log" style="height:220px">Esperando acción...</pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Ruta al archivo de duplicados generado por el notebook
+        const paths = {
+            duplicates: '../../duplicados/duplicados.bib'
+        };
+
+        const logEl = document.getElementById('log');
+        function log(...args){ logEl.textContent = args.join(' ') + "\n" + logEl.textContent; }
+
+        function showMsg(text){ document.getElementById('msg').textContent = text; }
+
+        async function fetchText(path){
+            try{
+                const res = await fetch(path);
+                if(!res.ok) throw new Error('HTTP ' + res.status);
+                return await res.text();
+            } catch(e){
+                throw new Error(`No disponible: ${path} (${e.message})`);
+            }
+        }
+
+        function parseBibTeX(text){
+            // Parser simple de BibTeX para extraer entradas
+            const entries = [];
+            const entryRegex = /@(\w+)\{([^,]+),\s*([\s\S]*?)\n\}\s*(?=@|$)/g;
+            let match;
+            
+            while ((match = entryRegex.exec(text)) !== null) {
+                const [, type, id, fieldsText] = match;
+                const fields = {};
+                
+                // Extraer campos individuales
+                const fieldRegex = /(\w+)\s*=\s*\{([^}]*)\}/g;
+                let fieldMatch;
+                while ((fieldMatch = fieldRegex.exec(fieldsText)) !== null) {
+                    fields[fieldMatch[1]] = fieldMatch[2];
+                }
+                
+                entries.push({
+                    type: type,
+                    id: id,
+                    fields: fields
+                });
+            }
+            
+            return entries;
+        }
+
+        function extractAuthors(authorString){
+            if(!authorString) return [];
+            // Separar autores por 'and'
+            return authorString.split(' and ').map(a => a.trim()).filter(a => a);
+        }
+
+        function topCounts(items, topN=10){
+            const counts = {};
+            items.forEach(item => {
+                const k = item.trim();
+                if(!k) return;
+                counts[k] = (counts[k] || 0) + 1;
+            });
+            const arr = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,topN);
+            return arr;
+        }
+
+        function renderEntry(entry, index){
+            const title = entry.fields.title || 'Sin título';
+            const author = entry.fields.author || 'Sin autor';
+            const year = entry.fields.year || 'Sin año';
+            const type = entry.type || 'unknown';
+            
+            return `
+                <div class="entry-card">
+                    <div class="entry-header">
+                        <span class="entry-number">#${index + 1}</span>
+                        <span class="entry-type">${type}</span>
+                        <span class="entry-id">${entry.id}</span>
+                    </div>
+                    <div class="entry-title">${title}</div>
+                    <div class="entry-meta">
+                        <div><strong>Autor(es):</strong> ${author}</div>
+                        <div><strong>Año:</strong> ${year}</div>
+                        ${entry.fields.journal ? `<div><strong>Journal:</strong> ${entry.fields.journal}</div>` : ''}
+                        ${entry.fields.booktitle ? `<div><strong>Booktitle:</strong> ${entry.fields.booktitle}</div>` : ''}
+                        ${entry.fields.doi ? `<div><strong>DOI:</strong> ${entry.fields.doi}</div>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        document.getElementById('loadBtn').addEventListener('click', async function(){
+            const btn = this;
+            btn.disabled = true;
+            showMsg('Cargando...');
+            log('Inicio de carga de duplicados');
+            document.getElementById('summaryText').textContent = 'Cargando archivo de duplicados...';
+            
+            try{
+                // Fetch duplicados.bib
+                let duplicatesText = null;
+                try{
+                    duplicatesText = await fetchText(paths.duplicates);
+                    log('duplicados.bib cargado:', paths.duplicates);
+                } catch(e){
+                    log(e.message);
+                    throw new Error('No se pudo cargar el archivo duplicados.bib. Verifica que el notebook haya generado el archivo.');
+                }
+
+                // Parse BibTeX
+                const entries = parseBibTeX(duplicatesText);
+                log(`Entradas duplicadas parseadas: ${entries.length}`);
+
+                // Mostrar resumen
+                const summaryEl = document.getElementById('summaryText');
+                summaryEl.innerHTML = `Total de entradas duplicadas: <strong>${entries.length}</strong>`;
+                
+                const countsEl = document.getElementById('counts');
+                countsEl.innerHTML = `<div class="muted">Estas entradas fueron detectadas como duplicadas durante el proceso de consolidación.</div>`;
+
+                // Estadísticas por tipo
+                const typeCounts = {};
+                entries.forEach(e => {
+                    typeCounts[e.type] = (typeCounts[e.type] || 0) + 1;
+                });
+                
+                const statsCard = document.getElementById('statsCard');
+                const typeStatsEl = document.getElementById('typeStats');
+                if(Object.keys(typeCounts).length > 0){
+                    statsCard.style.display = 'block';
+                    typeStatsEl.innerHTML = '<table><thead><tr><th>Tipo</th><th>Cantidad</th></tr></thead><tbody>'
+                        + Object.entries(typeCounts).sort((a,b)=>b[1]-a[1]).map(t => `<tr><td>${t[0]}</td><td>${t[1]}</td></tr>`).join('')
+                        + '</tbody></table>';
+                }
+
+                // Top autores
+                const allAuthors = [];
+                entries.forEach(e => {
+                    if(e.fields.author){
+                        const authors = extractAuthors(e.fields.author);
+                        allAuthors.push(...authors);
+                    }
+                });
+                
+                const topAuthors = topCounts(allAuthors, 10);
+                const topAuthorsCard = document.getElementById('topAuthorsCard');
+                const topAuthorsEl = document.getElementById('topAuthors');
+                if(topAuthors.length > 0){
+                    topAuthorsCard.style.display = 'block';
+                    topAuthorsEl.innerHTML = '<table><thead><tr><th>Autor</th><th>Apariciones</th></tr></thead><tbody>'
+                        + topAuthors.map(a => `<tr><td>${a[0]}</td><td>${a[1]}</td></tr>`).join('')
+                        + '</tbody></table>';
+                }
+
+                // Renderizar entradas
+                const entriesListEl = document.getElementById('entriesList');
+                if(entries.length > 0){
+                    entriesListEl.innerHTML = entries.map((e, i) => renderEntry(e, i)).join('');
+                } else {
+                    entriesListEl.innerHTML = '<div class="muted">No se encontraron entradas duplicadas.</div>';
+                }
+
+                log('Carga finalizada.');
+                showMsg('Carga finalizada.');
+            } catch(err){
+                log('Error general:', err.message);
+                showMsg('Error: ' + err.message);
+                document.getElementById('summaryText').textContent = 'Error al cargar el archivo. ' + err.message;
+            } finally {
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

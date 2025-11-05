@@ -53,7 +53,7 @@ htmlcov/
 # ============================================================================
 # DATOS Y DESCARGAS (archivos grandes)
 # ============================================================================
-# Archivos BibTeX descargados
+# Archivos BibTeX descargados (solo carpeta descargas)
 descargas/*.bib
 data/raw/**/*.bib
 data/raw/**/*.ris
@@ -61,7 +61,6 @@ data/raw/**/*.csv
 
 # Archivos procesados grandes
 data/processed/*.bib
-#*.bib
 !data/processed/.gitkeep
 
 # Archivos temporales de descarga
@@ -69,11 +68,35 @@ data/processed/*.bib
 *.tmp
 *.temp
 
+# EXCEPCIONES: Permitir archivos necesarios para visualización web
+# Requerimiento 1: duplicados
+!duplicados/*.bib
+
+# Requerimiento 2: outputs
+!proyecto/requerimiento2/outputs/*.csv
+!proyecto/requerimiento2/outputs/*.png
+!proyecto/requerimiento2/outputs/*.json
+!proyecto/requerimiento2/outputs/*.txt
+
+# Requerimiento 3: archivos en raíz
+!proyecto/requerimiento3/*.csv
+!proyecto/requerimiento3/*.png
+
+# Requerimiento 4: archivos en raíz
+!proyecto/requerimiento4/*.png
+
+# Requerimiento 5: data y outputs
+!proyecto/requerimiento5/data/*.csv
+!proyecto/requerimiento5/outputs/*.png
+!proyecto/requerimiento5/outputs/*.pdf
+
 # ============================================================================
 # SALIDAS Y RESULTADOS
 # ============================================================================
+# Excluir carpetas generales de salidas
 salidas/
 resultados/
+# Pero permitir outputs de los requerimientos (ya especificados arriba)
 
 # ============================================================================
 # LOGS Y METADATOS
@@ -152,8 +175,7 @@ htmlcov/
 # ============================================================================
 # ARCHIVOS ESPECÍFICOS DEL PROYECTO
 # ============================================================================
-# Duplicados identificados (opcional, depende si quieres versionar)
-duplicados/*.bib
+# Duplicados: permitidos arriba en la sección de excepciones
 
 # Archivos de ChromeDriver y Selenium
 chromedriver
@@ -170,3 +192,4 @@ cache/
 # ============================================================================
 # Usar archivos .gitkeep para mantener carpetas vacías en el repo
 !**/.gitkeep
+.vercel

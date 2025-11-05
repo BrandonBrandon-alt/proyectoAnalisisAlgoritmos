@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "name": "proyecto-analisis-algoritmos",
+  "builds": [
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "public": true
+}
