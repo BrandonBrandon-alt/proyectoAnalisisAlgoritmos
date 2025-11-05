@@ -1,4 +1,4 @@
-# Archivos Python y entornos virtuales
+# Python
 venv/
 __pycache__/
 *.pyc
@@ -11,7 +11,7 @@ __pycache__/
 dist/
 build/
 
-# Notebooks y checkpoints
+# Notebooks
 .ipynb_checkpoints/
 *.ipynb
 
@@ -25,22 +25,16 @@ DEPLOY.md
 ARCHIVOS_INCLUIDOS.md
 installed.txt
 seguimiento/
+verificar_despliegue.sh
+SOLUCION_DESPLIEGUE.md
+requirements.txt
+.env
 
-# READMEs (excepto el principal)
-proyecto/requerimiento*/README.md
+# READMEs
+README.md
 proyecto/README.md
-
-# IMPORTANTE: Permitir archivos necesarios para visualización
-!duplicados/
-!duplicados/duplicados.bib
-!proyecto/requerimiento*/data/
-!proyecto/requerimiento*/data/*.csv
-!proyecto/requerimiento*/outputs/
-!proyecto/requerimiento*/outputs/*.png
-!proyecto/requerimiento*/outputs/*.pdf
-!proyecto/requerimiento*/outputs/*.html
-!proyecto/requerimiento*/outputs/*.json
-!proyecto/requerimiento*/outputs/*.txt
-!proyecto/requerimiento*/outputs/*.csv
-!proyecto/requerimiento*/*.css
-!proyecto/requerimiento*/*.html
+proyecto/requerimiento1/README.md
+proyecto/requerimiento2/README.md
+proyecto/requerimiento3/README.md
+proyecto/requerimiento4/README.md
+proyecto/requerimiento5/README.md
