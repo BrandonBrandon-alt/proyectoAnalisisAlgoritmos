@@ -1,67 +1,329 @@
 <!doctype html>
 <html lang="es">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Proyecto — Análisis de Algoritmos</title>
-    <style>
-      :root{ --primary:#0b5fff; --muted:#666 }
-      body{ font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; margin:0; background:#fbfdff; color:#111 }
-      .wrap{ max-width:920px; margin:36px auto; padding:20px }
-      header{ display:flex; align-items:flex-start; gap:16px }
-      h1{ margin:0; font-size:1.4rem }
-      p.lead{ margin:6px 0 18px; color:#444 }
-      .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px }
-      .card{ background:white; border-radius:10px; padding:18px; box-shadow:0 8px 20px rgba(16,24,40,0.06); text-align:center }
-      .card a{ display:inline-block; margin-top:8px; padding:10px 12px; background:var(--primary); color:#fff; border-radius:8px; text-decoration:none; font-weight:700 }
-      .muted{ color:var(--muted); font-size:0.95rem }
-      footer{ margin-top:18px; color:#666; font-size:0.9rem }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Proyecto — Análisis de Algoritmos</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary: #7c3aed;
+  --primary-dark: #6d28d9;
+  --primary-light: #a78bfa;
+  --secondary: #06b6d4;
+  --background: #0f172a;
+  --surface: #1e293b;
+  --card: #334155;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --accent: #f59e0b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  background: var(--background);
+  color: var(--text);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.15) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px;
+  position: relative;
+  z-index: 1;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 64px;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 16px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+
+p.lead {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 32px 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  animation: fadeInUp 0.6s ease-out backwards;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+.card:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(124, 58, 237, 0.3);
+  border-color: rgba(124, 58, 237, 0.5);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border-radius: 12px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+}
+
+.card strong {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.card .muted {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  min-height: 48px;
+}
+
+.card a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+.card a:hover {
+  transform: translateX(4px);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5);
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+}
+
+.card a::after {
+  content: '→';
+  font-size: 1.2rem;
+  transition: transform 0.3s;
+}
+
+.card a:hover::after {
+  transform: translateX(4px);
+}
+
+footer {
+  text-align: center;
+  padding: 32px 24px;
+  background: var(--surface);
+  border-radius: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  animation: fadeIn 1s ease-out 0.6s backwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+footer code {
+  background: var(--card);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: 'Courier New', monospace;
+  color: var(--primary-light);
+  font-size: 0.85rem;
+  border: 1px solid rgba(167, 139, 250, 0.2);
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  p.lead {
+    font-size: 1.1rem;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .wrap {
+    padding: 40px 20px;
+  }
+}
+
+/* Scroll animations */
+@media (prefers-reduced-motion: no-preference) {
+  .card {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div>
-        <h1>Proyecto — Análisis de Algoritmos</h1>
-        <p class="lead">Selecciona un requerimiento para ver resultados o ejecutar el notebook correspondiente.</p>
-      </div>
-    </header>
+<div class="wrap">
+<header>
+<div class="badge">Análisis Computacional</div>
+<h1>Proyecto de Algoritmos</h1>
+<p class="lead">Explora cada requerimiento y descubre los resultados del análisis de complejidad y rendimiento.</p>
+</header>
 
-    <div class="grid">
-      <div class="card">
-        <strong>Requerimiento 1</strong>
-        <div class="muted">Análisis y resultados del requerimiento 1.</div>
-        <a href="proyecto/requerimiento1/index.html">Abrir R1</a>
-      </div>
+<div class="grid">
+<div class="card">
+<div class="card-number">1</div>
+<strong>Requerimiento 1</strong>
+<div class="muted">Análisis y resultados del requerimiento 1.</div>
+<a href="proyecto/requerimiento1/index.html">Ver Análisis</a>
+</div>
 
-      <div class="card">
-        <strong>Requerimiento 2</strong>
-        <div class="muted">Análisis y resultados del requerimiento 2.</div>
-        <a href="proyecto/requerimiento2/index.html">Abrir R2</a>
-      </div>
+<div class="card">
+<div class="card-number">2</div>
+<strong>Requerimiento 2</strong>
+<div class="muted">Análisis y resultados del requerimiento 2.</div>
+<a href="proyecto/requerimiento2/index.html">Ver Análisis</a>
+</div>
 
-      <div class="card">
-        <strong>Requerimiento 3</strong>
-        <div class="muted">Análisis y resultados del requerimiento 3.</div>
-        <a href="proyecto/requerimiento3/index.html">Abrir R3</a>
-      </div>
+<div class="card">
+<div class="card-number">3</div>
+<strong>Requerimiento 3</strong>
+<div class="muted">Análisis y resultados del requerimiento 3.</div>
+<a href="proyecto/requerimiento3/index.html">Ver Análisis</a>
+</div>
 
-      <div class="card">
-        <strong>Requerimiento 4</strong>
-        <div class="muted">Análisis y resultados del requerimiento 4.</div>
-        <a href="proyecto/requerimiento4/index.html">Abrir R4</a>
-      </div>
+<div class="card">
+<div class="card-number">4</div>
+<strong>Requerimiento 4</strong>
+<div class="muted">Análisis y resultados del requerimiento 4.</div>
+<a href="proyecto/requerimiento4/index.html">Ver Análisis</a>
+</div>
 
-      <div class="card">
-        <strong>Requerimiento 5</strong>
-        <div class="muted">Visualizaciones y reporte del requerimiento 5.</div>
-        <a href="proyecto/requerimiento5/index.html">Abrir R5</a>
-      </div>
-    </div>
+<div class="card">
+<div class="card-number">5</div>
+<strong>Requerimiento 5</strong>
+<div class="muted">Visualizaciones y reporte del requerimiento 5.</div>
+<a href="proyecto/requerimiento5/index.html">Ver Análisis</a>
+</div>
+</div>
 
-    <footer>
-      Archivos esperados en: <code>proyecto/requerimientoX/</code> y <code>proyecto/requerimiento5/outputs/</code>
-    </footer>
-  </div>
+</div>
 </body>
 </html>
