@@ -196,6 +196,38 @@ Si excedes estos límites, considera:
 2. Usar almacenamiento externo
 3. Actualizar a plan Pro de Vercel
 
+## Desplegar desde Otra Rama
+
+### Desplegar rama específica
+
+```bash
+# Cambiar a la rama que quieres desplegar
+git checkout nombre-de-la-rama
+
+# Desplegar como preview
+vercel
+
+# Desplegar a producción
+vercel --prod
+```
+
+### Configurar rama de producción en Vercel
+
+Si usas GitHub + Vercel:
+
+1. Ve a tu proyecto en Vercel Dashboard
+2. Settings → Git
+3. Cambia **Production Branch** de `main` a tu rama deseada
+4. Guarda los cambios
+
+### URLs por rama
+
+Vercel crea URLs automáticas para cada rama:
+
+- **Producción (main)**: `https://tu-proyecto.vercel.app`
+- **Preview (test-deploy)**: `https://tu-proyecto-git-test-deploy.vercel.app`
+- **Preview (otra-rama)**: `https://tu-proyecto-git-otra-rama.vercel.app`
+
 ## Comandos Útiles
 
 ```bash
@@ -210,6 +242,12 @@ vercel rm [deployment-url]
 
 # Ver información del proyecto
 vercel inspect
+
+# Ver en qué rama estás
+git branch
+
+# Desplegar rama actual
+vercel --prod
 ```
 
 ## Actualizar el Despliegue
