@@ -520,3 +520,4 @@ for art, score in top_influential:
 ✅ **Detección de plagio**: Encontrar artículos muy similares
 ✅ **Mapeo de conocimiento**: Visualizar estructura de un campo
 ✅ **Identificación de gaps**: Áreas poco conectadas
+prueba.
