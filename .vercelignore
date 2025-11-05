@@ -1,58 +1,6 @@
-# ============================================
-# .vercelignore - Archivos a IGNORAR en Vercel
-# ============================================
-# IMPORTANTE: Solo ignorar lo que NO se necesita en producción
-# Todo lo demás (HTML, CSS, imágenes, PDFs, etc.) se incluirá automáticamente
-
-# Python y entornos virtuales
 venv/
-env/
-ENV/
 __pycache__/
-*.py[cod]
-*.so
-*.egg
-*.egg-info/
-dist/
-build/
-
-# Notebooks Jupyter (no se necesitan en producción)
 *.ipynb
-.ipynb_checkpoints/
-
-# Archivos de configuración y desarrollo
-.git/
-.gitignore
-.env
-.env.*
-requirements.txt
-prompts.txt
-deploy.sh
-verificar_despliegue.sh
-
-# Documentación (no necesaria en producción)
-README.md
-DEPLOY.md
-ARCHIVOS_INCLUIDOS.md
-SOLUCION_DESPLIEGUE.md
-proyecto/README.md
-proyecto/requerimiento1/README.md
-proyecto/requerimiento2/README.md
-proyecto/requerimiento3/README.md
-proyecto/requerimiento4/README.md
-proyecto/requerimiento5/README.md
-
-# Archivos de seguimiento y descargas
-seguimiento/
 descargas/
-installed.txt
-
-# ============================================
-# TODO LO DEMÁS SE INCLUIRÁ AUTOMÁTICAMENTE:
-# - index.html (raíz y subdirectorios)
-# - *.css (todos los archivos de estilo)
-# - *.png, *.pdf, *.jpg (imágenes y documentos)
-# - *.json, *.csv, *.txt (datos en outputs/)
-# - *.bib (duplicados.bib)
-# - data/ y outputs/ (carpetas completas)
-# ============================================
+seguimiento/
+.git/
