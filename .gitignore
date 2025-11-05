@@ -6,9 +6,16 @@
 
 # Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.so
 venv/
+env/
+ENV/
+*.egg
 *.egg-info/
+dist/
+build/
 
 # Jupyter
 .ipynb_checkpoints/
@@ -16,8 +23,14 @@ venv/
 # Sistema
 .DS_Store
 Thumbs.db
+*.swp
+*.swo
+*~
 
 # IDEs
 .vscode/
 .idea/
+*.sublime-*
+
+# Vercel
 .vercel
