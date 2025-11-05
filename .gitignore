@@ -1,195 +1,23 @@
-# ============================================================================
-# Proyecto de Análisis Bibliométrico - Universidad del Quindío
-# ============================================================================
-
-# ============================================================================
-# ARCHIVOS SENSIBLES Y CREDENCIALES
-# ============================================================================
+# Archivos sensibles
 .env
-.env.local
-.env.*.local
+.env.*
 *.key
 *.pem
-credentials.json
-config/secrets.yaml
 
-# ============================================================================
-# ENTORNOS VIRTUALES DE PYTHON
-# ============================================================================
-venv/
-env/
-ENV/
-.venv/
-.virtualenv/
-*.egg-info/
-dist/
-build/
-
-# ============================================================================
-# ARCHIVOS DE PYTHON
-# ============================================================================
+# Python
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-*.egg
+*.pyc
+venv/
 *.egg-info/
-.pytest_cache/
-.coverage
-htmlcov/
-.tox/
-.hypothesis/
-*.cover
-*.log
 
-# ============================================================================
-# JUPYTER NOTEBOOKS
-# ============================================================================
+# Jupyter
 .ipynb_checkpoints/
-*/.ipynb_checkpoints/*
-*.ipynb_checkpoints
 
-# ============================================================================
-# DATOS Y DESCARGAS (archivos grandes)
-# ============================================================================
-# Archivos BibTeX descargados (solo carpeta descargas)
-descargas/*.bib
-data/raw/**/*.bib
-data/raw/**/*.ris
-data/raw/**/*.csv
-
-# Archivos procesados grandes
-data/processed/*.bib
-!data/processed/.gitkeep
-
-# Archivos temporales de descarga
-*.crdownload
-*.tmp
-*.temp
-
-# EXCEPCIONES: Permitir archivos necesarios para visualización web
-# Requerimiento 1: duplicados
-!duplicados/*.bib
-
-# Requerimiento 2: outputs
-!proyecto/requerimiento2/outputs/*.csv
-!proyecto/requerimiento2/outputs/*.png
-!proyecto/requerimiento2/outputs/*.json
-!proyecto/requerimiento2/outputs/*.txt
-
-# Requerimiento 3: archivos en raíz
-!proyecto/requerimiento3/*.csv
-!proyecto/requerimiento3/*.png
-
-# Requerimiento 4: archivos en raíz
-!proyecto/requerimiento4/*.png
-
-# Requerimiento 5: data y outputs
-!proyecto/requerimiento5/data/*.csv
-!proyecto/requerimiento5/outputs/*.png
-!proyecto/requerimiento5/outputs/*.pdf
-
-# ============================================================================
-# SALIDAS Y RESULTADOS
-# ============================================================================
-# Excluir carpetas generales de salidas
-salidas/
-resultados/
-# Pero permitir outputs de los requerimientos (ya especificados arriba)
-
-# ============================================================================
-# LOGS Y METADATOS
-# ============================================================================
-*.log
-logs/
-*.log.*
-data/metadata/*.json
-!data/metadata/.gitkeep
-
-# ============================================================================
-# SISTEMA OPERATIVO
-# ============================================================================
-# macOS
+# Sistema
 .DS_Store
-.AppleDouble
-.LSOverride
-._*
-
-# Linux
-*~
-.directory
-.Trash-*
-
-# Windows
 Thumbs.db
-Thumbs.db:encryptable
-ehthumbs.db
-ehthumbs_vista.db
-Desktop.ini
-$RECYCLE.BIN/
 
-# ============================================================================
-# IDEs Y EDITORES
-# ============================================================================
-# VSCode
+# IDEs
 .vscode/
-*.code-workspace
-
-# PyCharm
 .idea/
-*.iml
-*.iws
-*.ipr
-
-# Sublime Text
-*.sublime-.roject
-*.sublime-workspace
-
-# Vim
-*.swp
-*.swo
-*~
-
-# Emacs
-*~
-\#*\#
-.\#*
-
-# ============================================================================
-# HERRAMIENTAS DE DESARROLLO
-# ============================================================================
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# pytest
-.pytest_cache/
-
-# coverage
-.coverage
-.coverage.*
-htmlcov/
-
-# ============================================================================
-# ARCHIVOS ESPECÍFICOS DEL PROYECTO
-# ============================================================================
-# Duplicados: permitidos arriba en la sección de excepciones
-
-# Archivos de ChromeDriver y Selenium
-chromedriver
-geckodriver
-*.exe
-
-# Archivos temporales de procesamiento
-temp/
-tmp/
-cache/
-
-# ============================================================================
-# MANTENER ESTRUCTURA DE CARPETAS VACÍAS
-# ============================================================================
-# Usar archivos .gitkeep para mantener carpetas vacías en el repo
-!**/.gitkeep
 .vercel
