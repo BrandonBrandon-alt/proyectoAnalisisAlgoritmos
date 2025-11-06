@@ -1,0 +1,13 @@
+{
+  "updates": [
+    {
+      "timestamp": "2025-11-05T18:54:15.383869",
+      "new_records": 500,
+      "total_records": 500,
+      "new_countries_identified": 500,
+      "new_terms_added": 66326
+    }
+  ],
+  "last_record_count": 500,
+  "last_update": "2025-11-05T18:54:15.383896"
+}
