@@ -238,9 +238,29 @@ code {
     <h1>Requerimiento 5 — Visualizaciones y Reportes</h1>
     <p class="lead">Pulsa el botón para cargar los resultados generados por el notebook (archivos esperados en la carpeta del proyecto).</p>
 
-    <div>
+    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
         <button id="loadBtn">Cargar resultados</button>
+        <button id="refreshBtn" style="background: linear-gradient(135deg, var(--secondary), #0891b2); box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);" disabled>🔄 Actualizar visualizaciones</button>
         <span id="msg" class="muted" style="margin-left:12px"></span>
+    </div>
+    
+    <div id="updateInfo" style="margin-top: 16px; padding: 12px; background: var(--card); border-radius: 10px; border: 1px solid rgba(148, 163, 184, 0.1); display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <div>
+                <span class="muted">📊 Última actualización:</span>
+                <strong id="lastUpdate" style="margin-left: 8px; color: var(--primary-light);">-</strong>
+            </div>
+            <div>
+                <span class="muted">📝 Registros totales:</span>
+                <strong id="totalRecords" style="margin-left: 8px; color: var(--secondary);">-</strong>
+            </div>
+            <div>
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="checkbox" id="autoRefresh" style="cursor: pointer;">
+                    <span class="muted">Auto-actualizar cada 30s</span>
+                </label>
+            </div>
+        </div>
     </div>
 
     <div class="grid">
@@ -264,19 +284,28 @@ code {
                 <strong>Visualizaciones</strong>
                 <div id="visuals" style="margin-top:8px">
                     <div id="mapContainer" style="margin-bottom:12px;">
-                        <div class="muted">Mapa de países (mapa_paises.png)</div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <div class="muted">Mapa de países (mapa_paises.png)</div>
+                            <span id="mapTimestamp" class="muted" style="font-size: 0.8rem;"></span>
+                        </div>
                         <img id="mapImg" class="preview" alt="Mapa de países" style="display:none" />
                         <div id="mapMsg" class="muted" style="margin-top:6px"></div>
                     </div>
 
                     <div id="cloudContainer" style="margin-bottom:12px;">
-                        <div class="muted">Nube de palabras (nube_palabras.png)</div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <div class="muted">Nube de palabras (nube_palabras.png)</div>
+                            <span id="cloudTimestamp" class="muted" style="font-size: 0.8rem;"></span>
+                        </div>
                         <img id="cloudImg" class="preview" alt="Nube de palabras" style="display:none" />
                         <div id="cloudMsg" class="muted" style="margin-top:6px"></div>
                     </div>
 
                     <div id="timelineContainer" style="margin-bottom:12px;">
-                        <div class="muted">Línea temporal (linea_tiempo_by_source.png)</div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <div class="muted">Línea temporal (linea_tiempo_by_source.png)</div>
+                            <span id="timelineTimestamp" class="muted" style="font-size: 0.8rem;"></span>
+                        </div>
                         <img id="timelineImg" class="preview" alt="Línea temporal" style="display:none" />
                         <div id="timelineMsg" class="muted" style="margin-top:6px"></div>
                         <div style="margin-top:6px;">
@@ -316,6 +345,10 @@ code {
         function log(...args){ logEl.textContent = args.join(' ') + "\n\n" + logEl.textContent; }
 
         function showMsg(text){ document.getElementById('msg').textContent = text; }
+        
+        let autoRefreshInterval = null;
+        let lastRecordCount = 0;
+        let isLoaded = false;
 
         async function fetchText(path){
             try{
@@ -505,11 +538,116 @@ code {
 
                 log('Carga finalizada.');
                 showMsg('Carga finalizada.');
+                
+                // Habilitar botón de actualización y mostrar info
+                document.getElementById('refreshBtn').disabled = false;
+                document.getElementById('updateInfo').style.display = 'block';
+                document.getElementById('lastUpdate').textContent = new Date().toLocaleString('es-ES');
+                document.getElementById('totalRecords').textContent = recordsText ? parseCSVSimple(recordsText).rows.length : '0';
+                lastRecordCount = recordsText ? parseCSVSimple(recordsText).rows.length : 0;
+                isLoaded = true;
+                
             } catch(err){
                 log('Error general:', err.message);
                 showMsg('Error: ' + err.message);
             } finally {
                 btn.disabled = false;
+            }
+        });
+        
+        // Función para actualizar visualizaciones
+        async function refreshVisualizations() {
+            if (!isLoaded) return;
+            
+            log('🔄 Actualizando visualizaciones...');
+            showMsg('Actualizando...');
+            
+            try {
+                // Verificar si hay nuevos registros
+                const recordsText = await fetchText(paths.records);
+                const records = parseCSVSimple(recordsText);
+                const currentCount = records.rows.length;
+                
+                if (currentCount !== lastRecordCount) {
+                    log(`✨ Detectados ${currentCount - lastRecordCount} nuevos registros`);
+                    lastRecordCount = currentCount;
+                    document.getElementById('totalRecords').textContent = currentCount;
+                }
+                
+                // Recargar imágenes con timestamp para evitar caché
+                const timestamp = new Date().getTime();
+                
+                const mapImg = document.getElementById('mapImg');
+                const cloudImg = document.getElementById('cloudImg');
+                const timelineImg = document.getElementById('timelineImg');
+                
+                // Verificar y actualizar mapa
+                if (await checkImage(paths.mapa)) {
+                    mapImg.src = paths.mapa + '?t=' + timestamp;
+                    mapImg.style.display = 'block';
+                    document.getElementById('mapMsg').textContent = '';
+                    document.getElementById('mapTimestamp').textContent = '🕐 ' + new Date().toLocaleTimeString('es-ES');
+                    log('✅ Mapa actualizado');
+                }
+                
+                // Verificar y actualizar nube de palabras
+                if (await checkImage(paths.nube)) {
+                    cloudImg.src = paths.nube + '?t=' + timestamp;
+                    cloudImg.style.display = 'block';
+                    document.getElementById('cloudMsg').textContent = '';
+                    document.getElementById('cloudTimestamp').textContent = '🕐 ' + new Date().toLocaleTimeString('es-ES');
+                    log('✅ Nube de palabras actualizada');
+                }
+                
+                // Verificar y actualizar línea temporal
+                if (await checkImage(paths.timeline_png)) {
+                    timelineImg.src = paths.timeline_png + '?t=' + timestamp;
+                    timelineImg.style.display = 'block';
+                    document.getElementById('timelineMsg').textContent = '';
+                    document.getElementById('timelineTimestamp').textContent = '🕐 ' + new Date().toLocaleTimeString('es-ES');
+                    log('✅ Línea temporal actualizada');
+                }
+                
+                // Actualizar timestamp general
+                document.getElementById('lastUpdate').textContent = new Date().toLocaleString('es-ES');
+                
+                // Recargar datos de países
+                const cacheText = await fetchText(paths.cache);
+                const cache = parseCSVSimple(cacheText);
+                const top = topCounts(cache.rows, 'country', 12);
+                
+                if(top.length) {
+                    const topContainer = document.getElementById('topCountries');
+                    topContainer.innerHTML = '<table><thead><tr><th>País</th><th>Publicaciones</th></tr></thead><tbody>'
+                        + top.map(t => `<tr><td>${t[0]}</td><td>${t[1]}</td></tr>`).join('')
+                        + '</tbody></table>';
+                }
+                
+                log('✅ Actualización completada');
+                showMsg('Actualizado: ' + new Date().toLocaleTimeString('es-ES'));
+                
+            } catch(err) {
+                log('❌ Error al actualizar:', err.message);
+                showMsg('Error en actualización');
+            }
+        }
+        
+        // Botón de actualización manual
+        document.getElementById('refreshBtn').addEventListener('click', refreshVisualizations);
+        
+        // Auto-actualización
+        document.getElementById('autoRefresh').addEventListener('change', function() {
+            if (this.checked) {
+                log('🔄 Auto-actualización activada (cada 30 segundos)');
+                autoRefreshInterval = setInterval(refreshVisualizations, 30000);
+                showMsg('Auto-actualización activada');
+            } else {
+                log('⏸️ Auto-actualización desactivada');
+                if (autoRefreshInterval) {
+                    clearInterval(autoRefreshInterval);
+                    autoRefreshInterval = null;
+                }
+                showMsg('Auto-actualización desactivada');
             }
         });
     </script>
