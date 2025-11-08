@@ -272,14 +272,21 @@ code {
     </div>
 
     <div class="grid">
-        <!-- Fila 0: Resumen (fusionada) -->
+        <!-- Fila 0: Resumen -->
         <div id="summary" class="card full-width">
             <strong>Resumen del Análisis</strong>
             <div class="status" id="summaryText">No se ha cargado ningún archivo todavía.</div>
             <div id="counts" style="margin-top:8px"></div>
         </div>
 
-        <!-- Fila 1: Top 15 -->
+        <!-- NUEVA TARJETA: Coincidencias -->
+        <div id="matchCard" class="card full-width" style="display:none;">
+            <strong>Coincidencias entre textos</strong>
+            <div class="status" id="matchSummary">No se han cargado coincidencias.</div>
+            <div id="matchList" style="margin-top:12px;"></div>
+        </div>
+
+        <!-- Top 15 -->
         <div id="top15Card" class="card" style="display:none;">
             <strong>Top 15 Palabras Más Frecuentes</strong>
             <div class="table-container">
@@ -296,7 +303,7 @@ code {
             <div id="top15Msg" class="muted" style="margin-top:6px"></div>
         </div>
 
-        <!-- Fila 2: Categorías -->
+        <!-- Categorías -->
         <div id="categoriesCard" class="card" style="display:none;">
             <strong>Frecuencias por Categoría</strong>
             <div class="table-container">
@@ -313,7 +320,7 @@ code {
             <div id="categoriesMsg" class="muted" style="margin-top:6px"></div>
         </div>
 
-        <!-- Fila 3: Logs (fusionada) -->
+        <!-- Logs -->
         <div class="card full-width">
             <strong>Logs</strong>
             <pre id="log" style="height:180px">Esperando acción...</pre>
@@ -321,18 +328,16 @@ code {
     </div>
 
     <script>
-        // Rutas relativas desde este archivo (requerimiento3/index.html)
-        // Todos los archivos están en la misma carpeta del HTML
         const paths = {
             freqCategories: './frecuencias_palabras_categoria.csv',
             top15: './top15_palabras_frecuentes.csv',
             imgCategories: './frecuencia_palabras_categoria.png',
-            imgTop15: './top15_palabras.png'
+            imgTop15: './top15_palabras.png',
+            coincidencias: './resultados_coincidencias.json' // Nuevo archivo
         };
 
         const logEl = document.getElementById('log');
         function log(...args){ logEl.textContent = args.join(' ') + "\n\n" + logEl.textContent; }
-
         function showMsg(text){ document.getElementById('msg').textContent = text; }
 
         async function fetchText(path){
@@ -381,29 +386,24 @@ code {
             log('Inicio de carga de resultados');
             
             try{
-                // Fetch top15_palabras_frecuentes.csv
-                let top15Text=null;
-                try{
-                    top15Text = await fetchText(paths.top15);
-                    log('top15_palabras_frecuentes.csv cargado:', paths.top15);
-                } catch(e){
-                    log(e.message);
-                }
+                // CSVs
+                let top15Text=null, categoriesText=null;
+                try{ top15Text = await fetchText(paths.top15); log('top15_palabras_frecuentes.csv cargado'); }catch(e){ log(e.message); }
+                try{ categoriesText = await fetchText(paths.freqCategories); log('frecuencias_palabras_categoria.csv cargado'); }catch(e){ log(e.message); }
 
-                // Fetch frecuencia_palabras_categoria.csv
-                let categoriesText=null;
+                // JSON de coincidencias
+                let coincidenciasData = null;
                 try{
-                    categoriesText = await fetchText(paths.freqCategories);
-                    log('frecuencias_palabras_categoria.csv cargado:', paths.freqCategories);
-                } catch(e){
-                    log(e.message);
-                }
+                    const res = await fetch(paths.coincidencias);
+                    if(res.ok){ coincidenciasData = await res.json(); log('resultados_coincidencias.json cargado'); }
+                    else log('Archivo de coincidencias no encontrado');
+                }catch(e){ log('Error cargando coincidencias:', e.message); }
 
-                // Check images
+                // Imágenes
                 const top15ImgOk = await checkImage(paths.imgTop15);
                 const categoriesImgOk = await checkImage(paths.imgCategories);
 
-                // Update summary
+                // === Resumen ===
                 const summaryEl = document.getElementById('summaryText');
                 if(!top15Text && !categoriesText){
                     summaryEl.textContent = 'No se encontraron los archivos CSV en la ruta esperada.';
@@ -411,19 +411,27 @@ code {
                 } else {
                     let top15Data = {headers:[], rows:[]};
                     let categoriesData = {headers:[], rows:[]};
-                    
                     if(top15Text) top15Data = parseCSVSimple(top15Text);
                     if(categoriesText) categoriesData = parseCSVSimple(categoriesText);
-
-                    const totalTop15 = top15Data.rows.length;
-                    const totalCategories = categoriesData.rows.length;
-
-                    summaryEl.innerHTML = `Top 15 palabras cargadas: <strong>${totalTop15}</strong><br>Categorías analizadas: <strong>${totalCategories}</strong>`;
-                    const countsEl = document.getElementById('counts');
-                    countsEl.innerHTML = `<div class="muted">Todos los archivos deben estar en la misma carpeta que este HTML.</div>`;
+                    summaryEl.innerHTML = `Top 15 palabras cargadas: <strong>${top15Data.rows.length}</strong><br>Categorías analizadas: <strong>${categoriesData.rows.length}</strong>`;
+                    document.getElementById('counts').innerHTML = `<div class="muted">Todos los archivos deben estar en la misma carpeta que este HTML.</div>`;
                 }
 
-                // Process Top 15
+                // === Coincidencias ===
+                const matchCard = document.getElementById('matchCard');
+                const matchSummary = document.getElementById('matchSummary');
+                const matchList = document.getElementById('matchList');
+                if (coincidenciasData) {
+                    matchCard.style.display = 'block';
+                    matchSummary.innerHTML = `Porcentaje de coincidencia: <strong>${coincidenciasData.precision}%</strong>`;
+                    matchList.innerHTML = `<div class="muted">Coincidencias encontradas:</div><ul style="margin-top:6px; margin-left:20px;">` +
+                        coincidenciasData.coincidencias.map(c => `<li>${c}</li>`).join('') +
+                        `</ul>`;
+                } else {
+                    matchCard.style.display = 'none';
+                }
+
+                // === Top 15 ===
                 const top15Card = document.getElementById('top15Card');
                 const top15Container = document.getElementById('top15Words');
                 const top15Link = document.getElementById('top15Link');
@@ -436,28 +444,18 @@ code {
                     top15Card.style.display = 'block';
                     const headers = top15Data.headers;
                     top15Container.innerHTML = '<table><thead><tr>' 
-                        + headers.map(h => `<th>${h}</th>`).join('')
-                        + '</tr></thead><tbody>'
-                        + top15Data.rows.map(r => '<tr>' + headers.map(h => `<td>${r[h] || ''}</td>`).join('') + '</tr>').join('')
-                        + '</tbody></table>';
-                    
+                        + headers.map(h => `<th>${h}</th>`).join('') +
+                        '</tr></thead><tbody>' +
+                        top15Data.rows.map(r => '<tr>' + headers.map(h => `<td>${r[h] || ''}</td>`).join('') + '</tr>').join('') +
+                        '</tbody></table>';
                     top15Link.href = paths.top15;
                     top15Link.style.display = 'inline-block';
-                } else {
-                    top15Card.style.display = 'none';
-                }
+                } else top15Card.style.display = 'none';
 
-                if(top15ImgOk){
-                    top15ImgCard.style.display = 'block';
-                    top15Img.src = paths.imgTop15;
-                    top15Img.style.display = 'block';
-                    top15ImgMsg.textContent = '';
-                } else {
-                    top15ImgCard.style.display = 'none';
-                    top15ImgMsg.textContent = 'Imagen no encontrada: ' + paths.imgTop15;
-                }
+                if(top15ImgOk){ top15ImgCard.style.display='block'; top15Img.src=paths.imgTop15; top15Img.style.display='block'; top15ImgMsg.textContent=''; }
+                else { top15ImgCard.style.display='none'; top15ImgMsg.textContent='Imagen no encontrada'; }
 
-                // Process Categories
+                // === Categorías ===
                 const categoriesCard = document.getElementById('categoriesCard');
                 const categoriesContainer = document.getElementById('categoriesTable');
                 const categoriesLink = document.getElementById('categoriesLink');
@@ -469,27 +467,17 @@ code {
                     const categoriesData = parseCSVSimple(categoriesText);
                     categoriesCard.style.display = 'block';
                     const headers = categoriesData.headers;
-                    categoriesContainer.innerHTML = '<table><thead><tr>' 
-                        + headers.map(h => `<th>${h}</th>`).join('')
-                        + '</tr></thead><tbody>'
-                        + categoriesData.rows.map(r => '<tr>' + headers.map(h => `<td>${r[h] || ''}</td>`).join('') + '</tr>').join('')
-                        + '</tbody></table>';
-                    
+                    categoriesContainer.innerHTML = '<table><thead><tr>' +
+                        headers.map(h => `<th>${h}</th>`).join('') +
+                        '</tr></thead><tbody>' +
+                        categoriesData.rows.map(r => '<tr>' + headers.map(h => `<td>${r[h] || ''}</td>`).join('') + '</tr>').join('') +
+                        '</tbody></table>';
                     categoriesLink.href = paths.freqCategories;
                     categoriesLink.style.display = 'inline-block';
-                } else {
-                    categoriesCard.style.display = 'none';
-                }
+                } else categoriesCard.style.display = 'none';
 
-                if(categoriesImgOk){
-                    categoriesImgCard.style.display = 'block';
-                    categoriesImg.src = paths.imgCategories;
-                    categoriesImg.style.display = 'block';
-                    categoriesImgMsg.textContent = '';
-                } else {
-                    categoriesImgCard.style.display = 'none';
-                    categoriesImgMsg.textContent = 'Imagen no encontrada: ' + paths.imgCategories;
-                }
+                if(categoriesImgOk){ categoriesImgCard.style.display='block'; categoriesImg.src=paths.imgCategories; categoriesImg.style.display='block'; categoriesImgMsg.textContent=''; }
+                else { categoriesImgCard.style.display='none'; categoriesImgMsg.textContent='Imagen no encontrada'; }
 
                 log('Carga finalizada.');
                 showMsg('Carga finalizada.');
