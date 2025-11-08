@@ -154,6 +154,25 @@ button:disabled {
   transition: transform 0.3s;
 }
 
+/* Prevent very large generated images from breaking the layout */
+.preview {
+    max-height: 560px; /* limit height */
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Ensure large generated images don't break the layout. Use responsive sizing
+     and contain the image within a reasonable max-height. */
+.preview {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    max-height: 640px; /* limit extreme tall images */
+    object-fit: contain;
+}
+
 .preview:hover {
   transform: scale(1.02);
 }
@@ -243,6 +262,14 @@ code {
         <button id="refreshBtn" style="background: linear-gradient(135deg, var(--secondary), #0891b2); box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);" disabled>🔄 Actualizar visualizaciones</button>
         <span id="msg" class="muted" style="margin-left:12px"></span>
     </div>
+
+    <!-- Upload and regenerate controls -->
+    <div style="display:flex; gap:8px; align-items:center; margin-top:12px;">
+        <input id="bibFile" type="file" accept=".bib" style="padding:6px; background:var(--card); color:var(--text); border-radius:8px;" />
+        <button id="uploadBibBtn" style="background: linear-gradient(135deg, #f97316, #ef4444); box-shadow: 0 4px 10px rgba(239,68,68,0.2);">📤 Subir .bib</button>
+        <button id="runCloudBtn" style="background: linear-gradient(135deg, #06b6d4, #0891b2); box-shadow: 0 4px 10px rgba(6,182,212,0.2);">☁️ Generar nube</button>
+        <span id="uploadMsg" class="muted" style="margin-left:12px">Seleccione un archivo .bib y pulse «Subir .bib»</span>
+    </div>
     
     <div id="updateInfo" style="margin-top: 16px; padding: 12px; background: var(--card); border-radius: 10px; border: 1px solid rgba(148, 163, 184, 0.1); display: none;">
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
@@ -260,6 +287,11 @@ code {
                     <span class="muted">Auto-actualizar cada 30s</span>
                 </label>
             </div>
+        </div>
+        <div style="margin-top:10px; font-size:0.9rem; color:var(--text-muted);">
+            <span class="muted">Fuente de datos:</span>
+            <code id="recordsSource" style="margin-left:8px; color:var(--primary-light);">-</code>
+            <span id="recordsMeta" style="margin-left:12px; color:var(--text-muted);">-</span>
         </div>
     </div>
 
@@ -329,8 +361,18 @@ code {
     </div>
 
     <script>
-        // Rutas relativas desde este archivo (requerimiento5/index.html)
-        // Los archivos generados por el notebook se colocan en la carpeta `outputs/`
+    // Rutas relativas desde este archivo (requerimiento5/index.html)
+    // Los archivos generados por el notebook se colocan en la carpeta `outputs/`
+    // Dirección pública del backend (Render). Este valor se usa SOLO para las
+    // llamadas de acción (POST): /api/upload_bib y /api/run_wordcloud.
+    // Los ficheros estáticos como `data/` y `outputs/` se consideran locales y
+    // se cargarán desde el mismo origen que sirve esta página (rutas relativas).
+    const API_BACKEND = 'https://backend-proyecto-analisis-algoritmos.onrender.com';
+    const apiBase = API_BACKEND || ((location.protocol && location.protocol.startsWith('http')) ? location.origin : '');
+    // staticBase queda vacío por defecto: las rutas relativas (p.ej. 'outputs/nube.png')
+    // se resolverán desde el origen que sirva esta página.
+    const staticBase = '';
+
         const paths = {
             records: 'data/records.csv',
             cache: 'data/country_lookup.csv',
@@ -340,6 +382,16 @@ code {
             timeline_pdf: 'outputs/linea_tiempo_by_source.pdf',
             report: 'outputs/requerimiento5_report.pdf'
         };
+
+        function resolvePath(p){
+            if(!p) return p;
+            // absolute URL or already starting with / -> return as-is
+            if(p.startsWith('http') || p.startsWith('/')) return p;
+            // For static files (data/, outputs/) we keep relative paths so they
+            // are requested from the same origin that serves this page.
+            // This ensures `records.csv` and `country_lookup.csv` remain local.
+            return staticBase ? (staticBase + p) : p;
+        }
 
         const logEl = document.getElementById('log');
         function log(...args){ logEl.textContent = args.join(' ') + "\n\n" + logEl.textContent; }
@@ -351,12 +403,16 @@ code {
         let isLoaded = false;
 
         async function fetchText(path){
+            // Append cache-buster so we don't get stale copies of records/frequencies
+            let p = resolvePath(path);
+            const ts = new Date().getTime();
+            if(p.indexOf('?') === -1) p = p + '?t=' + ts; else p = p + '&t=' + ts;
             try{
-                const res = await fetch(path);
+                const res = await fetch(p);
                 if(!res.ok) throw new Error('HTTP ' + res.status);
                 return await res.text();
             } catch(e){
-                throw new Error(`No disponible: ${path} (${e.message})`);
+                throw new Error(`No disponible: ${p} (${e.message})`);
             }
         }
 
@@ -384,6 +440,46 @@ code {
             return {headers, rows};
         }
 
+    // Helper: update total records and lastUpdate from records.csv
+        async function updateCountsFromRecords(){
+            try{
+                const resolved = resolvePath(paths.records);
+                document.getElementById('recordsSource').textContent = resolved;
+
+                // Try to fetch HEAD to get metadata (last-modified, size)
+                try{
+                    const head = await fetch(resolved, { method: 'HEAD' });
+                    if(head.ok){
+                        const lm = head.headers.get('last-modified');
+                        const cl = head.headers.get('content-length');
+                        const metaParts = [];
+                        if(lm) metaParts.push('mod: ' + new Date(lm).toLocaleString('es-ES'));
+                        if(cl) metaParts.push('size: ' + (Math.round(Number(cl)/1024)) + ' KB');
+                        document.getElementById('recordsMeta').textContent = metaParts.join(' | ');
+                    } else {
+                        document.getElementById('recordsMeta').textContent = '';
+                    }
+                }catch(e){
+                    // ignore
+                    document.getElementById('recordsMeta').textContent = '';
+                }
+
+                const recordsText = await fetchText(paths.records);
+                const parsed = parseCSVSimple(recordsText);
+                const total = parsed.rows.length;
+                document.getElementById('totalRecords').textContent = total;
+                lastRecordCount = total;
+                document.getElementById('updateInfo').style.display = 'block';
+                document.getElementById('lastUpdate').textContent = new Date().toLocaleString('es-ES');
+                log('Conteo actualizado a', total);
+                return total;
+            } catch(e){
+                // if records not available, don't fail
+                log('No se pudo leer records.csv para actualizar conteo:', e.message);
+                return null;
+            }
+        }
+
         function topCounts(items, key, topN=10){
             const counts = {};
             items.forEach(it => {
@@ -395,13 +491,68 @@ code {
             return arr;
         }
 
+        // Use an <img> probe to check if an image URL exists.
+        // This avoids CORS/preflight issues that appear when using fetch HEAD from browsers.
         async function checkImage(url){
-            try{
-                const r = await fetch(url, {method:'HEAD'});
-                return r.ok;
-            }catch(e){
-                return false;
+            const p = resolvePath(url);
+            return new Promise((resolve) => {
+                try{
+                    const img = new Image();
+                    // Add cache-buster
+                    const sep = p.indexOf('?') === -1 ? '?' : '&';
+                    img.onload = function(){ resolve(true); };
+                    img.onerror = function(){ resolve(false); };
+                    img.src = p + sep + 't=' + (new Date().getTime());
+                }catch(e){ resolve(false); }
+            });
+        }
+
+        // If the backend exposes a direct image endpoint, prefer it for the cloud.
+        function remoteCloudUrl(){
+            // Prefer the explicit /api/image endpoint if available on the backend.
+            if(API_BACKEND){
+                return API_BACKEND.replace(/\/$/, '') + '/api/image';
             }
+            return null;
+        }
+
+        // Probe a set of candidate remote URLs and return the first reachable one.
+        async function findRemoteCloud(){
+            if(!API_BACKEND) return null;
+            const base = API_BACKEND.replace(/\/$/, '');
+            const candidates = [
+                base + '/api/image',
+                base + '/outputs/nube_palabras.png',
+                base + '/api/outputs/nube_palabras.png',
+                base + '/image',
+                base + '/outputs/nube_palabras.PNG'
+            ];
+            for(const c of candidates){
+                try{
+                    const ok = await checkImage(c);
+                    if(ok) return c;
+                }catch(e){
+                    // ignore
+                }
+            }
+            return null;
+        }
+
+        // Probe a named output file on the remote backend (e.g. timeline image)
+        async function findRemoteOutput(name){
+            if(!API_BACKEND) return null;
+            const base = API_BACKEND.replace(/\/$/, '');
+            const candidates = [
+                base + '/outputs/' + name,
+                base + '/api/outputs/' + name,
+            ];
+            for(const c of candidates){
+                try{
+                    const ok = await checkImage(c);
+                    if(ok) return c;
+                }catch(e){ }
+            }
+            return null;
         }
 
         document.getElementById('loadBtn').addEventListener('click', async function(){
@@ -435,12 +586,12 @@ code {
                 const timelineOk = await checkImage(paths.timeline_png);
                 let reportOk = false;
                 try {
-                    const r = await fetch(paths.report, {method:'HEAD'});
+                    const r = await fetch(resolvePath(paths.report), {method:'HEAD'});
                     reportOk = r.ok;
                 } catch(e){ reportOk = false; }
                 let timelinePdfOk = false;
                 try {
-                    const r2 = await fetch(paths.timeline_pdf, {method:'HEAD'});
+                    const r2 = await fetch(resolvePath(paths.timeline_pdf), {method:'HEAD'});
                     timelinePdfOk = r2.ok;
                 } catch(e){ timelinePdfOk = false; }
 
@@ -492,7 +643,7 @@ code {
                 const timelinePdfLink = document.getElementById('timelinePdfLink');
 
                 if(mapaOk){
-                    mapImg.src = paths.mapa;
+                    mapImg.src = resolvePath(paths.mapa) + '?t=' + new Date().getTime();
                     mapImg.style.display = 'block';
                     mapMsg.textContent = '';
                 } else {
@@ -500,26 +651,42 @@ code {
                     mapMsg.textContent = 'Mapa no encontrado en: ' + paths.mapa;
                 }
 
-                if(nubeOk){
-                    cloudImg.src = paths.nube;
+                // Prefer the canonical remote image endpoint '/api/image' on the backend.
+                const remoteApiImage = API_BACKEND ? API_BACKEND.replace(/\/$/, '') + '/api/image' : null;
+                let remote = null;
+                if(remoteApiImage){
+                    try{ if(await checkImage(remoteApiImage)) remote = remoteApiImage; }catch(e){}
+                }
+                // If the canonical endpoint isn't available, try other candidates.
+                if(!remote){ remote = await findRemoteCloud(); }
+                if(remote){
+                    cloudImg.src = remote + '?t=' + new Date().getTime();
                     cloudImg.style.display = 'block';
-                    cloudMsg.textContent = '';
+                    cloudMsg.textContent = '(desde backend remoto)';
                 } else {
                     cloudImg.style.display = 'none';
-                    cloudMsg.textContent = 'Nube no encontrada en: ' + paths.nube;
+                    cloudMsg.textContent = 'Nube remota no disponible en backend';
                 }
 
                 if(timelineOk){
-                    timelineImg.src = paths.timeline_png;
+                    timelineImg.src = resolvePath(paths.timeline_png) + '?t=' + new Date().getTime();
                     timelineImg.style.display = 'block';
                     timelineMsg.textContent = '';
                 } else {
-                    timelineImg.style.display = 'none';
-                    timelineMsg.textContent = 'Línea temporal no encontrada en: ' + paths.timeline_png;
+                    // Try remote timeline image on backend before giving up
+                    const remoteTimeline = await findRemoteOutput('linea_tiempo_by_source.png');
+                    if(remoteTimeline){
+                        timelineImg.src = remoteTimeline + '?t=' + new Date().getTime();
+                        timelineImg.style.display = 'block';
+                        timelineMsg.textContent = '(desde backend remoto)';
+                    } else {
+                        timelineImg.style.display = 'none';
+                        timelineMsg.textContent = 'Línea temporal no encontrada en: ' + paths.timeline_png;
+                    }
                 }
 
                 if(timelinePdfOk){
-                    timelinePdfLink.href = paths.timeline_pdf;
+                    timelinePdfLink.href = resolvePath(paths.timeline_pdf);
                     timelinePdfLink.style.display = 'inline-block';
                     timelinePdfLink.textContent = 'Abrir línea temporal (PDF)';
                 } else {
@@ -527,7 +694,7 @@ code {
                 }
 
                 if(reportOk){
-                    reportLink.href = paths.report;
+                    reportLink.href = resolvePath(paths.report);
                     reportLink.style.display = 'inline-block';
                     reportLink.textContent = 'Abrir informe (requerimiento5_report.pdf)';
                     pdfMsg.textContent = '';
@@ -583,25 +750,32 @@ code {
                 
                 // Verificar y actualizar mapa
                 if (await checkImage(paths.mapa)) {
-                    mapImg.src = paths.mapa + '?t=' + timestamp;
+                    mapImg.src = resolvePath(paths.mapa) + '?t=' + timestamp;
                     mapImg.style.display = 'block';
                     document.getElementById('mapMsg').textContent = '';
                     document.getElementById('mapTimestamp').textContent = '🕐 ' + new Date().toLocaleTimeString('es-ES');
                     log('✅ Mapa actualizado');
                 }
                 
-                // Verificar y actualizar nube de palabras
-                if (await checkImage(paths.nube)) {
-                    cloudImg.src = paths.nube + '?t=' + timestamp;
+                // Verificar y actualizar nube de palabras — preferir el endpoint canónico '/api/image'.
+                const remoteApiImage2 = API_BACKEND ? API_BACKEND.replace(/\/$/, '') + '/api/image' : null;
+                let remoteNow = null;
+                if(remoteApiImage2){ try{ if(await checkImage(remoteApiImage2)) remoteNow = remoteApiImage2; }catch(e){} }
+                if(!remoteNow){ remoteNow = await findRemoteCloud(); }
+                if(remoteNow){
+                    cloudImg.src = remoteNow + '?t=' + timestamp;
                     cloudImg.style.display = 'block';
-                    document.getElementById('cloudMsg').textContent = '';
+                    document.getElementById('cloudMsg').textContent = '(desde backend remoto)';
                     document.getElementById('cloudTimestamp').textContent = '🕐 ' + new Date().toLocaleTimeString('es-ES');
-                    log('✅ Nube de palabras actualizada');
+                    log('✅ Nube de palabras actualizada (remota)');
+                } else {
+                    cloudImg.style.display = 'none';
+                    document.getElementById('cloudMsg').textContent = 'Nube remota no encontrada';
                 }
                 
                 // Verificar y actualizar línea temporal
                 if (await checkImage(paths.timeline_png)) {
-                    timelineImg.src = paths.timeline_png + '?t=' + timestamp;
+                    timelineImg.src = resolvePath(paths.timeline_png) + '?t=' + timestamp;
                     timelineImg.style.display = 'block';
                     document.getElementById('timelineMsg').textContent = '';
                     document.getElementById('timelineTimestamp').textContent = '🕐 ' + new Date().toLocaleTimeString('es-ES');
@@ -650,6 +824,85 @@ code {
                 showMsg('Auto-actualización desactivada');
             }
         });
+
+        // Upload .bib -> POST /upload_bib
+        async function uploadBib(){
+            const fileInput = document.getElementById('bibFile');
+            const msg = document.getElementById('uploadMsg');
+            if(!fileInput || !fileInput.files || fileInput.files.length === 0){
+                msg.textContent = 'Selecciona un archivo .bib primero.';
+                return;
+            }
+            const f = fileInput.files[0];
+            msg.textContent = 'Subiendo ' + f.name + ' ...';
+            const fd = new FormData();
+            fd.append('file', f, f.name);
+            try{
+                const res = await fetch((apiBase || '') + '/api/upload_bib', { method: 'POST', body: fd });
+                if(!res.ok) throw new Error('HTTP ' + res.status);
+                const j = await res.json();
+                log('Archivo subido:', j.filename);
+                msg.textContent = 'Archivo subido: ' + j.filename;
+                // try to update counts after uploading (in case the server auto-merged)
+                await updateCountsFromRecords();
+            } catch(e){
+                log('Error upload:', e.message);
+                msg.textContent = 'Error al subir: ' + e.message;
+            }
+        }
+
+        // Run wordcloud -> POST /run_wordcloud
+        async function runCloud(){
+            const msg = document.getElementById('uploadMsg');
+            msg.textContent = 'Generando nube...';
+            try{
+                // If using remote backend, request with a generous timeout parameter
+                const runUrl = (apiBase || '') + '/api/run_wordcloud' + (apiBase ? '?timeout=300' : '');
+                const res = await fetch(runUrl, { method: 'POST' });
+                const j = await res.json();
+                log('run_wordcloud result:', JSON.stringify(j));
+                if(j.png_url){
+                    const cloudImg = document.getElementById('cloudImg');
+                    let url = j.png_url;
+                    // Normalize to absolute URL if backend base is known
+                    if(!url.startsWith('http')){
+                        if(url.startsWith('/')){
+                            url = API_BACKEND.replace(/\/$/, '') + url;
+                        } else if(API_BACKEND){
+                            url = API_BACKEND.replace(/\/$/, '') + '/' + url;
+                        }
+                    }
+                    cloudImg.src = url + '?t=' + new Date().getTime();
+                    cloudImg.style.display = 'block';
+                    document.getElementById('cloudMsg').textContent = '(desde backend remoto)';
+                    document.getElementById('cloudTimestamp').textContent = '🕐 ' + new Date().toLocaleTimeString('es-ES');
+                    msg.textContent = 'Nube generada.';
+                } else {
+                    // If no png_url provided, try discovering remote image; do not fall back to local
+                    const rc = await findRemoteCloud();
+                    if(rc){
+                        const cloudImg = document.getElementById('cloudImg');
+                        cloudImg.src = rc + '?t=' + new Date().getTime();
+                        cloudImg.style.display = 'block';
+                        document.getElementById('cloudMsg').textContent = '(desde backend remoto)';
+                        document.getElementById('cloudTimestamp').textContent = '🕐 ' + new Date().toLocaleTimeString('es-ES');
+                        msg.textContent = 'Nube generada.';
+                    } else {
+                        msg.textContent = 'No se generó la imagen de la nube en el backend. Revisa logs.';
+                    }
+                }
+                if(j.stdout) log('stdout:\n' + j.stdout);
+                if(j.stderr) log('stderr:\n' + j.stderr);
+                // Update counts after running the cloud (script may have merged .bib into records)
+                await updateCountsFromRecords();
+            } catch(e){
+                log('Error al generar nube:', e.message);
+                msg.textContent = 'Error al generar nube: ' + e.message;
+            }
+        }
+
+        document.getElementById('uploadBibBtn').addEventListener('click', uploadBib);
+        document.getElementById('runCloudBtn').addEventListener('click', runCloud);
     </script>
 </div>
 </body>
