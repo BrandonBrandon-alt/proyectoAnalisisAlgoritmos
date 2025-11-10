@@ -443,10 +443,39 @@ code {
     // Helper: update total records and lastUpdate from records.csv
         async function updateCountsFromRecords(){
             try{
-                const resolved = resolvePath(paths.records);
-                document.getElementById('recordsSource').textContent = resolved;
+                // Prefer backend records_total endpoint when available
+                let total = null;
+                let sourceName = null;
+                if(API_BACKEND){
+                    try{
+                        const r = await fetch(API_BACKEND.replace(/\/$/, '') + '/api/records_total');
+                        if(r.ok){
+                            const j = await r.json();
+                            if(j && typeof j.total_records === 'number'){
+                                total = j.total_records;
+                                sourceName = j.source || '';
+                            }
+                        }
+                    }catch(e){
+                        // ignore and fallback to local CSV
+                    }
+                }
 
-                // Try to fetch HEAD to get metadata (last-modified, size)
+                const resolved = resolvePath(paths.records);
+                // If we have remote total, show the remote source
+                if(total !== null){
+                    document.getElementById('recordsSource').textContent = sourceName ? (sourceName + ' (remoto)') : (API_BACKEND + '/api/records_total');
+                    document.getElementById('recordsMeta').textContent = '(obtenido desde backend remoto)';
+                    document.getElementById('totalRecords').textContent = total;
+                    lastRecordCount = total;
+                    document.getElementById('updateInfo').style.display = 'block';
+                    document.getElementById('lastUpdate').textContent = new Date().toLocaleString('es-ES');
+                    log('Conteo (remoto) actualizado a', total);
+                    return total;
+                }
+
+                // Fallback: read local records.csv
+                document.getElementById('recordsSource').textContent = resolved;
                 try{
                     const head = await fetch(resolved, { method: 'HEAD' });
                     if(head.ok){
@@ -459,14 +488,11 @@ code {
                     } else {
                         document.getElementById('recordsMeta').textContent = '';
                     }
-                }catch(e){
-                    // ignore
-                    document.getElementById('recordsMeta').textContent = '';
-                }
+                }catch(e){ document.getElementById('recordsMeta').textContent = ''; }
 
                 const recordsText = await fetchText(paths.records);
                 const parsed = parseCSVSimple(recordsText);
-                const total = parsed.rows.length;
+                total = parsed.rows.length;
                 document.getElementById('totalRecords').textContent = total;
                 lastRecordCount = total;
                 document.getElementById('updateInfo').style.display = 'block';
@@ -597,7 +623,16 @@ code {
 
                 // Process and display summary
                 const summaryEl = document.getElementById('summaryText');
-                if(!recordsText && !cacheText){
+                // Prefer remote records_total endpoint for totals when available
+                let remoteInfo = null;
+                if(API_BACKEND){
+                    try{
+                        const rr = await fetch(API_BACKEND.replace(/\/$/, '') + '/api/records_total');
+                        if(rr.ok){ remoteInfo = await rr.json(); }
+                    }catch(e){ /* ignore */ }
+                }
+
+                if(!recordsText && !cacheText && !remoteInfo){
                     summaryEl.textContent = 'No se encontraron archivos records.csv ni country_lookup.csv en las rutas esperadas.';
                     document.getElementById('counts').textContent = '';
                 } else {
@@ -606,13 +641,12 @@ code {
                     let cache = {headers:[], rows:[]};
                     if(recordsText) records = parseCSVSimple(recordsText);
                     if(cacheText) cache = parseCSVSimple(cacheText);
-
-                    const totalRecords = records.rows.length;
+                    const totalRecords = remoteInfo && typeof remoteInfo.total_records === 'number' ? remoteInfo.total_records : records.rows.length;
                     const identified = cache.rows.filter(r => (r.country || '').trim() !== '').length;
                     const countriesList = cache.rows.map(r => ({country: r.country || '', iso: r.country_iso2 || ''}));
                     const top = topCounts(cache.rows, 'country', 12);
-
-                    summaryEl.innerHTML = `Registros cargados: <strong>${totalRecords}</strong><br>Países identificados en cache: <strong>${identified}</strong>`;
+                    const sourceNote = remoteInfo && remoteInfo.source ? ` (fuente remota: ${remoteInfo.source})` : '';
+                    summaryEl.innerHTML = `Registros cargados: <strong>${totalRecords}</strong>${sourceNote}<br>Países identificados en cache: <strong>${identified}</strong>`;
                     const countsEl = document.getElementById('counts');
                     countsEl.innerHTML = `<div class="muted">Si los archivos no existen, verifica que el notebook guardó los resultados en: <code>requerimiento5/data/</code> y <code>outputs/</code></div>`;
 
